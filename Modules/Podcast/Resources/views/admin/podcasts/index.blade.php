@@ -28,9 +28,10 @@
                     <table class="data-table table table-bordered table-hover">
                         <thead>
                         <tr>
+                            <th width="16px"></th>
                             <th>Title</th>
                             <th>Tags</th>
-                            <th>{{ trans('core::core.table.created at') }}</th>
+                            <th>Published at</th>
                             <th data-sortable="false">{{ trans('core::core.table.actions') }}</th>
                         </tr>
                         </thead>
@@ -38,6 +39,13 @@
                         <?php if (isset($podcasts)): ?>
                         <?php foreach ($podcasts as $podcast): ?>
                         <tr>
+                            <td style="vertical-align:middle; text-align: center">
+                                @if ($podcast->published_at <= date('Y-m-d H:i:s'))
+                                    <span class="text-success">
+                                        <i class="fa fa-circle"></i>
+                                    </span>
+                                @endif
+                            </td>
                             <td>
                                 <a href="{{ route('admin.podcast.podcast.edit', [$podcast->id]) }}">
                                     {{ $podcast->title }}
@@ -47,7 +55,7 @@
                                     {{ $podcast->tags }}
                             </td>
                             <td>
-                                    {{ $podcast->created_at }}
+                                    {{ $podcast->published_at }}
                             </td>
                             <td>
                                 <div class="btn-group">
@@ -61,9 +69,10 @@
                         </tbody>
                         <tfoot>
                         <tr>
+                            <th></th>
                             <th>Title</th>
                             <th>Tags</th>
-                            <th>{{ trans('core::core.table.created at') }}</th>
+                            <th>Published at</th>
                             <th>{{ trans('core::core.table.actions') }}</th>
                         </tr>
                         </tfoot>
@@ -107,7 +116,7 @@
                 "sort": true,
                 "info": true,
                 "autoWidth": true,
-                "order": [[ 0, "desc" ]],
+                "order": [[ 3, "desc" ]],
                 "language": {
                     "url": '<?php echo Module::asset("core:js/vendor/datatables/{$locale}.json") ?>'
                 }

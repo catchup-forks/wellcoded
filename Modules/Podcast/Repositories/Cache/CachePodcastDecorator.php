@@ -11,4 +11,9 @@ class CachePodcastDecorator extends BaseCacheDecorator implements PodcastReposit
         $this->entityName = 'podcast.podcasts';
         $this->repository = $podcast;
     }
+
+    public function latests($perPage = 15)
+    {
+        return  $this->repository->latests($perPage);
+    }
 }

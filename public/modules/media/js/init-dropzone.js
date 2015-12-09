@@ -8,9 +8,7 @@ $( document ).ready(function() {
     });
     myDropzone.on("queuecomplete", function(file, http) {
         window.setTimeout(function(){
-            if (confirm('reload ?')) {
-                location.reload();
-            }
+            location.reload();
         }, 1000);
     });
     myDropzone.on("sending", function(file, fromData) {

@@ -15,7 +15,9 @@ class CreatePodcastPodcastsTable extends Migration
         Schema::create('podcast__podcasts', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            // Your fields
+
+            $table->dateTime('published_at');
+
             $table->timestamps();
         });
     }

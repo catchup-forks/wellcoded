@@ -31,17 +31,28 @@
                         </div>
                     @endforeach
 
+                    <div class="form-group">
+                        <label for="published_at">Publication Date :</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right" name="published_at" id="published_at" value="{{ old('published_at', $podcast->published_at) }}">
+                        </div>
+                    </div>
 
-                        @include('media::admin.fields.file-link', [
-                            'entityClass' => 'Modules\\\\Podcast\\\\Entities\\\\Podcast',
-                            'entityId' => $podcast->id,
-                            'zone' => 'audioFile',
-                            'type' => ['mp3', 'ogg', 'aac']
-                        ])
+
+                    @include('media::admin.fields.file-link', [
+                        'entityClass' => 'Modules\\\\Podcast\\\\Entities\\\\Podcast',
+                        'entityId' => $podcast->id,
+                        'zone' => 'audioFile',
+                        'type' => ['mp3', 'ogg', 'aac']
+                    ])
 
 
                         <div class="box-footer">
                         <button type="submit" class="btn btn-primary btn-flat">{{ trans('core::core.button.update') }}</button>
+                        <button class="btn btn-default btn-flat" name="button" type="reset">Reset</button>
                         <a class="btn btn-danger pull-right btn-flat" href="{{ route('admin.podcast.podcast.index')}}"><i class="fa fa-times"></i> {{ trans('core::core.button.cancel') }}</a>
                     </div>
                 </div>
@@ -87,6 +98,16 @@
                     input = '<input type="hidden" name="' + name + '" value="0" />';
                 $(this).parent().append(input);
             });
+        });
+    </script>
+    <script>
+        $('input[name=published_at]').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            timePicker: true,
+            timePickerIncrement: 30,
+            format: 'YYYY-MM-DD H:mm:ss',
+            timePicker12Hour: false
         });
     </script>
 @stop

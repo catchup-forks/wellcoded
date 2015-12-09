@@ -1,5 +1,6 @@
 <?php namespace Modules\Podcast\Http\Controllers\Admin;
 
+use Theme;
 use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
 use Modules\Media\Repositories\FileRepository;
@@ -17,6 +18,11 @@ class PodcastController extends AdminBaseController
     public function __construct(PodcastRepository $podcast)
     {
         parent::__construct();
+
+        $this->assetManager->addAsset('moment.js', Theme::url('vendor/admin-lte/plugins/daterangepicker/moment.min.js'));
+        $this->assetPipeline->requireCss('daterangepicker.css');
+        $this->assetPipeline->requireJs('moment.js');
+        $this->assetPipeline->requireJs('daterangepicker.js');
 
         $this->podcast = $podcast;
     }
