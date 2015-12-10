@@ -8,3 +8,4 @@ composer.phar
 composer.lock
 .vagrant
 Homestead.yaml
+aliases
