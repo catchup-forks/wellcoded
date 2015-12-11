@@ -9,7 +9,14 @@
             <a class="navbar-brand" href="{{ URL::to('/') }}">{{ Setting::get('core::site-name') }}</a>
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
-            {!! Menu::get('main') !!}
+            <ul class="nav navbar-nav navbar-right">
+                <li class="{{ on_route('homepage') ? 'active' : '' }}">
+                    <a href="{{ route('homepage') }}">Accueil <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="{{ on_route('podcasts.*') ? 'active' : '' }}">
+                    <a href="{{ route('podcasts.index') }}">Podcasts</a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
