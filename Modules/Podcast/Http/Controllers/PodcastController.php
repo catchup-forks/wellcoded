@@ -19,4 +19,13 @@ class PodcastController extends Controller
             'podcasts' => $podcastRepository->latests()
         ]);
     }
+
+    public function show(PodcastRepository $podcastRepository, $podcastId)
+    {
+        $podcast = $podcastRepository->find($podcastId);
+        if (!$podcast) {
+            abort(404, 'Podcast not found');
+        }
+        return view('podcast::frontend.show', compact('podcast'));
+    }
 }

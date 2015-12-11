@@ -5,4 +5,7 @@ use Illuminate\Routing\Router;
 
 $router->group(['prefix' =>'/podcasts'], function (Router $router) {
     get('/', ['as' => 'podcasts.index', 'uses' => 'PodcastController@index']);
+    get('/{podcast_id}-{podcast_slug}', ['as' => 'podcasts.show', 'uses' => 'PodcastController@show'])
+        ->where('podcast_id', '[0-9]+')
+        ->where('podcast_slug', '.+');
 });
