@@ -1,5 +1,5 @@
 /*!
- * jQuery JavaScript Library v2.1.3
+ * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
  *
  * Includes Sizzle.js
@@ -9,7 +9,7 @@
  * Released under the MIT license
  * http://jquery.org/license
  *
- * Date: 2014-12-18T15:11Z
+ * Date: 2015-04-28T16:01Z
  */
 
 (function( global, factory ) {
@@ -67,7 +67,7 @@ var
 	// Use the correct document accordingly with window argument (sandbox)
 	document = window.document,
 
-	version = "2.1.3",
+	version = "2.1.4",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -531,7 +531,12 @@ jQuery.each("Boolean Number String Function Array Date RegExp Object Error".spli
 });
 
 function isArraylike( obj ) {
-	var length = obj.length,
+
+	// Support: iOS 8.2 (not reproducible in simulator)
+	// `in` check used to prevent JIT error (gh-2145)
+	// hasOwn isn't used here due to false negatives
+	// regarding Nodelist length in IE
+	var length = "length" in obj && obj.length,
 		type = jQuery.type( obj );
 
 	if ( type === "function" || jQuery.isWindow( obj ) ) {
@@ -9205,18 +9210,18 @@ return jQuery;
 }));
 
 /*!
- * Bootstrap v3.3.4 (http://getbootstrap.com)
+ * Bootstrap v3.3.6 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * Licensed under the MIT license
  */
-if("undefined"==typeof jQuery)throw new Error("Bootstrap's JavaScript requires jQuery");+function(a){"use strict";var b=a.fn.jquery.split(" ")[0].split(".");if(b[0]<2&&b[1]<9||1==b[0]&&9==b[1]&&b[2]<1)throw new Error("Bootstrap's JavaScript requires jQuery version 1.9.1 or higher")}(jQuery),+function(a){"use strict";function b(){var a=document.createElement("bootstrap"),b={WebkitTransition:"webkitTransitionEnd",MozTransition:"transitionend",OTransition:"oTransitionEnd otransitionend",transition:"transitionend"};for(var c in b)if(void 0!==a.style[c])return{end:b[c]};return!1}a.fn.emulateTransitionEnd=function(b){var c=!1,d=this;a(this).one("bsTransitionEnd",function(){c=!0});var e=function(){c||a(d).trigger(a.support.transition.end)};return setTimeout(e,b),this},a(function(){a.support.transition=b(),a.support.transition&&(a.event.special.bsTransitionEnd={bindType:a.support.transition.end,delegateType:a.support.transition.end,handle:function(b){return a(b.target).is(this)?b.handleObj.handler.apply(this,arguments):void 0}})})}(jQuery),+function(a){"use strict";function b(b){return this.each(function(){var c=a(this),e=c.data("bs.alert");e||c.data("bs.alert",e=new d(this)),"string"==typeof b&&e[b].call(c)})}var c='[data-dismiss="alert"]',d=function(b){a(b).on("click",c,this.close)};d.VERSION="3.3.4",d.TRANSITION_DURATION=150,d.prototype.close=function(b){function c(){g.detach().trigger("closed.bs.alert").remove()}var e=a(this),f=e.attr("data-target");f||(f=e.attr("href"),f=f&&f.replace(/.*(?=#[^\s]*$)/,""));var g=a(f);b&&b.preventDefault(),g.length||(g=e.closest(".alert")),g.trigger(b=a.Event("close.bs.alert")),b.isDefaultPrevented()||(g.removeClass("in"),a.support.transition&&g.hasClass("fade")?g.one("bsTransitionEnd",c).emulateTransitionEnd(d.TRANSITION_DURATION):c())};var e=a.fn.alert;a.fn.alert=b,a.fn.alert.Constructor=d,a.fn.alert.noConflict=function(){return a.fn.alert=e,this},a(document).on("click.bs.alert.data-api",c,d.prototype.close)}(jQuery),+function(a){"use strict";function b(b){return this.each(function(){var d=a(this),e=d.data("bs.button"),f="object"==typeof b&&b;e||d.data("bs.button",e=new c(this,f)),"toggle"==b?e.toggle():b&&e.setState(b)})}var c=function(b,d){this.$element=a(b),this.options=a.extend({},c.DEFAULTS,d),this.isLoading=!1};c.VERSION="3.3.4",c.DEFAULTS={loadingText:"loading..."},c.prototype.setState=function(b){var c="disabled",d=this.$element,e=d.is("input")?"val":"html",f=d.data();b+="Text",null==f.resetText&&d.data("resetText",d[e]()),setTimeout(a.proxy(function(){d[e](null==f[b]?this.options[b]:f[b]),"loadingText"==b?(this.isLoading=!0,d.addClass(c).attr(c,c)):this.isLoading&&(this.isLoading=!1,d.removeClass(c).removeAttr(c))},this),0)},c.prototype.toggle=function(){var a=!0,b=this.$element.closest('[data-toggle="buttons"]');if(b.length){var c=this.$element.find("input");"radio"==c.prop("type")&&(c.prop("checked")&&this.$element.hasClass("active")?a=!1:b.find(".active").removeClass("active")),a&&c.prop("checked",!this.$element.hasClass("active")).trigger("change")}else this.$element.attr("aria-pressed",!this.$element.hasClass("active"));a&&this.$element.toggleClass("active")};var d=a.fn.button;a.fn.button=b,a.fn.button.Constructor=c,a.fn.button.noConflict=function(){return a.fn.button=d,this},a(document).on("click.bs.button.data-api",'[data-toggle^="button"]',function(c){var d=a(c.target);d.hasClass("btn")||(d=d.closest(".btn")),b.call(d,"toggle"),c.preventDefault()}).on("focus.bs.button.data-api blur.bs.button.data-api",'[data-toggle^="button"]',function(b){a(b.target).closest(".btn").toggleClass("focus",/^focus(in)?$/.test(b.type))})}(jQuery),+function(a){"use strict";function b(b){return this.each(function(){var d=a(this),e=d.data("bs.carousel"),f=a.extend({},c.DEFAULTS,d.data(),"object"==typeof b&&b),g="string"==typeof b?b:f.slide;e||d.data("bs.carousel",e=new c(this,f)),"number"==typeof b?e.to(b):g?e[g]():f.interval&&e.pause().cycle()})}var c=function(b,c){this.$element=a(b),this.$indicators=this.$element.find(".carousel-indicators"),this.options=c,this.paused=null,this.sliding=null,this.interval=null,this.$active=null,this.$items=null,this.options.keyboard&&this.$element.on("keydown.bs.carousel",a.proxy(this.keydown,this)),"hover"==this.options.pause&&!("ontouchstart"in document.documentElement)&&this.$element.on("mouseenter.bs.carousel",a.proxy(this.pause,this)).on("mouseleave.bs.carousel",a.proxy(this.cycle,this))};c.VERSION="3.3.4",c.TRANSITION_DURATION=600,c.DEFAULTS={interval:5e3,pause:"hover",wrap:!0,keyboard:!0},c.prototype.keydown=function(a){if(!/input|textarea/i.test(a.target.tagName)){switch(a.which){case 37:this.prev();break;case 39:this.next();break;default:return}a.preventDefault()}},c.prototype.cycle=function(b){return b||(this.paused=!1),this.interval&&clearInterval(this.interval),this.options.interval&&!this.paused&&(this.interval=setInterval(a.proxy(this.next,this),this.options.interval)),this},c.prototype.getItemIndex=function(a){return this.$items=a.parent().children(".item"),this.$items.index(a||this.$active)},c.prototype.getItemForDirection=function(a,b){var c=this.getItemIndex(b),d="prev"==a&&0===c||"next"==a&&c==this.$items.length-1;if(d&&!this.options.wrap)return b;var e="prev"==a?-1:1,f=(c+e)%this.$items.length;return this.$items.eq(f)},c.prototype.to=function(a){var b=this,c=this.getItemIndex(this.$active=this.$element.find(".item.active"));return a>this.$items.length-1||0>a?void 0:this.sliding?this.$element.one("slid.bs.carousel",function(){b.to(a)}):c==a?this.pause().cycle():this.slide(a>c?"next":"prev",this.$items.eq(a))},c.prototype.pause=function(b){return b||(this.paused=!0),this.$element.find(".next, .prev").length&&a.support.transition&&(this.$element.trigger(a.support.transition.end),this.cycle(!0)),this.interval=clearInterval(this.interval),this},c.prototype.next=function(){return this.sliding?void 0:this.slide("next")},c.prototype.prev=function(){return this.sliding?void 0:this.slide("prev")},c.prototype.slide=function(b,d){var e=this.$element.find(".item.active"),f=d||this.getItemForDirection(b,e),g=this.interval,h="next"==b?"left":"right",i=this;if(f.hasClass("active"))return this.sliding=!1;var j=f[0],k=a.Event("slide.bs.carousel",{relatedTarget:j,direction:h});if(this.$element.trigger(k),!k.isDefaultPrevented()){if(this.sliding=!0,g&&this.pause(),this.$indicators.length){this.$indicators.find(".active").removeClass("active");var l=a(this.$indicators.children()[this.getItemIndex(f)]);l&&l.addClass("active")}var m=a.Event("slid.bs.carousel",{relatedTarget:j,direction:h});return a.support.transition&&this.$element.hasClass("slide")?(f.addClass(b),f[0].offsetWidth,e.addClass(h),f.addClass(h),e.one("bsTransitionEnd",function(){f.removeClass([b,h].join(" ")).addClass("active"),e.removeClass(["active",h].join(" ")),i.sliding=!1,setTimeout(function(){i.$element.trigger(m)},0)}).emulateTransitionEnd(c.TRANSITION_DURATION)):(e.removeClass("active"),f.addClass("active"),this.sliding=!1,this.$element.trigger(m)),g&&this.cycle(),this}};var d=a.fn.carousel;a.fn.carousel=b,a.fn.carousel.Constructor=c,a.fn.carousel.noConflict=function(){return a.fn.carousel=d,this};var e=function(c){var d,e=a(this),f=a(e.attr("data-target")||(d=e.attr("href"))&&d.replace(/.*(?=#[^\s]+$)/,""));if(f.hasClass("carousel")){var g=a.extend({},f.data(),e.data()),h=e.attr("data-slide-to");h&&(g.interval=!1),b.call(f,g),h&&f.data("bs.carousel").to(h),c.preventDefault()}};a(document).on("click.bs.carousel.data-api","[data-slide]",e).on("click.bs.carousel.data-api","[data-slide-to]",e),a(window).on("load",function(){a('[data-ride="carousel"]').each(function(){var c=a(this);b.call(c,c.data())})})}(jQuery),+function(a){"use strict";function b(b){var c,d=b.attr("data-target")||(c=b.attr("href"))&&c.replace(/.*(?=#[^\s]+$)/,"");return a(d)}function c(b){return this.each(function(){var c=a(this),e=c.data("bs.collapse"),f=a.extend({},d.DEFAULTS,c.data(),"object"==typeof b&&b);!e&&f.toggle&&/show|hide/.test(b)&&(f.toggle=!1),e||c.data("bs.collapse",e=new d(this,f)),"string"==typeof b&&e[b]()})}var d=function(b,c){this.$element=a(b),this.options=a.extend({},d.DEFAULTS,c),this.$trigger=a('[data-toggle="collapse"][href="#'+b.id+'"],[data-toggle="collapse"][data-target="#'+b.id+'"]'),this.transitioning=null,this.options.parent?this.$parent=this.getParent():this.addAriaAndCollapsedClass(this.$element,this.$trigger),this.options.toggle&&this.toggle()};d.VERSION="3.3.4",d.TRANSITION_DURATION=350,d.DEFAULTS={toggle:!0},d.prototype.dimension=function(){var a=this.$element.hasClass("width");return a?"width":"height"},d.prototype.show=function(){if(!this.transitioning&&!this.$element.hasClass("in")){var b,e=this.$parent&&this.$parent.children(".panel").children(".in, .collapsing");if(!(e&&e.length&&(b=e.data("bs.collapse"),b&&b.transitioning))){var f=a.Event("show.bs.collapse");if(this.$element.trigger(f),!f.isDefaultPrevented()){e&&e.length&&(c.call(e,"hide"),b||e.data("bs.collapse",null));var g=this.dimension();this.$element.removeClass("collapse").addClass("collapsing")[g](0).attr("aria-expanded",!0),this.$trigger.removeClass("collapsed").attr("aria-expanded",!0),this.transitioning=1;var h=function(){this.$element.removeClass("collapsing").addClass("collapse in")[g](""),this.transitioning=0,this.$element.trigger("shown.bs.collapse")};if(!a.support.transition)return h.call(this);var i=a.camelCase(["scroll",g].join("-"));this.$element.one("bsTransitionEnd",a.proxy(h,this)).emulateTransitionEnd(d.TRANSITION_DURATION)[g](this.$element[0][i])}}}},d.prototype.hide=function(){if(!this.transitioning&&this.$element.hasClass("in")){var b=a.Event("hide.bs.collapse");if(this.$element.trigger(b),!b.isDefaultPrevented()){var c=this.dimension();this.$element[c](this.$element[c]())[0].offsetHeight,this.$element.addClass("collapsing").removeClass("collapse in").attr("aria-expanded",!1),this.$trigger.addClass("collapsed").attr("aria-expanded",!1),this.transitioning=1;var e=function(){this.transitioning=0,this.$element.removeClass("collapsing").addClass("collapse").trigger("hidden.bs.collapse")};return a.support.transition?void this.$element[c](0).one("bsTransitionEnd",a.proxy(e,this)).emulateTransitionEnd(d.TRANSITION_DURATION):e.call(this)}}},d.prototype.toggle=function(){this[this.$element.hasClass("in")?"hide":"show"]()},d.prototype.getParent=function(){return a(this.options.parent).find('[data-toggle="collapse"][data-parent="'+this.options.parent+'"]').each(a.proxy(function(c,d){var e=a(d);this.addAriaAndCollapsedClass(b(e),e)},this)).end()},d.prototype.addAriaAndCollapsedClass=function(a,b){var c=a.hasClass("in");a.attr("aria-expanded",c),b.toggleClass("collapsed",!c).attr("aria-expanded",c)};var e=a.fn.collapse;a.fn.collapse=c,a.fn.collapse.Constructor=d,a.fn.collapse.noConflict=function(){return a.fn.collapse=e,this},a(document).on("click.bs.collapse.data-api",'[data-toggle="collapse"]',function(d){var e=a(this);e.attr("data-target")||d.preventDefault();var f=b(e),g=f.data("bs.collapse"),h=g?"toggle":e.data();c.call(f,h)})}(jQuery),+function(a){"use strict";function b(b){b&&3===b.which||(a(e).remove(),a(f).each(function(){var d=a(this),e=c(d),f={relatedTarget:this};e.hasClass("open")&&(e.trigger(b=a.Event("hide.bs.dropdown",f)),b.isDefaultPrevented()||(d.attr("aria-expanded","false"),e.removeClass("open").trigger("hidden.bs.dropdown",f)))}))}function c(b){var c=b.attr("data-target");c||(c=b.attr("href"),c=c&&/#[A-Za-z]/.test(c)&&c.replace(/.*(?=#[^\s]*$)/,""));var d=c&&a(c);return d&&d.length?d:b.parent()}function d(b){return this.each(function(){var c=a(this),d=c.data("bs.dropdown");d||c.data("bs.dropdown",d=new g(this)),"string"==typeof b&&d[b].call(c)})}var e=".dropdown-backdrop",f='[data-toggle="dropdown"]',g=function(b){a(b).on("click.bs.dropdown",this.toggle)};g.VERSION="3.3.4",g.prototype.toggle=function(d){var e=a(this);if(!e.is(".disabled, :disabled")){var f=c(e),g=f.hasClass("open");if(b(),!g){"ontouchstart"in document.documentElement&&!f.closest(".navbar-nav").length&&a('<div class="dropdown-backdrop"/>').insertAfter(a(this)).on("click",b);var h={relatedTarget:this};if(f.trigger(d=a.Event("show.bs.dropdown",h)),d.isDefaultPrevented())return;e.trigger("focus").attr("aria-expanded","true"),f.toggleClass("open").trigger("shown.bs.dropdown",h)}return!1}},g.prototype.keydown=function(b){if(/(38|40|27|32)/.test(b.which)&&!/input|textarea/i.test(b.target.tagName)){var d=a(this);if(b.preventDefault(),b.stopPropagation(),!d.is(".disabled, :disabled")){var e=c(d),g=e.hasClass("open");if(!g&&27!=b.which||g&&27==b.which)return 27==b.which&&e.find(f).trigger("focus"),d.trigger("click");var h=" li:not(.disabled):visible a",i=e.find('[role="menu"]'+h+', [role="listbox"]'+h);if(i.length){var j=i.index(b.target);38==b.which&&j>0&&j--,40==b.which&&j<i.length-1&&j++,~j||(j=0),i.eq(j).trigger("focus")}}}};var h=a.fn.dropdown;a.fn.dropdown=d,a.fn.dropdown.Constructor=g,a.fn.dropdown.noConflict=function(){return a.fn.dropdown=h,this},a(document).on("click.bs.dropdown.data-api",b).on("click.bs.dropdown.data-api",".dropdown form",function(a){a.stopPropagation()}).on("click.bs.dropdown.data-api",f,g.prototype.toggle).on("keydown.bs.dropdown.data-api",f,g.prototype.keydown).on("keydown.bs.dropdown.data-api",'[role="menu"]',g.prototype.keydown).on("keydown.bs.dropdown.data-api",'[role="listbox"]',g.prototype.keydown)}(jQuery),+function(a){"use strict";function b(b,d){return this.each(function(){var e=a(this),f=e.data("bs.modal"),g=a.extend({},c.DEFAULTS,e.data(),"object"==typeof b&&b);f||e.data("bs.modal",f=new c(this,g)),"string"==typeof b?f[b](d):g.show&&f.show(d)})}var c=function(b,c){this.options=c,this.$body=a(document.body),this.$element=a(b),this.$dialog=this.$element.find(".modal-dialog"),this.$backdrop=null,this.isShown=null,this.originalBodyPad=null,this.scrollbarWidth=0,this.ignoreBackdropClick=!1,this.options.remote&&this.$element.find(".modal-content").load(this.options.remote,a.proxy(function(){this.$element.trigger("loaded.bs.modal")},this))};c.VERSION="3.3.4",c.TRANSITION_DURATION=300,c.BACKDROP_TRANSITION_DURATION=150,c.DEFAULTS={backdrop:!0,keyboard:!0,show:!0},c.prototype.toggle=function(a){return this.isShown?this.hide():this.show(a)},c.prototype.show=function(b){var d=this,e=a.Event("show.bs.modal",{relatedTarget:b});this.$element.trigger(e),this.isShown||e.isDefaultPrevented()||(this.isShown=!0,this.checkScrollbar(),this.setScrollbar(),this.$body.addClass("modal-open"),this.escape(),this.resize(),this.$element.on("click.dismiss.bs.modal",'[data-dismiss="modal"]',a.proxy(this.hide,this)),this.$dialog.on("mousedown.dismiss.bs.modal",function(){d.$element.one("mouseup.dismiss.bs.modal",function(b){a(b.target).is(d.$element)&&(d.ignoreBackdropClick=!0)})}),this.backdrop(function(){var e=a.support.transition&&d.$element.hasClass("fade");d.$element.parent().length||d.$element.appendTo(d.$body),d.$element.show().scrollTop(0),d.adjustDialog(),e&&d.$element[0].offsetWidth,d.$element.addClass("in").attr("aria-hidden",!1),d.enforceFocus();var f=a.Event("shown.bs.modal",{relatedTarget:b});e?d.$dialog.one("bsTransitionEnd",function(){d.$element.trigger("focus").trigger(f)}).emulateTransitionEnd(c.TRANSITION_DURATION):d.$element.trigger("focus").trigger(f)}))},c.prototype.hide=function(b){b&&b.preventDefault(),b=a.Event("hide.bs.modal"),this.$element.trigger(b),this.isShown&&!b.isDefaultPrevented()&&(this.isShown=!1,this.escape(),this.resize(),a(document).off("focusin.bs.modal"),this.$element.removeClass("in").attr("aria-hidden",!0).off("click.dismiss.bs.modal").off("mouseup.dismiss.bs.modal"),this.$dialog.off("mousedown.dismiss.bs.modal"),a.support.transition&&this.$element.hasClass("fade")?this.$element.one("bsTransitionEnd",a.proxy(this.hideModal,this)).emulateTransitionEnd(c.TRANSITION_DURATION):this.hideModal())},c.prototype.enforceFocus=function(){a(document).off("focusin.bs.modal").on("focusin.bs.modal",a.proxy(function(a){this.$element[0]===a.target||this.$element.has(a.target).length||this.$element.trigger("focus")},this))},c.prototype.escape=function(){this.isShown&&this.options.keyboard?this.$element.on("keydown.dismiss.bs.modal",a.proxy(function(a){27==a.which&&this.hide()},this)):this.isShown||this.$element.off("keydown.dismiss.bs.modal")},c.prototype.resize=function(){this.isShown?a(window).on("resize.bs.modal",a.proxy(this.handleUpdate,this)):a(window).off("resize.bs.modal")},c.prototype.hideModal=function(){var a=this;this.$element.hide(),this.backdrop(function(){a.$body.removeClass("modal-open"),a.resetAdjustments(),a.resetScrollbar(),a.$element.trigger("hidden.bs.modal")})},c.prototype.removeBackdrop=function(){this.$backdrop&&this.$backdrop.remove(),this.$backdrop=null},c.prototype.backdrop=function(b){var d=this,e=this.$element.hasClass("fade")?"fade":"";if(this.isShown&&this.options.backdrop){var f=a.support.transition&&e;if(this.$backdrop=a('<div class="modal-backdrop '+e+'" />').appendTo(this.$body),this.$element.on("click.dismiss.bs.modal",a.proxy(function(a){return this.ignoreBackdropClick?void(this.ignoreBackdropClick=!1):void(a.target===a.currentTarget&&("static"==this.options.backdrop?this.$element[0].focus():this.hide()))},this)),f&&this.$backdrop[0].offsetWidth,this.$backdrop.addClass("in"),!b)return;f?this.$backdrop.one("bsTransitionEnd",b).emulateTransitionEnd(c.BACKDROP_TRANSITION_DURATION):b()}else if(!this.isShown&&this.$backdrop){this.$backdrop.removeClass("in");var g=function(){d.removeBackdrop(),b&&b()};a.support.transition&&this.$element.hasClass("fade")?this.$backdrop.one("bsTransitionEnd",g).emulateTransitionEnd(c.BACKDROP_TRANSITION_DURATION):g()}else b&&b()},c.prototype.handleUpdate=function(){this.adjustDialog()},c.prototype.adjustDialog=function(){var a=this.$element[0].scrollHeight>document.documentElement.clientHeight;this.$element.css({paddingLeft:!this.bodyIsOverflowing&&a?this.scrollbarWidth:"",paddingRight:this.bodyIsOverflowing&&!a?this.scrollbarWidth:""})},c.prototype.resetAdjustments=function(){this.$element.css({paddingLeft:"",paddingRight:""})},c.prototype.checkScrollbar=function(){var a=window.innerWidth;if(!a){var b=document.documentElement.getBoundingClientRect();a=b.right-Math.abs(b.left)}this.bodyIsOverflowing=document.body.clientWidth<a,this.scrollbarWidth=this.measureScrollbar()},c.prototype.setScrollbar=function(){var a=parseInt(this.$body.css("padding-right")||0,10);this.originalBodyPad=document.body.style.paddingRight||"",this.bodyIsOverflowing&&this.$body.css("padding-right",a+this.scrollbarWidth)},c.prototype.resetScrollbar=function(){this.$body.css("padding-right",this.originalBodyPad)},c.prototype.measureScrollbar=function(){var a=document.createElement("div");a.className="modal-scrollbar-measure",this.$body.append(a);var b=a.offsetWidth-a.clientWidth;return this.$body[0].removeChild(a),b};var d=a.fn.modal;a.fn.modal=b,a.fn.modal.Constructor=c,a.fn.modal.noConflict=function(){return a.fn.modal=d,this},a(document).on("click.bs.modal.data-api",'[data-toggle="modal"]',function(c){var d=a(this),e=d.attr("href"),f=a(d.attr("data-target")||e&&e.replace(/.*(?=#[^\s]+$)/,"")),g=f.data("bs.modal")?"toggle":a.extend({remote:!/#/.test(e)&&e},f.data(),d.data());d.is("a")&&c.preventDefault(),f.one("show.bs.modal",function(a){a.isDefaultPrevented()||f.one("hidden.bs.modal",function(){d.is(":visible")&&d.trigger("focus")})}),b.call(f,g,this)})}(jQuery),+function(a){"use strict";function b(b){return this.each(function(){var d=a(this),e=d.data("bs.tooltip"),f="object"==typeof b&&b;(e||!/destroy|hide/.test(b))&&(e||d.data("bs.tooltip",e=new c(this,f)),"string"==typeof b&&e[b]())})}var c=function(a,b){this.type=null,this.options=null,this.enabled=null,this.timeout=null,this.hoverState=null,this.$element=null,this.init("tooltip",a,b)};c.VERSION="3.3.4",c.TRANSITION_DURATION=150,c.DEFAULTS={animation:!0,placement:"top",selector:!1,template:'<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',trigger:"hover focus",title:"",delay:0,html:!1,container:!1,viewport:{selector:"body",padding:0}},c.prototype.init=function(b,c,d){if(this.enabled=!0,this.type=b,this.$element=a(c),this.options=this.getOptions(d),this.$viewport=this.options.viewport&&a(this.options.viewport.selector||this.options.viewport),this.$element[0]instanceof document.constructor&&!this.options.selector)throw new Error("`selector` option must be specified when initializing "+this.type+" on the window.document object!");for(var e=this.options.trigger.split(" "),f=e.length;f--;){var g=e[f];if("click"==g)this.$element.on("click."+this.type,this.options.selector,a.proxy(this.toggle,this));else if("manual"!=g){var h="hover"==g?"mouseenter":"focusin",i="hover"==g?"mouseleave":"focusout";this.$element.on(h+"."+this.type,this.options.selector,a.proxy(this.enter,this)),this.$element.on(i+"."+this.type,this.options.selector,a.proxy(this.leave,this))}}this.options.selector?this._options=a.extend({},this.options,{trigger:"manual",selector:""}):this.fixTitle()},c.prototype.getDefaults=function(){return c.DEFAULTS},c.prototype.getOptions=function(b){return b=a.extend({},this.getDefaults(),this.$element.data(),b),b.delay&&"number"==typeof b.delay&&(b.delay={show:b.delay,hide:b.delay}),b},c.prototype.getDelegateOptions=function(){var b={},c=this.getDefaults();return this._options&&a.each(this._options,function(a,d){c[a]!=d&&(b[a]=d)}),b},c.prototype.enter=function(b){var c=b instanceof this.constructor?b:a(b.currentTarget).data("bs."+this.type);return c&&c.$tip&&c.$tip.is(":visible")?void(c.hoverState="in"):(c||(c=new this.constructor(b.currentTarget,this.getDelegateOptions()),a(b.currentTarget).data("bs."+this.type,c)),clearTimeout(c.timeout),c.hoverState="in",c.options.delay&&c.options.delay.show?void(c.timeout=setTimeout(function(){"in"==c.hoverState&&c.show()},c.options.delay.show)):c.show())},c.prototype.leave=function(b){var c=b instanceof this.constructor?b:a(b.currentTarget).data("bs."+this.type);return c||(c=new this.constructor(b.currentTarget,this.getDelegateOptions()),a(b.currentTarget).data("bs."+this.type,c)),clearTimeout(c.timeout),c.hoverState="out",c.options.delay&&c.options.delay.hide?void(c.timeout=setTimeout(function(){"out"==c.hoverState&&c.hide()},c.options.delay.hide)):c.hide()},c.prototype.show=function(){var b=a.Event("show.bs."+this.type);if(this.hasContent()&&this.enabled){this.$element.trigger(b);var d=a.contains(this.$element[0].ownerDocument.documentElement,this.$element[0]);if(b.isDefaultPrevented()||!d)return;var e=this,f=this.tip(),g=this.getUID(this.type);this.setContent(),f.attr("id",g),this.$element.attr("aria-describedby",g),this.options.animation&&f.addClass("fade");var h="function"==typeof this.options.placement?this.options.placement.call(this,f[0],this.$element[0]):this.options.placement,i=/\s?auto?\s?/i,j=i.test(h);j&&(h=h.replace(i,"")||"top"),f.detach().css({top:0,left:0,display:"block"}).addClass(h).data("bs."+this.type,this),this.options.container?f.appendTo(this.options.container):f.insertAfter(this.$element);var k=this.getPosition(),l=f[0].offsetWidth,m=f[0].offsetHeight;if(j){var n=h,o=this.options.container?a(this.options.container):this.$element.parent(),p=this.getPosition(o);h="bottom"==h&&k.bottom+m>p.bottom?"top":"top"==h&&k.top-m<p.top?"bottom":"right"==h&&k.right+l>p.width?"left":"left"==h&&k.left-l<p.left?"right":h,f.removeClass(n).addClass(h)}var q=this.getCalculatedOffset(h,k,l,m);this.applyPlacement(q,h);var r=function(){var a=e.hoverState;e.$element.trigger("shown.bs."+e.type),e.hoverState=null,"out"==a&&e.leave(e)};a.support.transition&&this.$tip.hasClass("fade")?f.one("bsTransitionEnd",r).emulateTransitionEnd(c.TRANSITION_DURATION):r()}},c.prototype.applyPlacement=function(b,c){var d=this.tip(),e=d[0].offsetWidth,f=d[0].offsetHeight,g=parseInt(d.css("margin-top"),10),h=parseInt(d.css("margin-left"),10);isNaN(g)&&(g=0),isNaN(h)&&(h=0),b.top=b.top+g,b.left=b.left+h,a.offset.setOffset(d[0],a.extend({using:function(a){d.css({top:Math.round(a.top),left:Math.round(a.left)})}},b),0),d.addClass("in");var i=d[0].offsetWidth,j=d[0].offsetHeight;"top"==c&&j!=f&&(b.top=b.top+f-j);var k=this.getViewportAdjustedDelta(c,b,i,j);k.left?b.left+=k.left:b.top+=k.top;var l=/top|bottom/.test(c),m=l?2*k.left-e+i:2*k.top-f+j,n=l?"offsetWidth":"offsetHeight";d.offset(b),this.replaceArrow(m,d[0][n],l)},c.prototype.replaceArrow=function(a,b,c){this.arrow().css(c?"left":"top",50*(1-a/b)+"%").css(c?"top":"left","")},c.prototype.setContent=function(){var a=this.tip(),b=this.getTitle();a.find(".tooltip-inner")[this.options.html?"html":"text"](b),a.removeClass("fade in top bottom left right")},c.prototype.hide=function(b){function d(){"in"!=e.hoverState&&f.detach(),e.$element.removeAttr("aria-describedby").trigger("hidden.bs."+e.type),b&&b()}var e=this,f=a(this.$tip),g=a.Event("hide.bs."+this.type);return this.$element.trigger(g),g.isDefaultPrevented()?void 0:(f.removeClass("in"),a.support.transition&&f.hasClass("fade")?f.one("bsTransitionEnd",d).emulateTransitionEnd(c.TRANSITION_DURATION):d(),this.hoverState=null,this)},c.prototype.fixTitle=function(){var a=this.$element;(a.attr("title")||"string"!=typeof a.attr("data-original-title"))&&a.attr("data-original-title",a.attr("title")||"").attr("title","")},c.prototype.hasContent=function(){return this.getTitle()},c.prototype.getPosition=function(b){b=b||this.$element;var c=b[0],d="BODY"==c.tagName,e=c.getBoundingClientRect();null==e.width&&(e=a.extend({},e,{width:e.right-e.left,height:e.bottom-e.top}));var f=d?{top:0,left:0}:b.offset(),g={scroll:d?document.documentElement.scrollTop||document.body.scrollTop:b.scrollTop()},h=d?{width:a(window).width(),height:a(window).height()}:null;return a.extend({},e,g,h,f)},c.prototype.getCalculatedOffset=function(a,b,c,d){return"bottom"==a?{top:b.top+b.height,left:b.left+b.width/2-c/2}:"top"==a?{top:b.top-d,left:b.left+b.width/2-c/2}:"left"==a?{top:b.top+b.height/2-d/2,left:b.left-c}:{top:b.top+b.height/2-d/2,left:b.left+b.width}},c.prototype.getViewportAdjustedDelta=function(a,b,c,d){var e={top:0,left:0};if(!this.$viewport)return e;var f=this.options.viewport&&this.options.viewport.padding||0,g=this.getPosition(this.$viewport);if(/right|left/.test(a)){var h=b.top-f-g.scroll,i=b.top+f-g.scroll+d;h<g.top?e.top=g.top-h:i>g.top+g.height&&(e.top=g.top+g.height-i)}else{var j=b.left-f,k=b.left+f+c;j<g.left?e.left=g.left-j:k>g.width&&(e.left=g.left+g.width-k)}return e},c.prototype.getTitle=function(){var a,b=this.$element,c=this.options;return a=b.attr("data-original-title")||("function"==typeof c.title?c.title.call(b[0]):c.title)},c.prototype.getUID=function(a){do a+=~~(1e6*Math.random());while(document.getElementById(a));return a},c.prototype.tip=function(){return this.$tip=this.$tip||a(this.options.template)},c.prototype.arrow=function(){return this.$arrow=this.$arrow||this.tip().find(".tooltip-arrow")},c.prototype.enable=function(){this.enabled=!0},c.prototype.disable=function(){this.enabled=!1},c.prototype.toggleEnabled=function(){this.enabled=!this.enabled},c.prototype.toggle=function(b){var c=this;b&&(c=a(b.currentTarget).data("bs."+this.type),c||(c=new this.constructor(b.currentTarget,this.getDelegateOptions()),a(b.currentTarget).data("bs."+this.type,c))),c.tip().hasClass("in")?c.leave(c):c.enter(c)},c.prototype.destroy=function(){var a=this;clearTimeout(this.timeout),this.hide(function(){a.$element.off("."+a.type).removeData("bs."+a.type)})};var d=a.fn.tooltip;a.fn.tooltip=b,a.fn.tooltip.Constructor=c,a.fn.tooltip.noConflict=function(){return a.fn.tooltip=d,this}}(jQuery),+function(a){"use strict";function b(b){return this.each(function(){var d=a(this),e=d.data("bs.popover"),f="object"==typeof b&&b;(e||!/destroy|hide/.test(b))&&(e||d.data("bs.popover",e=new c(this,f)),"string"==typeof b&&e[b]())})}var c=function(a,b){this.init("popover",a,b)};if(!a.fn.tooltip)throw new Error("Popover requires tooltip.js");c.VERSION="3.3.4",c.DEFAULTS=a.extend({},a.fn.tooltip.Constructor.DEFAULTS,{placement:"right",trigger:"click",content:"",template:'<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'}),c.prototype=a.extend({},a.fn.tooltip.Constructor.prototype),c.prototype.constructor=c,c.prototype.getDefaults=function(){return c.DEFAULTS},c.prototype.setContent=function(){var a=this.tip(),b=this.getTitle(),c=this.getContent();a.find(".popover-title")[this.options.html?"html":"text"](b),a.find(".popover-content").children().detach().end()[this.options.html?"string"==typeof c?"html":"append":"text"](c),a.removeClass("fade top bottom left right in"),a.find(".popover-title").html()||a.find(".popover-title").hide()},c.prototype.hasContent=function(){return this.getTitle()||this.getContent()},c.prototype.getContent=function(){var a=this.$element,b=this.options;return a.attr("data-content")||("function"==typeof b.content?b.content.call(a[0]):b.content)},c.prototype.arrow=function(){return this.$arrow=this.$arrow||this.tip().find(".arrow")};var d=a.fn.popover;a.fn.popover=b,a.fn.popover.Constructor=c,a.fn.popover.noConflict=function(){return a.fn.popover=d,this}}(jQuery),+function(a){"use strict";function b(c,d){this.$body=a(document.body),this.$scrollElement=a(a(c).is(document.body)?window:c),this.options=a.extend({},b.DEFAULTS,d),this.selector=(this.options.target||"")+" .nav li > a",this.offsets=[],this.targets=[],this.activeTarget=null,this.scrollHeight=0,this.$scrollElement.on("scroll.bs.scrollspy",a.proxy(this.process,this)),this.refresh(),this.process()}function c(c){return this.each(function(){var d=a(this),e=d.data("bs.scrollspy"),f="object"==typeof c&&c;e||d.data("bs.scrollspy",e=new b(this,f)),"string"==typeof c&&e[c]()})}b.VERSION="3.3.4",b.DEFAULTS={offset:10},b.prototype.getScrollHeight=function(){return this.$scrollElement[0].scrollHeight||Math.max(this.$body[0].scrollHeight,document.documentElement.scrollHeight)},b.prototype.refresh=function(){var b=this,c="offset",d=0;this.offsets=[],this.targets=[],this.scrollHeight=this.getScrollHeight(),a.isWindow(this.$scrollElement[0])||(c="position",d=this.$scrollElement.scrollTop()),this.$body.find(this.selector).map(function(){var b=a(this),e=b.data("target")||b.attr("href"),f=/^#./.test(e)&&a(e);return f&&f.length&&f.is(":visible")&&[[f[c]().top+d,e]]||null}).sort(function(a,b){return a[0]-b[0]}).each(function(){b.offsets.push(this[0]),b.targets.push(this[1])})},b.prototype.process=function(){var a,b=this.$scrollElement.scrollTop()+this.options.offset,c=this.getScrollHeight(),d=this.options.offset+c-this.$scrollElement.height(),e=this.offsets,f=this.targets,g=this.activeTarget;if(this.scrollHeight!=c&&this.refresh(),b>=d)return g!=(a=f[f.length-1])&&this.activate(a);if(g&&b<e[0])return this.activeTarget=null,this.clear();for(a=e.length;a--;)g!=f[a]&&b>=e[a]&&(void 0===e[a+1]||b<e[a+1])&&this.activate(f[a])},b.prototype.activate=function(b){this.activeTarget=b,this.clear();var c=this.selector+'[data-target="'+b+'"],'+this.selector+'[href="'+b+'"]',d=a(c).parents("li").addClass("active");d.parent(".dropdown-menu").length&&(d=d.closest("li.dropdown").addClass("active")),d.trigger("activate.bs.scrollspy")},b.prototype.clear=function(){a(this.selector).parentsUntil(this.options.target,".active").removeClass("active")};var d=a.fn.scrollspy;a.fn.scrollspy=c,a.fn.scrollspy.Constructor=b,a.fn.scrollspy.noConflict=function(){return a.fn.scrollspy=d,this},a(window).on("load.bs.scrollspy.data-api",function(){a('[data-spy="scroll"]').each(function(){var b=a(this);c.call(b,b.data())})})}(jQuery),+function(a){"use strict";function b(b){return this.each(function(){var d=a(this),e=d.data("bs.tab");e||d.data("bs.tab",e=new c(this)),"string"==typeof b&&e[b]()})}var c=function(b){this.element=a(b)};c.VERSION="3.3.4",c.TRANSITION_DURATION=150,c.prototype.show=function(){var b=this.element,c=b.closest("ul:not(.dropdown-menu)"),d=b.data("target");if(d||(d=b.attr("href"),d=d&&d.replace(/.*(?=#[^\s]*$)/,"")),!b.parent("li").hasClass("active")){
-var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a.Event("show.bs.tab",{relatedTarget:e[0]});if(e.trigger(f),b.trigger(g),!g.isDefaultPrevented()&&!f.isDefaultPrevented()){var h=a(d);this.activate(b.closest("li"),c),this.activate(h,h.parent(),function(){e.trigger({type:"hidden.bs.tab",relatedTarget:b[0]}),b.trigger({type:"shown.bs.tab",relatedTarget:e[0]})})}}},c.prototype.activate=function(b,d,e){function f(){g.removeClass("active").find("> .dropdown-menu > .active").removeClass("active").end().find('[data-toggle="tab"]').attr("aria-expanded",!1),b.addClass("active").find('[data-toggle="tab"]').attr("aria-expanded",!0),h?(b[0].offsetWidth,b.addClass("in")):b.removeClass("fade"),b.parent(".dropdown-menu").length&&b.closest("li.dropdown").addClass("active").end().find('[data-toggle="tab"]').attr("aria-expanded",!0),e&&e()}var g=d.find("> .active"),h=e&&a.support.transition&&(g.length&&g.hasClass("fade")||!!d.find("> .fade").length);g.length&&h?g.one("bsTransitionEnd",f).emulateTransitionEnd(c.TRANSITION_DURATION):f(),g.removeClass("in")};var d=a.fn.tab;a.fn.tab=b,a.fn.tab.Constructor=c,a.fn.tab.noConflict=function(){return a.fn.tab=d,this};var e=function(c){c.preventDefault(),b.call(a(this),"show")};a(document).on("click.bs.tab.data-api",'[data-toggle="tab"]',e).on("click.bs.tab.data-api",'[data-toggle="pill"]',e)}(jQuery),+function(a){"use strict";function b(b){return this.each(function(){var d=a(this),e=d.data("bs.affix"),f="object"==typeof b&&b;e||d.data("bs.affix",e=new c(this,f)),"string"==typeof b&&e[b]()})}var c=function(b,d){this.options=a.extend({},c.DEFAULTS,d),this.$target=a(this.options.target).on("scroll.bs.affix.data-api",a.proxy(this.checkPosition,this)).on("click.bs.affix.data-api",a.proxy(this.checkPositionWithEventLoop,this)),this.$element=a(b),this.affixed=null,this.unpin=null,this.pinnedOffset=null,this.checkPosition()};c.VERSION="3.3.4",c.RESET="affix affix-top affix-bottom",c.DEFAULTS={offset:0,target:window},c.prototype.getState=function(a,b,c,d){var e=this.$target.scrollTop(),f=this.$element.offset(),g=this.$target.height();if(null!=c&&"top"==this.affixed)return c>e?"top":!1;if("bottom"==this.affixed)return null!=c?e+this.unpin<=f.top?!1:"bottom":a-d>=e+g?!1:"bottom";var h=null==this.affixed,i=h?e:f.top,j=h?g:b;return null!=c&&c>=e?"top":null!=d&&i+j>=a-d?"bottom":!1},c.prototype.getPinnedOffset=function(){if(this.pinnedOffset)return this.pinnedOffset;this.$element.removeClass(c.RESET).addClass("affix");var a=this.$target.scrollTop(),b=this.$element.offset();return this.pinnedOffset=b.top-a},c.prototype.checkPositionWithEventLoop=function(){setTimeout(a.proxy(this.checkPosition,this),1)},c.prototype.checkPosition=function(){if(this.$element.is(":visible")){var b=this.$element.height(),d=this.options.offset,e=d.top,f=d.bottom,g=a(document.body).height();"object"!=typeof d&&(f=e=d),"function"==typeof e&&(e=d.top(this.$element)),"function"==typeof f&&(f=d.bottom(this.$element));var h=this.getState(g,b,e,f);if(this.affixed!=h){null!=this.unpin&&this.$element.css("top","");var i="affix"+(h?"-"+h:""),j=a.Event(i+".bs.affix");if(this.$element.trigger(j),j.isDefaultPrevented())return;this.affixed=h,this.unpin="bottom"==h?this.getPinnedOffset():null,this.$element.removeClass(c.RESET).addClass(i).trigger(i.replace("affix","affixed")+".bs.affix")}"bottom"==h&&this.$element.offset({top:g-b-f})}};var d=a.fn.affix;a.fn.affix=b,a.fn.affix.Constructor=c,a.fn.affix.noConflict=function(){return a.fn.affix=d,this},a(window).on("load",function(){a('[data-spy="affix"]').each(function(){var c=a(this),d=c.data();d.offset=d.offset||{},null!=d.offsetBottom&&(d.offset.bottom=d.offsetBottom),null!=d.offsetTop&&(d.offset.top=d.offsetTop),b.call(c,d)})})}(jQuery);
+if("undefined"==typeof jQuery)throw new Error("Bootstrap's JavaScript requires jQuery");+function(a){"use strict";var b=a.fn.jquery.split(" ")[0].split(".");if(b[0]<2&&b[1]<9||1==b[0]&&9==b[1]&&b[2]<1||b[0]>2)throw new Error("Bootstrap's JavaScript requires jQuery version 1.9.1 or higher, but lower than version 3")}(jQuery),+function(a){"use strict";function b(){var a=document.createElement("bootstrap"),b={WebkitTransition:"webkitTransitionEnd",MozTransition:"transitionend",OTransition:"oTransitionEnd otransitionend",transition:"transitionend"};for(var c in b)if(void 0!==a.style[c])return{end:b[c]};return!1}a.fn.emulateTransitionEnd=function(b){var c=!1,d=this;a(this).one("bsTransitionEnd",function(){c=!0});var e=function(){c||a(d).trigger(a.support.transition.end)};return setTimeout(e,b),this},a(function(){a.support.transition=b(),a.support.transition&&(a.event.special.bsTransitionEnd={bindType:a.support.transition.end,delegateType:a.support.transition.end,handle:function(b){return a(b.target).is(this)?b.handleObj.handler.apply(this,arguments):void 0}})})}(jQuery),+function(a){"use strict";function b(b){return this.each(function(){var c=a(this),e=c.data("bs.alert");e||c.data("bs.alert",e=new d(this)),"string"==typeof b&&e[b].call(c)})}var c='[data-dismiss="alert"]',d=function(b){a(b).on("click",c,this.close)};d.VERSION="3.3.6",d.TRANSITION_DURATION=150,d.prototype.close=function(b){function c(){g.detach().trigger("closed.bs.alert").remove()}var e=a(this),f=e.attr("data-target");f||(f=e.attr("href"),f=f&&f.replace(/.*(?=#[^\s]*$)/,""));var g=a(f);b&&b.preventDefault(),g.length||(g=e.closest(".alert")),g.trigger(b=a.Event("close.bs.alert")),b.isDefaultPrevented()||(g.removeClass("in"),a.support.transition&&g.hasClass("fade")?g.one("bsTransitionEnd",c).emulateTransitionEnd(d.TRANSITION_DURATION):c())};var e=a.fn.alert;a.fn.alert=b,a.fn.alert.Constructor=d,a.fn.alert.noConflict=function(){return a.fn.alert=e,this},a(document).on("click.bs.alert.data-api",c,d.prototype.close)}(jQuery),+function(a){"use strict";function b(b){return this.each(function(){var d=a(this),e=d.data("bs.button"),f="object"==typeof b&&b;e||d.data("bs.button",e=new c(this,f)),"toggle"==b?e.toggle():b&&e.setState(b)})}var c=function(b,d){this.$element=a(b),this.options=a.extend({},c.DEFAULTS,d),this.isLoading=!1};c.VERSION="3.3.6",c.DEFAULTS={loadingText:"loading..."},c.prototype.setState=function(b){var c="disabled",d=this.$element,e=d.is("input")?"val":"html",f=d.data();b+="Text",null==f.resetText&&d.data("resetText",d[e]()),setTimeout(a.proxy(function(){d[e](null==f[b]?this.options[b]:f[b]),"loadingText"==b?(this.isLoading=!0,d.addClass(c).attr(c,c)):this.isLoading&&(this.isLoading=!1,d.removeClass(c).removeAttr(c))},this),0)},c.prototype.toggle=function(){var a=!0,b=this.$element.closest('[data-toggle="buttons"]');if(b.length){var c=this.$element.find("input");"radio"==c.prop("type")?(c.prop("checked")&&(a=!1),b.find(".active").removeClass("active"),this.$element.addClass("active")):"checkbox"==c.prop("type")&&(c.prop("checked")!==this.$element.hasClass("active")&&(a=!1),this.$element.toggleClass("active")),c.prop("checked",this.$element.hasClass("active")),a&&c.trigger("change")}else this.$element.attr("aria-pressed",!this.$element.hasClass("active")),this.$element.toggleClass("active")};var d=a.fn.button;a.fn.button=b,a.fn.button.Constructor=c,a.fn.button.noConflict=function(){return a.fn.button=d,this},a(document).on("click.bs.button.data-api",'[data-toggle^="button"]',function(c){var d=a(c.target);d.hasClass("btn")||(d=d.closest(".btn")),b.call(d,"toggle"),a(c.target).is('input[type="radio"]')||a(c.target).is('input[type="checkbox"]')||c.preventDefault()}).on("focus.bs.button.data-api blur.bs.button.data-api",'[data-toggle^="button"]',function(b){a(b.target).closest(".btn").toggleClass("focus",/^focus(in)?$/.test(b.type))})}(jQuery),+function(a){"use strict";function b(b){return this.each(function(){var d=a(this),e=d.data("bs.carousel"),f=a.extend({},c.DEFAULTS,d.data(),"object"==typeof b&&b),g="string"==typeof b?b:f.slide;e||d.data("bs.carousel",e=new c(this,f)),"number"==typeof b?e.to(b):g?e[g]():f.interval&&e.pause().cycle()})}var c=function(b,c){this.$element=a(b),this.$indicators=this.$element.find(".carousel-indicators"),this.options=c,this.paused=null,this.sliding=null,this.interval=null,this.$active=null,this.$items=null,this.options.keyboard&&this.$element.on("keydown.bs.carousel",a.proxy(this.keydown,this)),"hover"==this.options.pause&&!("ontouchstart"in document.documentElement)&&this.$element.on("mouseenter.bs.carousel",a.proxy(this.pause,this)).on("mouseleave.bs.carousel",a.proxy(this.cycle,this))};c.VERSION="3.3.6",c.TRANSITION_DURATION=600,c.DEFAULTS={interval:5e3,pause:"hover",wrap:!0,keyboard:!0},c.prototype.keydown=function(a){if(!/input|textarea/i.test(a.target.tagName)){switch(a.which){case 37:this.prev();break;case 39:this.next();break;default:return}a.preventDefault()}},c.prototype.cycle=function(b){return b||(this.paused=!1),this.interval&&clearInterval(this.interval),this.options.interval&&!this.paused&&(this.interval=setInterval(a.proxy(this.next,this),this.options.interval)),this},c.prototype.getItemIndex=function(a){return this.$items=a.parent().children(".item"),this.$items.index(a||this.$active)},c.prototype.getItemForDirection=function(a,b){var c=this.getItemIndex(b),d="prev"==a&&0===c||"next"==a&&c==this.$items.length-1;if(d&&!this.options.wrap)return b;var e="prev"==a?-1:1,f=(c+e)%this.$items.length;return this.$items.eq(f)},c.prototype.to=function(a){var b=this,c=this.getItemIndex(this.$active=this.$element.find(".item.active"));return a>this.$items.length-1||0>a?void 0:this.sliding?this.$element.one("slid.bs.carousel",function(){b.to(a)}):c==a?this.pause().cycle():this.slide(a>c?"next":"prev",this.$items.eq(a))},c.prototype.pause=function(b){return b||(this.paused=!0),this.$element.find(".next, .prev").length&&a.support.transition&&(this.$element.trigger(a.support.transition.end),this.cycle(!0)),this.interval=clearInterval(this.interval),this},c.prototype.next=function(){return this.sliding?void 0:this.slide("next")},c.prototype.prev=function(){return this.sliding?void 0:this.slide("prev")},c.prototype.slide=function(b,d){var e=this.$element.find(".item.active"),f=d||this.getItemForDirection(b,e),g=this.interval,h="next"==b?"left":"right",i=this;if(f.hasClass("active"))return this.sliding=!1;var j=f[0],k=a.Event("slide.bs.carousel",{relatedTarget:j,direction:h});if(this.$element.trigger(k),!k.isDefaultPrevented()){if(this.sliding=!0,g&&this.pause(),this.$indicators.length){this.$indicators.find(".active").removeClass("active");var l=a(this.$indicators.children()[this.getItemIndex(f)]);l&&l.addClass("active")}var m=a.Event("slid.bs.carousel",{relatedTarget:j,direction:h});return a.support.transition&&this.$element.hasClass("slide")?(f.addClass(b),f[0].offsetWidth,e.addClass(h),f.addClass(h),e.one("bsTransitionEnd",function(){f.removeClass([b,h].join(" ")).addClass("active"),e.removeClass(["active",h].join(" ")),i.sliding=!1,setTimeout(function(){i.$element.trigger(m)},0)}).emulateTransitionEnd(c.TRANSITION_DURATION)):(e.removeClass("active"),f.addClass("active"),this.sliding=!1,this.$element.trigger(m)),g&&this.cycle(),this}};var d=a.fn.carousel;a.fn.carousel=b,a.fn.carousel.Constructor=c,a.fn.carousel.noConflict=function(){return a.fn.carousel=d,this};var e=function(c){var d,e=a(this),f=a(e.attr("data-target")||(d=e.attr("href"))&&d.replace(/.*(?=#[^\s]+$)/,""));if(f.hasClass("carousel")){var g=a.extend({},f.data(),e.data()),h=e.attr("data-slide-to");h&&(g.interval=!1),b.call(f,g),h&&f.data("bs.carousel").to(h),c.preventDefault()}};a(document).on("click.bs.carousel.data-api","[data-slide]",e).on("click.bs.carousel.data-api","[data-slide-to]",e),a(window).on("load",function(){a('[data-ride="carousel"]').each(function(){var c=a(this);b.call(c,c.data())})})}(jQuery),+function(a){"use strict";function b(b){var c,d=b.attr("data-target")||(c=b.attr("href"))&&c.replace(/.*(?=#[^\s]+$)/,"");return a(d)}function c(b){return this.each(function(){var c=a(this),e=c.data("bs.collapse"),f=a.extend({},d.DEFAULTS,c.data(),"object"==typeof b&&b);!e&&f.toggle&&/show|hide/.test(b)&&(f.toggle=!1),e||c.data("bs.collapse",e=new d(this,f)),"string"==typeof b&&e[b]()})}var d=function(b,c){this.$element=a(b),this.options=a.extend({},d.DEFAULTS,c),this.$trigger=a('[data-toggle="collapse"][href="#'+b.id+'"],[data-toggle="collapse"][data-target="#'+b.id+'"]'),this.transitioning=null,this.options.parent?this.$parent=this.getParent():this.addAriaAndCollapsedClass(this.$element,this.$trigger),this.options.toggle&&this.toggle()};d.VERSION="3.3.6",d.TRANSITION_DURATION=350,d.DEFAULTS={toggle:!0},d.prototype.dimension=function(){var a=this.$element.hasClass("width");return a?"width":"height"},d.prototype.show=function(){if(!this.transitioning&&!this.$element.hasClass("in")){var b,e=this.$parent&&this.$parent.children(".panel").children(".in, .collapsing");if(!(e&&e.length&&(b=e.data("bs.collapse"),b&&b.transitioning))){var f=a.Event("show.bs.collapse");if(this.$element.trigger(f),!f.isDefaultPrevented()){e&&e.length&&(c.call(e,"hide"),b||e.data("bs.collapse",null));var g=this.dimension();this.$element.removeClass("collapse").addClass("collapsing")[g](0).attr("aria-expanded",!0),this.$trigger.removeClass("collapsed").attr("aria-expanded",!0),this.transitioning=1;var h=function(){this.$element.removeClass("collapsing").addClass("collapse in")[g](""),this.transitioning=0,this.$element.trigger("shown.bs.collapse")};if(!a.support.transition)return h.call(this);var i=a.camelCase(["scroll",g].join("-"));this.$element.one("bsTransitionEnd",a.proxy(h,this)).emulateTransitionEnd(d.TRANSITION_DURATION)[g](this.$element[0][i])}}}},d.prototype.hide=function(){if(!this.transitioning&&this.$element.hasClass("in")){var b=a.Event("hide.bs.collapse");if(this.$element.trigger(b),!b.isDefaultPrevented()){var c=this.dimension();this.$element[c](this.$element[c]())[0].offsetHeight,this.$element.addClass("collapsing").removeClass("collapse in").attr("aria-expanded",!1),this.$trigger.addClass("collapsed").attr("aria-expanded",!1),this.transitioning=1;var e=function(){this.transitioning=0,this.$element.removeClass("collapsing").addClass("collapse").trigger("hidden.bs.collapse")};return a.support.transition?void this.$element[c](0).one("bsTransitionEnd",a.proxy(e,this)).emulateTransitionEnd(d.TRANSITION_DURATION):e.call(this)}}},d.prototype.toggle=function(){this[this.$element.hasClass("in")?"hide":"show"]()},d.prototype.getParent=function(){return a(this.options.parent).find('[data-toggle="collapse"][data-parent="'+this.options.parent+'"]').each(a.proxy(function(c,d){var e=a(d);this.addAriaAndCollapsedClass(b(e),e)},this)).end()},d.prototype.addAriaAndCollapsedClass=function(a,b){var c=a.hasClass("in");a.attr("aria-expanded",c),b.toggleClass("collapsed",!c).attr("aria-expanded",c)};var e=a.fn.collapse;a.fn.collapse=c,a.fn.collapse.Constructor=d,a.fn.collapse.noConflict=function(){return a.fn.collapse=e,this},a(document).on("click.bs.collapse.data-api",'[data-toggle="collapse"]',function(d){var e=a(this);e.attr("data-target")||d.preventDefault();var f=b(e),g=f.data("bs.collapse"),h=g?"toggle":e.data();c.call(f,h)})}(jQuery),+function(a){"use strict";function b(b){var c=b.attr("data-target");c||(c=b.attr("href"),c=c&&/#[A-Za-z]/.test(c)&&c.replace(/.*(?=#[^\s]*$)/,""));var d=c&&a(c);return d&&d.length?d:b.parent()}function c(c){c&&3===c.which||(a(e).remove(),a(f).each(function(){var d=a(this),e=b(d),f={relatedTarget:this};e.hasClass("open")&&(c&&"click"==c.type&&/input|textarea/i.test(c.target.tagName)&&a.contains(e[0],c.target)||(e.trigger(c=a.Event("hide.bs.dropdown",f)),c.isDefaultPrevented()||(d.attr("aria-expanded","false"),e.removeClass("open").trigger(a.Event("hidden.bs.dropdown",f)))))}))}function d(b){return this.each(function(){var c=a(this),d=c.data("bs.dropdown");d||c.data("bs.dropdown",d=new g(this)),"string"==typeof b&&d[b].call(c)})}var e=".dropdown-backdrop",f='[data-toggle="dropdown"]',g=function(b){a(b).on("click.bs.dropdown",this.toggle)};g.VERSION="3.3.6",g.prototype.toggle=function(d){var e=a(this);if(!e.is(".disabled, :disabled")){var f=b(e),g=f.hasClass("open");if(c(),!g){"ontouchstart"in document.documentElement&&!f.closest(".navbar-nav").length&&a(document.createElement("div")).addClass("dropdown-backdrop").insertAfter(a(this)).on("click",c);var h={relatedTarget:this};if(f.trigger(d=a.Event("show.bs.dropdown",h)),d.isDefaultPrevented())return;e.trigger("focus").attr("aria-expanded","true"),f.toggleClass("open").trigger(a.Event("shown.bs.dropdown",h))}return!1}},g.prototype.keydown=function(c){if(/(38|40|27|32)/.test(c.which)&&!/input|textarea/i.test(c.target.tagName)){var d=a(this);if(c.preventDefault(),c.stopPropagation(),!d.is(".disabled, :disabled")){var e=b(d),g=e.hasClass("open");if(!g&&27!=c.which||g&&27==c.which)return 27==c.which&&e.find(f).trigger("focus"),d.trigger("click");var h=" li:not(.disabled):visible a",i=e.find(".dropdown-menu"+h);if(i.length){var j=i.index(c.target);38==c.which&&j>0&&j--,40==c.which&&j<i.length-1&&j++,~j||(j=0),i.eq(j).trigger("focus")}}}};var h=a.fn.dropdown;a.fn.dropdown=d,a.fn.dropdown.Constructor=g,a.fn.dropdown.noConflict=function(){return a.fn.dropdown=h,this},a(document).on("click.bs.dropdown.data-api",c).on("click.bs.dropdown.data-api",".dropdown form",function(a){a.stopPropagation()}).on("click.bs.dropdown.data-api",f,g.prototype.toggle).on("keydown.bs.dropdown.data-api",f,g.prototype.keydown).on("keydown.bs.dropdown.data-api",".dropdown-menu",g.prototype.keydown)}(jQuery),+function(a){"use strict";function b(b,d){return this.each(function(){var e=a(this),f=e.data("bs.modal"),g=a.extend({},c.DEFAULTS,e.data(),"object"==typeof b&&b);f||e.data("bs.modal",f=new c(this,g)),"string"==typeof b?f[b](d):g.show&&f.show(d)})}var c=function(b,c){this.options=c,this.$body=a(document.body),this.$element=a(b),this.$dialog=this.$element.find(".modal-dialog"),this.$backdrop=null,this.isShown=null,this.originalBodyPad=null,this.scrollbarWidth=0,this.ignoreBackdropClick=!1,this.options.remote&&this.$element.find(".modal-content").load(this.options.remote,a.proxy(function(){this.$element.trigger("loaded.bs.modal")},this))};c.VERSION="3.3.6",c.TRANSITION_DURATION=300,c.BACKDROP_TRANSITION_DURATION=150,c.DEFAULTS={backdrop:!0,keyboard:!0,show:!0},c.prototype.toggle=function(a){return this.isShown?this.hide():this.show(a)},c.prototype.show=function(b){var d=this,e=a.Event("show.bs.modal",{relatedTarget:b});this.$element.trigger(e),this.isShown||e.isDefaultPrevented()||(this.isShown=!0,this.checkScrollbar(),this.setScrollbar(),this.$body.addClass("modal-open"),this.escape(),this.resize(),this.$element.on("click.dismiss.bs.modal",'[data-dismiss="modal"]',a.proxy(this.hide,this)),this.$dialog.on("mousedown.dismiss.bs.modal",function(){d.$element.one("mouseup.dismiss.bs.modal",function(b){a(b.target).is(d.$element)&&(d.ignoreBackdropClick=!0)})}),this.backdrop(function(){var e=a.support.transition&&d.$element.hasClass("fade");d.$element.parent().length||d.$element.appendTo(d.$body),d.$element.show().scrollTop(0),d.adjustDialog(),e&&d.$element[0].offsetWidth,d.$element.addClass("in"),d.enforceFocus();var f=a.Event("shown.bs.modal",{relatedTarget:b});e?d.$dialog.one("bsTransitionEnd",function(){d.$element.trigger("focus").trigger(f)}).emulateTransitionEnd(c.TRANSITION_DURATION):d.$element.trigger("focus").trigger(f)}))},c.prototype.hide=function(b){b&&b.preventDefault(),b=a.Event("hide.bs.modal"),this.$element.trigger(b),this.isShown&&!b.isDefaultPrevented()&&(this.isShown=!1,this.escape(),this.resize(),a(document).off("focusin.bs.modal"),this.$element.removeClass("in").off("click.dismiss.bs.modal").off("mouseup.dismiss.bs.modal"),this.$dialog.off("mousedown.dismiss.bs.modal"),a.support.transition&&this.$element.hasClass("fade")?this.$element.one("bsTransitionEnd",a.proxy(this.hideModal,this)).emulateTransitionEnd(c.TRANSITION_DURATION):this.hideModal())},c.prototype.enforceFocus=function(){a(document).off("focusin.bs.modal").on("focusin.bs.modal",a.proxy(function(a){this.$element[0]===a.target||this.$element.has(a.target).length||this.$element.trigger("focus")},this))},c.prototype.escape=function(){this.isShown&&this.options.keyboard?this.$element.on("keydown.dismiss.bs.modal",a.proxy(function(a){27==a.which&&this.hide()},this)):this.isShown||this.$element.off("keydown.dismiss.bs.modal")},c.prototype.resize=function(){this.isShown?a(window).on("resize.bs.modal",a.proxy(this.handleUpdate,this)):a(window).off("resize.bs.modal")},c.prototype.hideModal=function(){var a=this;this.$element.hide(),this.backdrop(function(){a.$body.removeClass("modal-open"),a.resetAdjustments(),a.resetScrollbar(),a.$element.trigger("hidden.bs.modal")})},c.prototype.removeBackdrop=function(){this.$backdrop&&this.$backdrop.remove(),this.$backdrop=null},c.prototype.backdrop=function(b){var d=this,e=this.$element.hasClass("fade")?"fade":"";if(this.isShown&&this.options.backdrop){var f=a.support.transition&&e;if(this.$backdrop=a(document.createElement("div")).addClass("modal-backdrop "+e).appendTo(this.$body),this.$element.on("click.dismiss.bs.modal",a.proxy(function(a){return this.ignoreBackdropClick?void(this.ignoreBackdropClick=!1):void(a.target===a.currentTarget&&("static"==this.options.backdrop?this.$element[0].focus():this.hide()))},this)),f&&this.$backdrop[0].offsetWidth,this.$backdrop.addClass("in"),!b)return;f?this.$backdrop.one("bsTransitionEnd",b).emulateTransitionEnd(c.BACKDROP_TRANSITION_DURATION):b()}else if(!this.isShown&&this.$backdrop){this.$backdrop.removeClass("in");var g=function(){d.removeBackdrop(),b&&b()};a.support.transition&&this.$element.hasClass("fade")?this.$backdrop.one("bsTransitionEnd",g).emulateTransitionEnd(c.BACKDROP_TRANSITION_DURATION):g()}else b&&b()},c.prototype.handleUpdate=function(){this.adjustDialog()},c.prototype.adjustDialog=function(){var a=this.$element[0].scrollHeight>document.documentElement.clientHeight;this.$element.css({paddingLeft:!this.bodyIsOverflowing&&a?this.scrollbarWidth:"",paddingRight:this.bodyIsOverflowing&&!a?this.scrollbarWidth:""})},c.prototype.resetAdjustments=function(){this.$element.css({paddingLeft:"",paddingRight:""})},c.prototype.checkScrollbar=function(){var a=window.innerWidth;if(!a){var b=document.documentElement.getBoundingClientRect();a=b.right-Math.abs(b.left)}this.bodyIsOverflowing=document.body.clientWidth<a,this.scrollbarWidth=this.measureScrollbar()},c.prototype.setScrollbar=function(){var a=parseInt(this.$body.css("padding-right")||0,10);this.originalBodyPad=document.body.style.paddingRight||"",this.bodyIsOverflowing&&this.$body.css("padding-right",a+this.scrollbarWidth)},c.prototype.resetScrollbar=function(){this.$body.css("padding-right",this.originalBodyPad)},c.prototype.measureScrollbar=function(){var a=document.createElement("div");a.className="modal-scrollbar-measure",this.$body.append(a);var b=a.offsetWidth-a.clientWidth;return this.$body[0].removeChild(a),b};var d=a.fn.modal;a.fn.modal=b,a.fn.modal.Constructor=c,a.fn.modal.noConflict=function(){return a.fn.modal=d,this},a(document).on("click.bs.modal.data-api",'[data-toggle="modal"]',function(c){var d=a(this),e=d.attr("href"),f=a(d.attr("data-target")||e&&e.replace(/.*(?=#[^\s]+$)/,"")),g=f.data("bs.modal")?"toggle":a.extend({remote:!/#/.test(e)&&e},f.data(),d.data());d.is("a")&&c.preventDefault(),f.one("show.bs.modal",function(a){a.isDefaultPrevented()||f.one("hidden.bs.modal",function(){d.is(":visible")&&d.trigger("focus")})}),b.call(f,g,this)})}(jQuery),+function(a){"use strict";function b(b){return this.each(function(){var d=a(this),e=d.data("bs.tooltip"),f="object"==typeof b&&b;(e||!/destroy|hide/.test(b))&&(e||d.data("bs.tooltip",e=new c(this,f)),"string"==typeof b&&e[b]())})}var c=function(a,b){this.type=null,this.options=null,this.enabled=null,this.timeout=null,this.hoverState=null,this.$element=null,this.inState=null,this.init("tooltip",a,b)};c.VERSION="3.3.6",c.TRANSITION_DURATION=150,c.DEFAULTS={animation:!0,placement:"top",selector:!1,template:'<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>',trigger:"hover focus",title:"",delay:0,html:!1,container:!1,viewport:{selector:"body",padding:0}},c.prototype.init=function(b,c,d){if(this.enabled=!0,this.type=b,this.$element=a(c),this.options=this.getOptions(d),this.$viewport=this.options.viewport&&a(a.isFunction(this.options.viewport)?this.options.viewport.call(this,this.$element):this.options.viewport.selector||this.options.viewport),this.inState={click:!1,hover:!1,focus:!1},this.$element[0]instanceof document.constructor&&!this.options.selector)throw new Error("`selector` option must be specified when initializing "+this.type+" on the window.document object!");for(var e=this.options.trigger.split(" "),f=e.length;f--;){var g=e[f];if("click"==g)this.$element.on("click."+this.type,this.options.selector,a.proxy(this.toggle,this));else if("manual"!=g){var h="hover"==g?"mouseenter":"focusin",i="hover"==g?"mouseleave":"focusout";this.$element.on(h+"."+this.type,this.options.selector,a.proxy(this.enter,this)),this.$element.on(i+"."+this.type,this.options.selector,a.proxy(this.leave,this))}}this.options.selector?this._options=a.extend({},this.options,{trigger:"manual",selector:""}):this.fixTitle()},c.prototype.getDefaults=function(){return c.DEFAULTS},c.prototype.getOptions=function(b){return b=a.extend({},this.getDefaults(),this.$element.data(),b),b.delay&&"number"==typeof b.delay&&(b.delay={show:b.delay,hide:b.delay}),b},c.prototype.getDelegateOptions=function(){var b={},c=this.getDefaults();return this._options&&a.each(this._options,function(a,d){c[a]!=d&&(b[a]=d)}),b},c.prototype.enter=function(b){var c=b instanceof this.constructor?b:a(b.currentTarget).data("bs."+this.type);return c||(c=new this.constructor(b.currentTarget,this.getDelegateOptions()),a(b.currentTarget).data("bs."+this.type,c)),b instanceof a.Event&&(c.inState["focusin"==b.type?"focus":"hover"]=!0),c.tip().hasClass("in")||"in"==c.hoverState?void(c.hoverState="in"):(clearTimeout(c.timeout),c.hoverState="in",c.options.delay&&c.options.delay.show?void(c.timeout=setTimeout(function(){"in"==c.hoverState&&c.show()},c.options.delay.show)):c.show())},c.prototype.isInStateTrue=function(){for(var a in this.inState)if(this.inState[a])return!0;return!1},c.prototype.leave=function(b){var c=b instanceof this.constructor?b:a(b.currentTarget).data("bs."+this.type);return c||(c=new this.constructor(b.currentTarget,this.getDelegateOptions()),a(b.currentTarget).data("bs."+this.type,c)),b instanceof a.Event&&(c.inState["focusout"==b.type?"focus":"hover"]=!1),c.isInStateTrue()?void 0:(clearTimeout(c.timeout),c.hoverState="out",c.options.delay&&c.options.delay.hide?void(c.timeout=setTimeout(function(){"out"==c.hoverState&&c.hide()},c.options.delay.hide)):c.hide())},c.prototype.show=function(){var b=a.Event("show.bs."+this.type);if(this.hasContent()&&this.enabled){this.$element.trigger(b);var d=a.contains(this.$element[0].ownerDocument.documentElement,this.$element[0]);if(b.isDefaultPrevented()||!d)return;var e=this,f=this.tip(),g=this.getUID(this.type);this.setContent(),f.attr("id",g),this.$element.attr("aria-describedby",g),this.options.animation&&f.addClass("fade");var h="function"==typeof this.options.placement?this.options.placement.call(this,f[0],this.$element[0]):this.options.placement,i=/\s?auto?\s?/i,j=i.test(h);j&&(h=h.replace(i,"")||"top"),f.detach().css({top:0,left:0,display:"block"}).addClass(h).data("bs."+this.type,this),this.options.container?f.appendTo(this.options.container):f.insertAfter(this.$element),this.$element.trigger("inserted.bs."+this.type);var k=this.getPosition(),l=f[0].offsetWidth,m=f[0].offsetHeight;if(j){var n=h,o=this.getPosition(this.$viewport);h="bottom"==h&&k.bottom+m>o.bottom?"top":"top"==h&&k.top-m<o.top?"bottom":"right"==h&&k.right+l>o.width?"left":"left"==h&&k.left-l<o.left?"right":h,f.removeClass(n).addClass(h)}var p=this.getCalculatedOffset(h,k,l,m);this.applyPlacement(p,h);var q=function(){var a=e.hoverState;e.$element.trigger("shown.bs."+e.type),e.hoverState=null,"out"==a&&e.leave(e)};a.support.transition&&this.$tip.hasClass("fade")?f.one("bsTransitionEnd",q).emulateTransitionEnd(c.TRANSITION_DURATION):q()}},c.prototype.applyPlacement=function(b,c){var d=this.tip(),e=d[0].offsetWidth,f=d[0].offsetHeight,g=parseInt(d.css("margin-top"),10),h=parseInt(d.css("margin-left"),10);isNaN(g)&&(g=0),isNaN(h)&&(h=0),b.top+=g,b.left+=h,a.offset.setOffset(d[0],a.extend({using:function(a){d.css({top:Math.round(a.top),left:Math.round(a.left)})}},b),0),d.addClass("in");var i=d[0].offsetWidth,j=d[0].offsetHeight;"top"==c&&j!=f&&(b.top=b.top+f-j);var k=this.getViewportAdjustedDelta(c,b,i,j);k.left?b.left+=k.left:b.top+=k.top;var l=/top|bottom/.test(c),m=l?2*k.left-e+i:2*k.top-f+j,n=l?"offsetWidth":"offsetHeight";d.offset(b),this.replaceArrow(m,d[0][n],l)},c.prototype.replaceArrow=function(a,b,c){this.arrow().css(c?"left":"top",50*(1-a/b)+"%").css(c?"top":"left","")},c.prototype.setContent=function(){var a=this.tip(),b=this.getTitle();a.find(".tooltip-inner")[this.options.html?"html":"text"](b),a.removeClass("fade in top bottom left right")},c.prototype.hide=function(b){function d(){"in"!=e.hoverState&&f.detach(),e.$element.removeAttr("aria-describedby").trigger("hidden.bs."+e.type),b&&b()}var e=this,f=a(this.$tip),g=a.Event("hide.bs."+this.type);return this.$element.trigger(g),g.isDefaultPrevented()?void 0:(f.removeClass("in"),a.support.transition&&f.hasClass("fade")?f.one("bsTransitionEnd",d).emulateTransitionEnd(c.TRANSITION_DURATION):d(),this.hoverState=null,this)},c.prototype.fixTitle=function(){var a=this.$element;(a.attr("title")||"string"!=typeof a.attr("data-original-title"))&&a.attr("data-original-title",a.attr("title")||"").attr("title","")},c.prototype.hasContent=function(){return this.getTitle()},c.prototype.getPosition=function(b){b=b||this.$element;var c=b[0],d="BODY"==c.tagName,e=c.getBoundingClientRect();null==e.width&&(e=a.extend({},e,{width:e.right-e.left,height:e.bottom-e.top}));var f=d?{top:0,left:0}:b.offset(),g={scroll:d?document.documentElement.scrollTop||document.body.scrollTop:b.scrollTop()},h=d?{width:a(window).width(),height:a(window).height()}:null;return a.extend({},e,g,h,f)},c.prototype.getCalculatedOffset=function(a,b,c,d){return"bottom"==a?{top:b.top+b.height,left:b.left+b.width/2-c/2}:"top"==a?{top:b.top-d,left:b.left+b.width/2-c/2}:"left"==a?{top:b.top+b.height/2-d/2,left:b.left-c}:{top:b.top+b.height/2-d/2,left:b.left+b.width}},c.prototype.getViewportAdjustedDelta=function(a,b,c,d){var e={top:0,left:0};if(!this.$viewport)return e;var f=this.options.viewport&&this.options.viewport.padding||0,g=this.getPosition(this.$viewport);if(/right|left/.test(a)){var h=b.top-f-g.scroll,i=b.top+f-g.scroll+d;h<g.top?e.top=g.top-h:i>g.top+g.height&&(e.top=g.top+g.height-i)}else{var j=b.left-f,k=b.left+f+c;j<g.left?e.left=g.left-j:k>g.right&&(e.left=g.left+g.width-k)}return e},c.prototype.getTitle=function(){var a,b=this.$element,c=this.options;return a=b.attr("data-original-title")||("function"==typeof c.title?c.title.call(b[0]):c.title)},c.prototype.getUID=function(a){do a+=~~(1e6*Math.random());while(document.getElementById(a));return a},c.prototype.tip=function(){if(!this.$tip&&(this.$tip=a(this.options.template),1!=this.$tip.length))throw new Error(this.type+" `template` option must consist of exactly 1 top-level element!");return this.$tip},c.prototype.arrow=function(){return this.$arrow=this.$arrow||this.tip().find(".tooltip-arrow")},c.prototype.enable=function(){this.enabled=!0},c.prototype.disable=function(){this.enabled=!1},c.prototype.toggleEnabled=function(){this.enabled=!this.enabled},c.prototype.toggle=function(b){var c=this;b&&(c=a(b.currentTarget).data("bs."+this.type),c||(c=new this.constructor(b.currentTarget,this.getDelegateOptions()),a(b.currentTarget).data("bs."+this.type,c))),b?(c.inState.click=!c.inState.click,c.isInStateTrue()?c.enter(c):c.leave(c)):c.tip().hasClass("in")?c.leave(c):c.enter(c)},c.prototype.destroy=function(){var a=this;clearTimeout(this.timeout),this.hide(function(){a.$element.off("."+a.type).removeData("bs."+a.type),a.$tip&&a.$tip.detach(),a.$tip=null,a.$arrow=null,a.$viewport=null})};var d=a.fn.tooltip;a.fn.tooltip=b,a.fn.tooltip.Constructor=c,a.fn.tooltip.noConflict=function(){return a.fn.tooltip=d,this}}(jQuery),+function(a){"use strict";function b(b){return this.each(function(){var d=a(this),e=d.data("bs.popover"),f="object"==typeof b&&b;(e||!/destroy|hide/.test(b))&&(e||d.data("bs.popover",e=new c(this,f)),"string"==typeof b&&e[b]())})}var c=function(a,b){this.init("popover",a,b)};if(!a.fn.tooltip)throw new Error("Popover requires tooltip.js");c.VERSION="3.3.6",c.DEFAULTS=a.extend({},a.fn.tooltip.Constructor.DEFAULTS,{placement:"right",trigger:"click",content:"",template:'<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'}),c.prototype=a.extend({},a.fn.tooltip.Constructor.prototype),c.prototype.constructor=c,c.prototype.getDefaults=function(){return c.DEFAULTS},c.prototype.setContent=function(){var a=this.tip(),b=this.getTitle(),c=this.getContent();a.find(".popover-title")[this.options.html?"html":"text"](b),a.find(".popover-content").children().detach().end()[this.options.html?"string"==typeof c?"html":"append":"text"](c),a.removeClass("fade top bottom left right in"),a.find(".popover-title").html()||a.find(".popover-title").hide()},c.prototype.hasContent=function(){return this.getTitle()||this.getContent()},c.prototype.getContent=function(){var a=this.$element,b=this.options;return a.attr("data-content")||("function"==typeof b.content?b.content.call(a[0]):b.content)},c.prototype.arrow=function(){return this.$arrow=this.$arrow||this.tip().find(".arrow")};var d=a.fn.popover;a.fn.popover=b,a.fn.popover.Constructor=c,a.fn.popover.noConflict=function(){return a.fn.popover=d,this}}(jQuery),+function(a){"use strict";function b(c,d){this.$body=a(document.body),this.$scrollElement=a(a(c).is(document.body)?window:c),this.options=a.extend({},b.DEFAULTS,d),this.selector=(this.options.target||"")+" .nav li > a",this.offsets=[],this.targets=[],this.activeTarget=null,this.scrollHeight=0,this.$scrollElement.on("scroll.bs.scrollspy",a.proxy(this.process,this)),this.refresh(),this.process()}function c(c){return this.each(function(){var d=a(this),e=d.data("bs.scrollspy"),f="object"==typeof c&&c;e||d.data("bs.scrollspy",e=new b(this,f)),"string"==typeof c&&e[c]()})}b.VERSION="3.3.6",b.DEFAULTS={offset:10},b.prototype.getScrollHeight=function(){return this.$scrollElement[0].scrollHeight||Math.max(this.$body[0].scrollHeight,document.documentElement.scrollHeight)},b.prototype.refresh=function(){var b=this,c="offset",d=0;this.offsets=[],this.targets=[],this.scrollHeight=this.getScrollHeight(),a.isWindow(this.$scrollElement[0])||(c="position",d=this.$scrollElement.scrollTop()),this.$body.find(this.selector).map(function(){var b=a(this),e=b.data("target")||b.attr("href"),f=/^#./.test(e)&&a(e);return f&&f.length&&f.is(":visible")&&[[f[c]().top+d,e]]||null}).sort(function(a,b){return a[0]-b[0]}).each(function(){b.offsets.push(this[0]),b.targets.push(this[1])})},b.prototype.process=function(){var a,b=this.$scrollElement.scrollTop()+this.options.offset,c=this.getScrollHeight(),d=this.options.offset+c-this.$scrollElement.height(),e=this.offsets,f=this.targets,g=this.activeTarget;if(this.scrollHeight!=c&&this.refresh(),b>=d)return g!=(a=f[f.length-1])&&this.activate(a);if(g&&b<e[0])return this.activeTarget=null,this.clear();for(a=e.length;a--;)g!=f[a]&&b>=e[a]&&(void 0===e[a+1]||b<e[a+1])&&this.activate(f[a])},b.prototype.activate=function(b){this.activeTarget=b,this.clear();var c=this.selector+'[data-target="'+b+'"],'+this.selector+'[href="'+b+'"]',d=a(c).parents("li").addClass("active");
+d.parent(".dropdown-menu").length&&(d=d.closest("li.dropdown").addClass("active")),d.trigger("activate.bs.scrollspy")},b.prototype.clear=function(){a(this.selector).parentsUntil(this.options.target,".active").removeClass("active")};var d=a.fn.scrollspy;a.fn.scrollspy=c,a.fn.scrollspy.Constructor=b,a.fn.scrollspy.noConflict=function(){return a.fn.scrollspy=d,this},a(window).on("load.bs.scrollspy.data-api",function(){a('[data-spy="scroll"]').each(function(){var b=a(this);c.call(b,b.data())})})}(jQuery),+function(a){"use strict";function b(b){return this.each(function(){var d=a(this),e=d.data("bs.tab");e||d.data("bs.tab",e=new c(this)),"string"==typeof b&&e[b]()})}var c=function(b){this.element=a(b)};c.VERSION="3.3.6",c.TRANSITION_DURATION=150,c.prototype.show=function(){var b=this.element,c=b.closest("ul:not(.dropdown-menu)"),d=b.data("target");if(d||(d=b.attr("href"),d=d&&d.replace(/.*(?=#[^\s]*$)/,"")),!b.parent("li").hasClass("active")){var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a.Event("show.bs.tab",{relatedTarget:e[0]});if(e.trigger(f),b.trigger(g),!g.isDefaultPrevented()&&!f.isDefaultPrevented()){var h=a(d);this.activate(b.closest("li"),c),this.activate(h,h.parent(),function(){e.trigger({type:"hidden.bs.tab",relatedTarget:b[0]}),b.trigger({type:"shown.bs.tab",relatedTarget:e[0]})})}}},c.prototype.activate=function(b,d,e){function f(){g.removeClass("active").find("> .dropdown-menu > .active").removeClass("active").end().find('[data-toggle="tab"]').attr("aria-expanded",!1),b.addClass("active").find('[data-toggle="tab"]').attr("aria-expanded",!0),h?(b[0].offsetWidth,b.addClass("in")):b.removeClass("fade"),b.parent(".dropdown-menu").length&&b.closest("li.dropdown").addClass("active").end().find('[data-toggle="tab"]').attr("aria-expanded",!0),e&&e()}var g=d.find("> .active"),h=e&&a.support.transition&&(g.length&&g.hasClass("fade")||!!d.find("> .fade").length);g.length&&h?g.one("bsTransitionEnd",f).emulateTransitionEnd(c.TRANSITION_DURATION):f(),g.removeClass("in")};var d=a.fn.tab;a.fn.tab=b,a.fn.tab.Constructor=c,a.fn.tab.noConflict=function(){return a.fn.tab=d,this};var e=function(c){c.preventDefault(),b.call(a(this),"show")};a(document).on("click.bs.tab.data-api",'[data-toggle="tab"]',e).on("click.bs.tab.data-api",'[data-toggle="pill"]',e)}(jQuery),+function(a){"use strict";function b(b){return this.each(function(){var d=a(this),e=d.data("bs.affix"),f="object"==typeof b&&b;e||d.data("bs.affix",e=new c(this,f)),"string"==typeof b&&e[b]()})}var c=function(b,d){this.options=a.extend({},c.DEFAULTS,d),this.$target=a(this.options.target).on("scroll.bs.affix.data-api",a.proxy(this.checkPosition,this)).on("click.bs.affix.data-api",a.proxy(this.checkPositionWithEventLoop,this)),this.$element=a(b),this.affixed=null,this.unpin=null,this.pinnedOffset=null,this.checkPosition()};c.VERSION="3.3.6",c.RESET="affix affix-top affix-bottom",c.DEFAULTS={offset:0,target:window},c.prototype.getState=function(a,b,c,d){var e=this.$target.scrollTop(),f=this.$element.offset(),g=this.$target.height();if(null!=c&&"top"==this.affixed)return c>e?"top":!1;if("bottom"==this.affixed)return null!=c?e+this.unpin<=f.top?!1:"bottom":a-d>=e+g?!1:"bottom";var h=null==this.affixed,i=h?e:f.top,j=h?g:b;return null!=c&&c>=e?"top":null!=d&&i+j>=a-d?"bottom":!1},c.prototype.getPinnedOffset=function(){if(this.pinnedOffset)return this.pinnedOffset;this.$element.removeClass(c.RESET).addClass("affix");var a=this.$target.scrollTop(),b=this.$element.offset();return this.pinnedOffset=b.top-a},c.prototype.checkPositionWithEventLoop=function(){setTimeout(a.proxy(this.checkPosition,this),1)},c.prototype.checkPosition=function(){if(this.$element.is(":visible")){var b=this.$element.height(),d=this.options.offset,e=d.top,f=d.bottom,g=Math.max(a(document).height(),a(document.body).height());"object"!=typeof d&&(f=e=d),"function"==typeof e&&(e=d.top(this.$element)),"function"==typeof f&&(f=d.bottom(this.$element));var h=this.getState(g,b,e,f);if(this.affixed!=h){null!=this.unpin&&this.$element.css("top","");var i="affix"+(h?"-"+h:""),j=a.Event(i+".bs.affix");if(this.$element.trigger(j),j.isDefaultPrevented())return;this.affixed=h,this.unpin="bottom"==h?this.getPinnedOffset():null,this.$element.removeClass(c.RESET).addClass(i).trigger(i.replace("affix","affixed")+".bs.affix")}"bottom"==h&&this.$element.offset({top:g-b-f})}};var d=a.fn.affix;a.fn.affix=b,a.fn.affix.Constructor=c,a.fn.affix.noConflict=function(){return a.fn.affix=d,this},a(window).on("load",function(){a('[data-spy="affix"]').each(function(){var c=a(this),d=c.data();d.offset=d.offset||{},null!=d.offsetBottom&&(d.offset.bottom=d.offsetBottom),null!=d.offsetTop&&(d.offset.top=d.offsetTop),b.call(c,d)})})}(jQuery);
 
 /* **********************************************
      Begin prism-core.js
 ********************************************** */
 
-self = (typeof window !== 'undefined')
+var _self = (typeof window !== 'undefined')
 	? window   // if in browser
 	: (
 		(typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope)
@@ -9235,7 +9240,7 @@ var Prism = (function(){
 // Private helper vars
 var lang = /\blang(?:uage)?-(?!\*)(\w+)\b/i;
 
-var _ = self.Prism = {
+var _ = _self.Prism = {
 	util: {
 		encode: function (tokens) {
 			if (tokens instanceof Token) {
@@ -9268,7 +9273,8 @@ var _ = self.Prism = {
 					return clone;
 
 				case 'Array':
-					return o.map(function(v) { return _.util.clone(v); });
+					// Check for existence for IE8
+					return o.map && o.map(function(v) { return _.util.clone(v); });
 			}
 
 			return o;
@@ -9357,7 +9363,8 @@ var _ = self.Prism = {
 			}
 		}
 	},
-
+	plugins: {},
+	
 	highlightAll: function(async, callback) {
 		var elements = document.querySelectorAll('code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code');
 
@@ -9379,10 +9386,6 @@ var _ = self.Prism = {
 			grammar = _.languages[language];
 		}
 
-		if (!grammar) {
-			return;
-		}
-
 		// Set language on the element, if not present
 		element.className = element.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
 
@@ -9395,12 +9398,6 @@ var _ = self.Prism = {
 
 		var code = element.textContent;
 
-		if(!code) {
-			return;
-		}
-
-		code = code.replace(/^(?:\r?\n|\r)/,'');
-
 		var env = {
 			element: element,
 			language: language,
@@ -9408,13 +9405,18 @@ var _ = self.Prism = {
 			code: code
 		};
 
+		if (!code || !grammar) {
+			_.hooks.run('complete', env);
+			return;
+		}
+
 		_.hooks.run('before-highlight', env);
 
-		if (async && self.Worker) {
+		if (async && _self.Worker) {
 			var worker = new Worker(_.filename);
 
 			worker.onmessage = function(evt) {
-				env.highlightedCode = Token.stringify(JSON.parse(evt.data), language);
+				env.highlightedCode = evt.data;
 
 				_.hooks.run('before-insert', env);
 
@@ -9422,11 +9424,13 @@ var _ = self.Prism = {
 
 				callback && callback.call(env.element);
 				_.hooks.run('after-highlight', env);
+				_.hooks.run('complete', env);
 			};
 
 			worker.postMessage(JSON.stringify({
 				language: env.language,
-				code: env.code
+				code: env.code,
+				immediateClose: true
 			}));
 		}
 		else {
@@ -9439,6 +9443,7 @@ var _ = self.Prism = {
 			callback && callback.call(element);
 
 			_.hooks.run('after-highlight', env);
+			_.hooks.run('complete', env);
 		}
 	},
 
@@ -9597,29 +9602,32 @@ Token.stringify = function(o, language, parent) {
 	var attributes = '';
 
 	for (var name in env.attributes) {
-		attributes += name + '="' + (env.attributes[name] || '') + '"';
+		attributes += (attributes ? ' ' : '') + name + '="' + (env.attributes[name] || '') + '"';
 	}
 
 	return '<' + env.tag + ' class="' + env.classes.join(' ') + '" ' + attributes + '>' + env.content + '</' + env.tag + '>';
 
 };
 
-if (!self.document) {
-	if (!self.addEventListener) {
+if (!_self.document) {
+	if (!_self.addEventListener) {
 		// in Node.js
-		return self.Prism;
+		return _self.Prism;
 	}
  	// In worker
-	self.addEventListener('message', function(evt) {
+	_self.addEventListener('message', function(evt) {
 		var message = JSON.parse(evt.data),
 		    lang = message.language,
-		    code = message.code;
+		    code = message.code,
+		    immediateClose = message.immediateClose;
 
-		self.postMessage(JSON.stringify(_.util.encode(_.tokenize(code, _.languages[lang]))));
-		self.close();
+		_self.postMessage(_.highlight(code, _.languages[lang], lang));
+		if (immediateClose) {
+			_self.close();
+		}
 	}, false);
 
-	return self.Prism;
+	return _self.Prism;
 }
 
 // Get current script and highlight
@@ -9635,12 +9643,17 @@ if (script) {
 	}
 }
 
-return self.Prism;
+return _self.Prism;
 
 })();
 
 if (typeof module !== 'undefined' && module.exports) {
 	module.exports = Prism;
+}
+
+// hack for components to work correctly in node.js
+if (typeof global !== 'undefined') {
+	global.Prism = Prism;
 }
 
 
@@ -9650,30 +9663,30 @@ if (typeof module !== 'undefined' && module.exports) {
 
 Prism.languages.markup = {
 	'comment': /<!--[\w\W]*?-->/,
-	'prolog': /<\?.+?\?>/,
-	'doctype': /<!DOCTYPE.+?>/,
+	'prolog': /<\?[\w\W]+?\?>/,
+	'doctype': /<!DOCTYPE[\w\W]+?>/,
 	'cdata': /<!\[CDATA\[[\w\W]*?]]>/i,
 	'tag': {
-		pattern: /<\/?[\w:-]+\s*(?:\s+[\w:-]+(?:=(?:("|')(\\?[\w\W])*?\1|[^\s'">=]+))?\s*)*\/?>/i,
+		pattern: /<\/?(?!\d)[^\s>\/=.$<]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\\1|\\?(?!\1)[\w\W])*\1|[^\s'">=]+))?)*\s*\/?>/i,
 		inside: {
 			'tag': {
-				pattern: /^<\/?[\w:-]+/i,
+				pattern: /^<\/?[^\s>\/]+/i,
 				inside: {
 					'punctuation': /^<\/?/,
-					'namespace': /^[\w-]+?:/
+					'namespace': /^[^\s>\/:]+:/
 				}
 			},
 			'attr-value': {
 				pattern: /=(?:('|")[\w\W]*?(\1)|[^\s>]+)/i,
 				inside: {
-					'punctuation': /=|>|"/
+					'punctuation': /[=>"']/
 				}
 			},
 			'punctuation': /\/?>/,
 			'attr-name': {
-				pattern: /[\w:-]+/,
+				pattern: /[^\s>\/]+/,
 				inside: {
-					'namespace': /^[\w-]+?:/
+					'namespace': /^[^\s>\/:]+:/
 				}
 			}
 
@@ -9690,6 +9703,11 @@ Prism.hooks.add('wrap', function(env) {
 	}
 });
 
+Prism.languages.xml = Prism.languages.markup;
+Prism.languages.html = Prism.languages.markup;
+Prism.languages.mathml = Prism.languages.markup;
+Prism.languages.svg = Prism.languages.markup;
+
 
 /* **********************************************
      Begin prism-css.js
@@ -9700,29 +9718,27 @@ Prism.languages.css = {
 	'atrule': {
 		pattern: /@[\w-]+?.*?(;|(?=\s*\{))/i,
 		inside: {
-			'punctuation': /[;:]/
+			'rule': /@[\w-]+/
+			// See rest below
 		}
 	},
-	'url': /url\((?:(["'])(\\\n|\\?.)*?\1|.*?)\)/i,
-	'selector': /[^\{\}\s][^\{\};]*(?=\s*\{)/,
-	'string': /("|')(\\\n|\\?.)*?\1/,
+	'url': /url\((?:(["'])(\\(?:\r\n|[\w\W])|(?!\1)[^\\\r\n])*\1|.*?)\)/i,
+	'selector': /[^\{\}\s][^\{\};]*?(?=\s*\{)/,
+	'string': /("|')(\\(?:\r\n|[\w\W])|(?!\1)[^\\\r\n])*\1/,
 	'property': /(\b|\B)[\w-]+(?=\s*:)/i,
 	'important': /\B!important\b/i,
-	'punctuation': /[\{\};:]/,
-	'function': /[-a-z0-9]+(?=\()/i
+	'function': /[-a-z0-9]+(?=\()/i,
+	'punctuation': /[(){};:]/
 };
+
+Prism.languages.css['atrule'].inside.rest = Prism.util.clone(Prism.languages.css);
 
 if (Prism.languages.markup) {
 	Prism.languages.insertBefore('markup', 'tag', {
 		'style': {
-			pattern: /<style[\w\W]*?>[\w\W]*?<\/style>/i,
-			inside: {
-				'tag': {
-					pattern: /<style[\w\W]*?>|<\/style>/i,
-					inside: Prism.languages.markup.tag.inside
-				},
-				rest: Prism.languages.css
-			},
+			pattern: /(<style[\w\W]*?>)[\w\W]*?(?=<\/style>)/i,
+			lookbehind: true,
+			inside: Prism.languages.css,
 			alias: 'language-css'
 		}
 	});
@@ -9757,13 +9773,13 @@ Prism.languages.clike = {
 			lookbehind: true
 		},
 		{
-			pattern: /(^|[^\\:])\/\/.+/,
+			pattern: /(^|[^\\:])\/\/.*/,
 			lookbehind: true
 		}
 	],
-	'string': /("|')(\\\n|\\?.)*?\1/,
+	'string': /(["'])(\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
 	'class-name': {
-		pattern: /((?:(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[a-z0-9_\.\\]+/i,
+		pattern: /((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[a-z0-9_\.\\]+/i,
 		lookbehind: true,
 		inside: {
 			punctuation: /(\.|\\)/
@@ -9771,15 +9787,9 @@ Prism.languages.clike = {
 	},
 	'keyword': /\b(if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,
 	'boolean': /\b(true|false)\b/,
-	'function': {
-		pattern: /[a-z0-9_]+\(/i,
-		inside: {
-			punctuation: /\(/
-		}
-	},
-	'number': /\b-?(0x[\dA-Fa-f]+|\d*\.?\d+([Ee]-?\d+)?)\b/,
-	'operator': /[-+]{1,2}|!|<=?|>=?|={1,3}|&{1,2}|\|?\||\?|\*|\/|~|\^|%/,
-	'ignore': /&(lt|gt|amp);/i,
+	'function': /[a-z0-9_]+(?=\()/i,
+	'number': /\b-?(?:0x[\da-f]+|\d*\.?\d+(?:e[+-]?\d+)?)\b/i,
+	'operator': /--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,
 	'punctuation': /[{}[\];(),.:]/
 };
 
@@ -9789,41 +9799,57 @@ Prism.languages.clike = {
 ********************************************** */
 
 Prism.languages.javascript = Prism.languages.extend('clike', {
-	'keyword': /\b(break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|false|finally|for|function|get|if|implements|import|in|instanceof|interface|let|new|null|package|private|protected|public|return|set|static|super|switch|this|throw|true|try|typeof|var|void|while|with|yield)\b/,
-	'number': /\b-?(0x[\dA-Fa-f]+|\d*\.?\d+([Ee][+-]?\d+)?|NaN|-?Infinity)\b/,
-	'function': /(?!\d)[a-z0-9_$]+(?=\()/i
+	'keyword': /\b(as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|var|void|while|with|yield)\b/,
+	'number': /\b-?(0x[\dA-Fa-f]+|0b[01]+|0o[0-7]+|\d*\.?\d+([Ee][+-]?\d+)?|NaN|Infinity)\b/,
+	// Allow for all non-ASCII characters (See http://stackoverflow.com/a/2008444)
+	'function': /[_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*(?=\()/i
 });
 
 Prism.languages.insertBefore('javascript', 'keyword', {
 	'regex': {
-		pattern: /(^|[^/])\/(?!\/)(\[.+?]|\\.|[^/\r\n])+\/[gim]{0,3}(?=\s*($|[\r\n,.;})]))/,
+		pattern: /(^|[^/])\/(?!\/)(\[.+?]|\\.|[^/\\\r\n])+\/[gimyu]{0,5}(?=\s*($|[\r\n,.;})]))/,
 		lookbehind: true
+	}
+});
+
+Prism.languages.insertBefore('javascript', 'class-name', {
+	'template-string': {
+		pattern: /`(?:\\`|\\?[^`])*`/,
+		inside: {
+			'interpolation': {
+				pattern: /\$\{[^}]+\}/,
+				inside: {
+					'interpolation-punctuation': {
+						pattern: /^\$\{|\}$/,
+						alias: 'punctuation'
+					},
+					rest: Prism.languages.javascript
+				}
+			},
+			'string': /[\s\S]+/
+		}
 	}
 });
 
 if (Prism.languages.markup) {
 	Prism.languages.insertBefore('markup', 'tag', {
 		'script': {
-			pattern: /<script[\w\W]*?>[\w\W]*?<\/script>/i,
-			inside: {
-				'tag': {
-					pattern: /<script[\w\W]*?>|<\/script>/i,
-					inside: Prism.languages.markup.tag.inside
-				},
-				rest: Prism.languages.javascript
-			},
+			pattern: /(<script[\w\W]*?>)[\w\W]*?(?=<\/script>)/i,
+			lookbehind: true,
+			inside: Prism.languages.javascript,
 			alias: 'language-javascript'
 		}
 	});
 }
 
+Prism.languages.js = Prism.languages.javascript;
 
 /* **********************************************
      Begin prism-file-highlight.js
 ********************************************** */
 
 (function () {
-	if (!self.Prism || !self.document || !document.querySelector) {
+	if (typeof self === 'undefined' || !self.Prism || !self.document || !document.querySelector) {
 		return;
 	}
 
@@ -9840,49 +9866,3571 @@ if (Prism.languages.markup) {
 			'psm1': 'powershell'
 		};
 
-		Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function(pre) {
-			var src = pre.getAttribute('data-src');
-			var extension = (src.match(/\.(\w+)$/) || [,''])[1];
-			var language = Extensions[extension] || extension;
+		if(Array.prototype.forEach) { // Check to prevent error in IE8
+			Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+				var src = pre.getAttribute('data-src');
 
-			var code = document.createElement('code');
-			code.className = 'language-' + language;
-
-			pre.textContent = '';
-
-			code.textContent = 'Loading…';
-
-			pre.appendChild(code);
-
-			var xhr = new XMLHttpRequest();
-
-			xhr.open('GET', src, true);
-
-			xhr.onreadystatechange = function() {
-				if (xhr.readyState == 4) {
-
-					if (xhr.status < 400 && xhr.responseText) {
-						code.textContent = xhr.responseText;
-
-						Prism.highlightElement(code);
-					}
-					else if (xhr.status >= 400) {
-						code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
-					}
-					else {
-						code.textContent = '✖ Error: File does not exist or is empty';
-					}
+				var language, parent = pre;
+				var lang = /\blang(?:uage)?-(?!\*)(\w+)\b/i;
+				while (parent && !lang.test(parent.className)) {
+					parent = parent.parentNode;
 				}
-			};
 
-			xhr.send(null);
-		});
+				if (parent) {
+					language = (pre.className.match(lang) || [, ''])[1];
+				}
+
+				if (!language) {
+					var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+					language = Extensions[extension] || extension;
+				}
+
+				var code = document.createElement('code');
+				code.className = 'language-' + language;
+
+				pre.textContent = '';
+
+				code.textContent = 'Loading…';
+
+				pre.appendChild(code);
+
+				var xhr = new XMLHttpRequest();
+
+				xhr.open('GET', src, true);
+
+				xhr.onreadystatechange = function () {
+					if (xhr.readyState == 4) {
+
+						if (xhr.status < 400 && xhr.responseText) {
+							code.textContent = xhr.responseText;
+
+							Prism.highlightElement(code);
+						}
+						else if (xhr.status >= 400) {
+							code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+						}
+						else {
+							code.textContent = '✖ Error: File does not exist or is empty';
+						}
+					}
+				};
+
+				xhr.send(null);
+			});
+		}
 
 	};
 
 	self.Prism.fileHighlight();
 
 })();
+
+/*
+ * jPlayer Plugin for jQuery JavaScript Library
+ * http://www.jplayer.org
+ *
+ * Copyright (c) 2009 - 2014 Happyworm Ltd
+ * Licensed under the MIT license.
+ * http://opensource.org/licenses/MIT
+ *
+ * Author: Mark J Panaghiston
+ * Version: 2.9.2
+ * Date: 14th December 2014
+ */
+
+/* Support for Zepto 1.0 compiled with optional data module.
+ * For AMD or NODE/CommonJS support, you will need to manually switch the related 2 lines in the code below.
+ * Search terms: "jQuery Switch" and "Zepto Switch"
+ */
+
+(function (root, factory) {
+	if (typeof define === 'function' && define.amd) {
+		// AMD. Register as an anonymous module.
+		define(['jquery'], factory); // jQuery Switch
+		// define(['zepto'], factory); // Zepto Switch
+	} else if (typeof exports === 'object') {
+		// Node/CommonJS
+		factory(require('jquery')); // jQuery Switch
+		//factory(require('zepto')); // Zepto Switch
+	} else {
+		// Browser globals
+		if(root.jQuery) { // Use jQuery if available
+			factory(root.jQuery);
+		} else { // Otherwise, use Zepto
+			factory(root.Zepto);
+		}
+	}
+}(this, function ($, undefined) {
+
+	// Adapted from jquery.ui.widget.js (1.8.7): $.widget.bridge - Tweaked $.data(this,XYZ) to $(this).data(XYZ) for Zepto
+	$.fn.jPlayer = function( options ) {
+		var name = "jPlayer";
+		var isMethodCall = typeof options === "string",
+			args = Array.prototype.slice.call( arguments, 1 ),
+			returnValue = this;
+
+		// allow multiple hashes to be passed on init
+		options = !isMethodCall && args.length ?
+			$.extend.apply( null, [ true, options ].concat(args) ) :
+			options;
+
+		// prevent calls to internal methods
+		if ( isMethodCall && options.charAt( 0 ) === "_" ) {
+			return returnValue;
+		}
+
+		if ( isMethodCall ) {
+			this.each(function() {
+				var instance = $(this).data( name ),
+					methodValue = instance && $.isFunction( instance[options] ) ?
+						instance[ options ].apply( instance, args ) :
+						instance;
+				if ( methodValue !== instance && methodValue !== undefined ) {
+					returnValue = methodValue;
+					return false;
+				}
+			});
+		} else {
+			this.each(function() {
+				var instance = $(this).data( name );
+				if ( instance ) {
+					// instance.option( options || {} )._init(); // Orig jquery.ui.widget.js code: Not recommend for jPlayer. ie., Applying new options to an existing instance (via the jPlayer constructor) and performing the _init(). The _init() is what concerns me. It would leave a lot of event handlers acting on jPlayer instance and the interface.
+					instance.option( options || {} ); // The new constructor only changes the options. Changing options only has basic support atm.
+				} else {
+					$(this).data( name, new $.jPlayer( options, this ) );
+				}
+			});
+		}
+
+		return returnValue;
+	};
+
+	$.jPlayer = function( options, element ) {
+		// allow instantiation without initializing for simple inheritance
+		if ( arguments.length ) {
+			this.element = $(element);
+			this.options = $.extend(true, {},
+				this.options,
+				options
+			);
+			var self = this;
+			this.element.bind( "remove.jPlayer", function() {
+				self.destroy();
+			});
+			this._init();
+		}
+	};
+	// End of: (Adapted from jquery.ui.widget.js (1.8.7))
+
+	// Zepto is missing one of the animation methods.
+	if(typeof $.fn.stop !== 'function') {
+		$.fn.stop = function() {};
+	}
+
+	// Emulated HTML5 methods and properties
+	$.jPlayer.emulateMethods = "load play pause";
+	$.jPlayer.emulateStatus = "src readyState networkState currentTime duration paused ended playbackRate";
+	$.jPlayer.emulateOptions = "muted volume";
+
+	// Reserved event names generated by jPlayer that are not part of the HTML5 Media element spec
+	$.jPlayer.reservedEvent = "ready flashreset resize repeat error warning";
+
+	// Events generated by jPlayer
+	$.jPlayer.event = {};
+	$.each(
+		[
+			'ready',
+			'setmedia', // Fires when the media is set
+			'flashreset', // Similar to the ready event if the Flash solution is set to display:none and then shown again or if it's reloaded for another reason by the browser. For example, using CSS position:fixed on Firefox for the full screen feature.
+			'resize', // Occurs when the size changes through a full/restore screen operation or if the size/sizeFull options are changed.
+			'repeat', // Occurs when the repeat status changes. Usually through clicks on the repeat button of the interface.
+			'click', // Occurs when the user clicks on one of the following: poster image, html video, flash video.
+			'error', // Event error code in event.jPlayer.error.type. See $.jPlayer.error
+			'warning', // Event warning code in event.jPlayer.warning.type. See $.jPlayer.warning
+
+			// Other events match HTML5 spec.
+			'loadstart',
+			'progress',
+			'suspend',
+			'abort',
+			'emptied',
+			'stalled',
+			'play',
+			'pause',
+			'loadedmetadata',
+			'loadeddata',
+			'waiting',
+			'playing',
+			'canplay',
+			'canplaythrough',
+			'seeking',
+			'seeked',
+			'timeupdate',
+			'ended',
+			'ratechange',
+			'durationchange',
+			'volumechange'
+		],
+		function() {
+			$.jPlayer.event[ this ] = 'jPlayer_' + this;
+		}
+	);
+
+	$.jPlayer.htmlEvent = [ // These HTML events are bubbled through to the jPlayer event, without any internal action.
+		"loadstart",
+		// "progress", // jPlayer uses internally before bubbling.
+		// "suspend", // jPlayer uses internally before bubbling.
+		"abort",
+		// "error", // jPlayer uses internally before bubbling.
+		"emptied",
+		"stalled",
+		// "play", // jPlayer uses internally before bubbling.
+		// "pause", // jPlayer uses internally before bubbling.
+		"loadedmetadata",
+		// "loadeddata", // jPlayer uses internally before bubbling.
+		// "waiting", // jPlayer uses internally before bubbling.
+		// "playing", // jPlayer uses internally before bubbling.
+		"canplay",
+		"canplaythrough"
+		// "seeking", // jPlayer uses internally before bubbling.
+		// "seeked", // jPlayer uses internally before bubbling.
+		// "timeupdate", // jPlayer uses internally before bubbling.
+		// "ended", // jPlayer uses internally before bubbling.
+		// "ratechange" // jPlayer uses internally before bubbling.
+		// "durationchange" // jPlayer uses internally before bubbling.
+		// "volumechange" // jPlayer uses internally before bubbling.
+	];
+
+	$.jPlayer.pause = function() {
+		$.jPlayer.prototype.destroyRemoved();
+		$.each($.jPlayer.prototype.instances, function(i, element) {
+			if(element.data("jPlayer").status.srcSet) { // Check that media is set otherwise would cause error event.
+				element.jPlayer("pause");
+			}
+		});
+	};
+
+	// Default for jPlayer option.timeFormat
+	$.jPlayer.timeFormat = {
+		showHour: false,
+		showMin: true,
+		showSec: true,
+		padHour: false,
+		padMin: true,
+		padSec: true,
+		sepHour: ":",
+		sepMin: ":",
+		sepSec: ""
+	};
+	var ConvertTime = function() {
+		this.init();
+	};
+	ConvertTime.prototype = {
+		init: function() {
+			this.options = {
+				timeFormat: $.jPlayer.timeFormat
+			};
+		},
+		time: function(s) { // function used on jPlayer.prototype._convertTime to enable per instance options.
+			s = (s && typeof s === 'number') ? s : 0;
+
+			var myTime = new Date(s * 1000),
+				hour = myTime.getUTCHours(),
+				min = this.options.timeFormat.showHour ? myTime.getUTCMinutes() : myTime.getUTCMinutes() + hour * 60,
+				sec = this.options.timeFormat.showMin ? myTime.getUTCSeconds() : myTime.getUTCSeconds() + min * 60,
+				strHour = (this.options.timeFormat.padHour && hour < 10) ? "0" + hour : hour,
+				strMin = (this.options.timeFormat.padMin && min < 10) ? "0" + min : min,
+				strSec = (this.options.timeFormat.padSec && sec < 10) ? "0" + sec : sec,
+				strTime = "";
+
+			strTime += this.options.timeFormat.showHour ? strHour + this.options.timeFormat.sepHour : "";
+			strTime += this.options.timeFormat.showMin ? strMin + this.options.timeFormat.sepMin : "";
+			strTime += this.options.timeFormat.showSec ? strSec + this.options.timeFormat.sepSec : "";
+
+			return strTime;
+		}
+	};
+	var myConvertTime = new ConvertTime();
+	$.jPlayer.convertTime = function(s) {
+		return myConvertTime.time(s);
+	};
+
+	// Adapting jQuery 1.4.4 code for jQuery.browser. Required since jQuery 1.3.2 does not detect Chrome as webkit.
+	$.jPlayer.uaBrowser = function( userAgent ) {
+		var ua = userAgent.toLowerCase();
+
+		// Useragent RegExp
+		var rwebkit = /(webkit)[ \/]([\w.]+)/;
+		var ropera = /(opera)(?:.*version)?[ \/]([\w.]+)/;
+		var rmsie = /(msie) ([\w.]+)/;
+		var rmozilla = /(mozilla)(?:.*? rv:([\w.]+))?/;
+
+		var match = rwebkit.exec( ua ) ||
+			ropera.exec( ua ) ||
+			rmsie.exec( ua ) ||
+			ua.indexOf("compatible") < 0 && rmozilla.exec( ua ) ||
+			[];
+
+		return { browser: match[1] || "", version: match[2] || "0" };
+	};
+
+	// Platform sniffer for detecting mobile devices
+	$.jPlayer.uaPlatform = function( userAgent ) {
+		var ua = userAgent.toLowerCase();
+
+		// Useragent RegExp
+		var rplatform = /(ipad|iphone|ipod|android|blackberry|playbook|windows ce|webos)/;
+		var rtablet = /(ipad|playbook)/;
+		var randroid = /(android)/;
+		var rmobile = /(mobile)/;
+
+		var platform = rplatform.exec( ua ) || [];
+		var tablet = rtablet.exec( ua ) ||
+			!rmobile.exec( ua ) && randroid.exec( ua ) ||
+			[];
+
+		if(platform[1]) {
+			platform[1] = platform[1].replace(/\s/g, "_"); // Change whitespace to underscore. Enables dot notation.
+		}
+
+		return { platform: platform[1] || "", tablet: tablet[1] || "" };
+	};
+
+	$.jPlayer.browser = {
+	};
+	$.jPlayer.platform = {
+	};
+
+	var browserMatch = $.jPlayer.uaBrowser(navigator.userAgent);
+	if ( browserMatch.browser ) {
+		$.jPlayer.browser[ browserMatch.browser ] = true;
+		$.jPlayer.browser.version = browserMatch.version;
+	}
+	var platformMatch = $.jPlayer.uaPlatform(navigator.userAgent);
+	if ( platformMatch.platform ) {
+		$.jPlayer.platform[ platformMatch.platform ] = true;
+		$.jPlayer.platform.mobile = !platformMatch.tablet;
+		$.jPlayer.platform.tablet = !!platformMatch.tablet;
+	}
+
+	// Internet Explorer (IE) Browser Document Mode Sniffer. Based on code at:
+	// http://msdn.microsoft.com/en-us/library/cc288325%28v=vs.85%29.aspx#GetMode
+	$.jPlayer.getDocMode = function() {
+		var docMode;
+		if ($.jPlayer.browser.msie) {
+			if (document.documentMode) { // IE8 or later
+				docMode = document.documentMode;
+			} else { // IE 5-7
+				docMode = 5; // Assume quirks mode unless proven otherwise
+				if (document.compatMode) {
+					if (document.compatMode === "CSS1Compat") {
+						docMode = 7; // standards mode
+					}
+				}
+			}
+		}
+		return docMode;
+	};
+	$.jPlayer.browser.documentMode = $.jPlayer.getDocMode();
+
+	$.jPlayer.nativeFeatures = {
+		init: function() {
+
+			/* Fullscreen function naming influenced by W3C naming.
+			 * No support for: Mozilla Proposal: https://wiki.mozilla.org/Gecko:FullScreenAPI
+			 */
+
+			var d = document,
+				v = d.createElement('video'),
+				spec = {
+					// http://www.w3.org/TR/fullscreen/
+					w3c: [
+						'fullscreenEnabled',
+						'fullscreenElement',
+						'requestFullscreen',
+						'exitFullscreen',
+						'fullscreenchange',
+						'fullscreenerror'
+					],
+					// https://developer.mozilla.org/en-US/docs/DOM/Using_fullscreen_mode
+					moz: [
+						'mozFullScreenEnabled',
+						'mozFullScreenElement',
+						'mozRequestFullScreen',
+						'mozCancelFullScreen',
+						'mozfullscreenchange',
+						'mozfullscreenerror'
+					],
+					// http://developer.apple.com/library/safari/#documentation/WebKit/Reference/ElementClassRef/Element/Element.html
+					// http://developer.apple.com/library/safari/#documentation/UserExperience/Reference/DocumentAdditionsReference/DocumentAdditions/DocumentAdditions.html
+					webkit: [
+						'',
+						'webkitCurrentFullScreenElement',
+						'webkitRequestFullScreen',
+						'webkitCancelFullScreen',
+						'webkitfullscreenchange',
+						''
+					],
+					// http://developer.apple.com/library/safari/#documentation/AudioVideo/Reference/HTMLVideoElementClassReference/HTMLVideoElement/HTMLVideoElement.html
+					// https://developer.apple.com/library/safari/samplecode/HTML5VideoEventFlow/Listings/events_js.html#//apple_ref/doc/uid/DTS40010085-events_js-DontLinkElementID_5
+					// Events: 'webkitbeginfullscreen' and 'webkitendfullscreen'
+					webkitVideo: [
+						'webkitSupportsFullscreen',
+						'webkitDisplayingFullscreen',
+						'webkitEnterFullscreen',
+						'webkitExitFullscreen',
+						'',
+						''
+					],
+					ms: [
+						'',
+						'msFullscreenElement',
+						'msRequestFullscreen',
+						'msExitFullscreen',
+						'MSFullscreenChange',
+						'MSFullscreenError'
+					]
+				},
+				specOrder = [
+					'w3c',
+					'moz',
+					'webkit',
+					'webkitVideo',
+					'ms'
+				],
+				fs, i, il;
+
+			this.fullscreen = fs = {
+				support: {
+					w3c: !!d[spec.w3c[0]],
+					moz: !!d[spec.moz[0]],
+					webkit: typeof d[spec.webkit[3]] === 'function',
+					webkitVideo: typeof v[spec.webkitVideo[2]] === 'function',
+					ms: typeof v[spec.ms[2]] === 'function'
+				},
+				used: {}
+			};
+
+			// Store the name of the spec being used and as a handy boolean.
+			for(i = 0, il = specOrder.length; i < il; i++) {
+				var n = specOrder[i];
+				if(fs.support[n]) {
+					fs.spec = n;
+					fs.used[n] = true;
+					break;
+				}
+			}
+
+			if(fs.spec) {
+				var s = spec[fs.spec];
+				fs.api = {
+					fullscreenEnabled: true,
+					fullscreenElement: function(elem) {
+						elem = elem ? elem : d; // Video element required for webkitVideo
+						return elem[s[1]];
+					},
+					requestFullscreen: function(elem) {
+						return elem[s[2]](); // Chrome and Opera want parameter (Element.ALLOW_KEYBOARD_INPUT) but Safari fails if flag used.
+					},
+					exitFullscreen: function(elem) {
+						elem = elem ? elem : d; // Video element required for webkitVideo
+						return elem[s[3]]();
+					}
+				};
+				fs.event = {
+					fullscreenchange: s[4],
+					fullscreenerror: s[5]
+				};
+			} else {
+				fs.api = {
+					fullscreenEnabled: false,
+					fullscreenElement: function() {
+						return null;
+					},
+					requestFullscreen: function() {},
+					exitFullscreen: function() {}
+				};
+				fs.event = {};
+			}
+		}
+	};
+	$.jPlayer.nativeFeatures.init();
+
+	// The keyboard control system.
+
+	// The current jPlayer instance in focus.
+	$.jPlayer.focus = null;
+
+	// The list of element node names to ignore with key controls.
+	$.jPlayer.keyIgnoreElementNames = "A INPUT TEXTAREA SELECT BUTTON";
+
+	// The function that deals with key presses.
+	var keyBindings = function(event) {
+		var f = $.jPlayer.focus,
+			ignoreKey;
+
+		// A jPlayer instance must be in focus. ie., keyEnabled and the last one played.
+		if(f) {
+			// What generated the key press?
+			$.each( $.jPlayer.keyIgnoreElementNames.split(/\s+/g), function(i, name) {
+				// The strings should already be uppercase.
+				if(event.target.nodeName.toUpperCase() === name.toUpperCase()) {
+					ignoreKey = true;
+					return false; // exit each.
+				}
+			});
+			if(!ignoreKey) {
+				// See if the key pressed matches any of the bindings.
+				$.each(f.options.keyBindings, function(action, binding) {
+					// The binding could be a null when the default has been disabled. ie., 1st clause in if()
+					if(
+						(binding && $.isFunction(binding.fn)) &&
+						((typeof binding.key === 'number' && event.which === binding.key) ||
+						(typeof binding.key === 'string' && event.key === binding.key))
+					) {
+						event.preventDefault(); // Key being used by jPlayer, so prevent default operation.
+						binding.fn(f);
+						return false; // exit each.
+					}
+				});
+			}
+		}
+	};
+
+	$.jPlayer.keys = function(en) {
+		var event = "keydown.jPlayer";
+		// Remove any binding, just in case enabled more than once.
+		$(document.documentElement).unbind(event);
+		if(en) {
+			$(document.documentElement).bind(event, keyBindings);
+		}
+	};
+
+	// Enable the global key control handler ready for any jPlayer instance with the keyEnabled option enabled.
+	$.jPlayer.keys(true);
+
+	$.jPlayer.prototype = {
+		count: 0, // Static Variable: Change it via prototype.
+		version: { // Static Object
+			script: "2.9.2",
+			needFlash: "2.9.0",
+			flash: "unknown"
+		},
+		options: { // Instanced in $.jPlayer() constructor
+			swfPath: "js", // Path to jquery.jplayer.swf. Can be relative, absolute or server root relative.
+			solution: "html, flash", // Valid solutions: html, flash, aurora. Order defines priority. 1st is highest,
+			supplied: "mp3", // Defines which formats jPlayer will try and support and the priority by the order. 1st is highest,
+			auroraFormats: "wav", // List the aurora.js codecs being loaded externally. Its core supports "wav". Specify format in jPlayer context. EG., The aac.js codec gives the "m4a" format.
+			preload: 'metadata',  // HTML5 Spec values: none, metadata, auto.
+			volume: 0.8, // The volume. Number 0 to 1.
+			muted: false,
+			remainingDuration: false, // When true, the remaining time is shown in the duration GUI element.
+			toggleDuration: false, // When true, clicks on the duration toggle between the duration and remaining display.
+			captureDuration: true, // When true, clicks on the duration are captured and no longer propagate up the DOM.
+			playbackRate: 1,
+			defaultPlaybackRate: 1,
+			minPlaybackRate: 0.5,
+			maxPlaybackRate: 4,
+			wmode: "opaque", // Valid wmode: window, transparent, opaque, direct, gpu. 
+			backgroundColor: "#000000", // To define the jPlayer div and Flash background color.
+			cssSelectorAncestor: "#jp_container_1",
+			cssSelector: { // * denotes properties that should only be required when video media type required. _cssSelector() would require changes to enable splitting these into Audio and Video defaults.
+				videoPlay: ".jp-video-play", // *
+				play: ".jp-play",
+				pause: ".jp-pause",
+				stop: ".jp-stop",
+				seekBar: ".jp-seek-bar",
+				playBar: ".jp-play-bar",
+				mute: ".jp-mute",
+				unmute: ".jp-unmute",
+				volumeBar: ".jp-volume-bar",
+				volumeBarValue: ".jp-volume-bar-value",
+				volumeMax: ".jp-volume-max",
+				playbackRateBar: ".jp-playback-rate-bar",
+				playbackRateBarValue: ".jp-playback-rate-bar-value",
+				currentTime: ".jp-current-time",
+				duration: ".jp-duration",
+				title: ".jp-title",
+				fullScreen: ".jp-full-screen", // *
+				restoreScreen: ".jp-restore-screen", // *
+				repeat: ".jp-repeat",
+				repeatOff: ".jp-repeat-off",
+				gui: ".jp-gui", // The interface used with autohide feature.
+				noSolution: ".jp-no-solution" // For error feedback when jPlayer cannot find a solution.
+			},
+			stateClass: { // Classes added to the cssSelectorAncestor to indicate the state.
+				playing: "jp-state-playing",
+				seeking: "jp-state-seeking",
+				muted: "jp-state-muted",
+				looped: "jp-state-looped",
+				fullScreen: "jp-state-full-screen",
+				noVolume: "jp-state-no-volume"
+			},
+			useStateClassSkin: false, // A state class skin relies on the state classes to change the visual appearance. The single control toggles the effect, for example: play then pause, mute then unmute.
+			autoBlur: true, // GUI control handlers will drop focus after clicks.
+			smoothPlayBar: false, // Smooths the play bar transitions, which affects clicks and short media with big changes per second.
+			fullScreen: false, // Native Full Screen
+			fullWindow: false,
+			autohide: {
+				restored: false, // Controls the interface autohide feature.
+				full: true, // Controls the interface autohide feature.
+				fadeIn: 200, // Milliseconds. The period of the fadeIn anim.
+				fadeOut: 600, // Milliseconds. The period of the fadeOut anim.
+				hold: 1000 // Milliseconds. The period of the pause before autohide beings.
+			},
+			loop: false,
+			repeat: function(event) { // The default jPlayer repeat event handler
+				if(event.jPlayer.options.loop) {
+					$(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+						$(this).jPlayer("play");
+					});
+				} else {
+					$(this).unbind(".jPlayerRepeat");
+				}
+			},
+			nativeVideoControls: {
+				// Works well on standard browsers.
+				// Phone and tablet browsers can have problems with the controls disappearing.
+			},
+			noFullWindow: {
+				msie: /msie [0-6]\./,
+				ipad: /ipad.*?os [0-4]\./,
+				iphone: /iphone/,
+				ipod: /ipod/,
+				android_pad: /android [0-3]\.(?!.*?mobile)/,
+				android_phone: /(?=.*android)(?!.*chrome)(?=.*mobile)/,
+				blackberry: /blackberry/,
+				windows_ce: /windows ce/,
+				iemobile: /iemobile/,
+				webos: /webos/
+			},
+			noVolume: {
+				ipad: /ipad/,
+				iphone: /iphone/,
+				ipod: /ipod/,
+				android_pad: /android(?!.*?mobile)/,
+				android_phone: /android.*?mobile/,
+				blackberry: /blackberry/,
+				windows_ce: /windows ce/,
+				iemobile: /iemobile/,
+				webos: /webos/,
+				playbook: /playbook/
+			},
+			timeFormat: {
+				// Specific time format for this instance. The supported options are defined in $.jPlayer.timeFormat
+				// For the undefined options we use the default from $.jPlayer.timeFormat
+			},
+			keyEnabled: false, // Enables keyboard controls.
+			audioFullScreen: false, // Enables keyboard controls to enter full screen with audio media.
+			keyBindings: { // The key control object, defining the key codes and the functions to execute.
+				// The parameter, f = $.jPlayer.focus, will be checked truethy before attempting to call any of these functions.
+				// Properties may be added to this object, in key/fn pairs, to enable other key controls. EG, for the playlist add-on.
+				play: {
+					key: 80, // p
+					fn: function(f) {
+						if(f.status.paused) {
+							f.play();
+						} else {
+							f.pause();
+						}
+					}
+				},
+				fullScreen: {
+					key: 70, // f
+					fn: function(f) {
+						if(f.status.video || f.options.audioFullScreen) {
+							f._setOption("fullScreen", !f.options.fullScreen);
+						}
+					}
+				},
+				muted: {
+					key: 77, // m
+					fn: function(f) {
+						f._muted(!f.options.muted);
+					}
+				},
+				volumeUp: {
+					key: 190, // .
+					fn: function(f) {
+						f.volume(f.options.volume + 0.1);
+					}
+				},
+				volumeDown: {
+					key: 188, // ,
+					fn: function(f) {
+						f.volume(f.options.volume - 0.1);
+					}
+				},
+				loop: {
+					key: 76, // l
+					fn: function(f) {
+						f._loop(!f.options.loop);
+					}
+				}
+			},
+			verticalVolume: false, // Calculate volume from the bottom of the volume bar. Default is from the left. Also volume affects either width or height.
+			verticalPlaybackRate: false,
+			globalVolume: false, // Set to make volume and muted changes affect all jPlayer instances with this option enabled
+			idPrefix: "jp", // Prefix for the ids of html elements created by jPlayer. For flash, this must not include characters: . - + * / \
+			noConflict: "jQuery",
+			emulateHtml: false, // Emulates the HTML5 Media element on the jPlayer element.
+			consoleAlerts: true, // Alerts are sent to the console.log() instead of alert().
+			errorAlerts: false,
+			warningAlerts: false
+		},
+		optionsAudio: {
+			size: {
+				width: "0px",
+				height: "0px",
+				cssClass: ""
+			},
+			sizeFull: {
+				width: "0px",
+				height: "0px",
+				cssClass: ""
+			}
+		},
+		optionsVideo: {
+			size: {
+				width: "480px",
+				height: "270px",
+				cssClass: "jp-video-270p"
+			},
+			sizeFull: {
+				width: "100%",
+				height: "100%",
+				cssClass: "jp-video-full"
+			}
+		},
+		instances: {}, // Static Object
+		status: { // Instanced in _init()
+			src: "",
+			media: {},
+			paused: true,
+			format: {},
+			formatType: "",
+			waitForPlay: true, // Same as waitForLoad except in case where preloading.
+			waitForLoad: true,
+			srcSet: false,
+			video: false, // True if playing a video
+			seekPercent: 0,
+			currentPercentRelative: 0,
+			currentPercentAbsolute: 0,
+			currentTime: 0,
+			duration: 0,
+			remaining: 0,
+			videoWidth: 0, // Intrinsic width of the video in pixels.
+			videoHeight: 0, // Intrinsic height of the video in pixels.
+			readyState: 0,
+			networkState: 0,
+			playbackRate: 1, // Warning - Now both an option and a status property
+			ended: 0
+
+/*		Persistant status properties created dynamically at _init():
+			width
+			height
+			cssClass
+			nativeVideoControls
+			noFullWindow
+			noVolume
+			playbackRateEnabled // Warning - Technically, we can have both Flash and HTML, so this might not be correct if the Flash is active. That is a niche case.
+*/
+		},
+
+		internal: { // Instanced in _init()
+			ready: false
+			// instance: undefined
+			// domNode: undefined
+			// htmlDlyCmdId: undefined
+			// autohideId: undefined
+			// mouse: undefined
+			// cmdsIgnored
+		},
+		solution: { // Static Object: Defines the solutions built in jPlayer.
+			html: true,
+			aurora: true,
+			flash: true
+		},
+		// 'MPEG-4 support' : canPlayType('video/mp4; codecs="mp4v.20.8"')
+		format: { // Static Object
+			mp3: {
+				codec: 'audio/mpeg',
+				flashCanPlay: true,
+				media: 'audio'
+			},
+			m4a: { // AAC / MP4
+				codec: 'audio/mp4; codecs="mp4a.40.2"',
+				flashCanPlay: true,
+				media: 'audio'
+			},
+			m3u8a: { // AAC / MP4 / Apple HLS
+				codec: 'application/vnd.apple.mpegurl; codecs="mp4a.40.2"',
+				flashCanPlay: false,
+				media: 'audio'
+			},
+			m3ua: { // M3U
+				codec: 'audio/mpegurl',
+				flashCanPlay: false,
+				media: 'audio'
+			},
+			oga: { // OGG
+				codec: 'audio/ogg; codecs="vorbis, opus"',
+				flashCanPlay: false,
+				media: 'audio'
+			},
+			flac: { // FLAC
+				codec: 'audio/x-flac',
+				flashCanPlay: false,
+				media: 'audio'
+			},
+			wav: { // PCM
+				codec: 'audio/wav; codecs="1"',
+				flashCanPlay: false,
+				media: 'audio'
+			},
+			webma: { // WEBM
+				codec: 'audio/webm; codecs="vorbis"',
+				flashCanPlay: false,
+				media: 'audio'
+			},
+			fla: { // FLV / F4A
+				codec: 'audio/x-flv',
+				flashCanPlay: true,
+				media: 'audio'
+			},
+			rtmpa: { // RTMP AUDIO
+				codec: 'audio/rtmp; codecs="rtmp"',
+				flashCanPlay: true,
+				media: 'audio'
+			},
+			m4v: { // H.264 / MP4
+				codec: 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"',
+				flashCanPlay: true,
+				media: 'video'
+			},
+			m3u8v: { // H.264 / AAC / MP4 / Apple HLS
+				codec: 'application/vnd.apple.mpegurl; codecs="avc1.42E01E, mp4a.40.2"',
+				flashCanPlay: false,
+				media: 'video'
+			},
+			m3uv: { // M3U
+				codec: 'audio/mpegurl',
+				flashCanPlay: false,
+				media: 'video'
+			},
+			ogv: { // OGG
+				codec: 'video/ogg; codecs="theora, vorbis"',
+				flashCanPlay: false,
+				media: 'video'
+			},
+			webmv: { // WEBM
+				codec: 'video/webm; codecs="vorbis, vp8"',
+				flashCanPlay: false,
+				media: 'video'
+			},
+			flv: { // FLV / F4V
+				codec: 'video/x-flv',
+				flashCanPlay: true,
+				media: 'video'
+			},
+			rtmpv: { // RTMP VIDEO
+				codec: 'video/rtmp; codecs="rtmp"',
+				flashCanPlay: true,
+				media: 'video'
+			}
+		},
+		_init: function() {
+			var self = this;
+			
+			this.element.empty();
+			
+			this.status = $.extend({}, this.status); // Copy static to unique instance.
+			this.internal = $.extend({}, this.internal); // Copy static to unique instance.
+
+			// Initialize the time format
+			this.options.timeFormat = $.extend({}, $.jPlayer.timeFormat, this.options.timeFormat);
+
+			// On iOS, assume commands will be ignored before user initiates them.
+			this.internal.cmdsIgnored = $.jPlayer.platform.ipad || $.jPlayer.platform.iphone || $.jPlayer.platform.ipod;
+
+			this.internal.domNode = this.element.get(0);
+
+			// Add key bindings focus to 1st jPlayer instanced with key control enabled.
+			if(this.options.keyEnabled && !$.jPlayer.focus) {
+				$.jPlayer.focus = this;
+			}
+
+			// A fix for Android where older (2.3) and even some 4.x devices fail to work when changing the *audio* SRC and then playing immediately.
+			this.androidFix = {
+				setMedia: false, // True when media set
+				play: false, // True when a progress event will instruct the media to play
+				pause: false, // True when a progress event will instruct the media to pause at a time.
+				time: NaN // The play(time) parameter
+			};
+			if($.jPlayer.platform.android) {
+				this.options.preload = this.options.preload !== 'auto' ? 'metadata' : 'auto'; // Default to metadata, but allow auto.
+			}
+
+			this.formats = []; // Array based on supplied string option. Order defines priority.
+			this.solutions = []; // Array based on solution string option. Order defines priority.
+			this.require = {}; // Which media types are required: video, audio.
+			
+			this.htmlElement = {}; // DOM elements created by jPlayer
+			this.html = {}; // In _init()'s this.desired code and setmedia(): Accessed via this[solution], where solution from this.solutions array.
+			this.html.audio = {};
+			this.html.video = {};
+			this.aurora = {}; // In _init()'s this.desired code and setmedia(): Accessed via this[solution], where solution from this.solutions array.
+			this.aurora.formats = [];
+			this.aurora.properties = [];
+			this.flash = {}; // In _init()'s this.desired code and setmedia(): Accessed via this[solution], where solution from this.solutions array.
+			
+			this.css = {};
+			this.css.cs = {}; // Holds the css selector strings
+			this.css.jq = {}; // Holds jQuery selectors. ie., $(css.cs.method)
+
+			this.ancestorJq = []; // Holds jQuery selector of cssSelectorAncestor. Init would use $() instead of [], but it is only 1.4+
+
+			this.options.volume = this._limitValue(this.options.volume, 0, 1); // Limit volume value's bounds.
+
+			// Create the formats array, with prority based on the order of the supplied formats string
+			$.each(this.options.supplied.toLowerCase().split(","), function(index1, value1) {
+				var format = value1.replace(/^\s+|\s+$/g, ""); //trim
+				if(self.format[format]) { // Check format is valid.
+					var dupFound = false;
+					$.each(self.formats, function(index2, value2) { // Check for duplicates
+						if(format === value2) {
+							dupFound = true;
+							return false;
+						}
+					});
+					if(!dupFound) {
+						self.formats.push(format);
+					}
+				}
+			});
+
+			// Create the solutions array, with prority based on the order of the solution string
+			$.each(this.options.solution.toLowerCase().split(","), function(index1, value1) {
+				var solution = value1.replace(/^\s+|\s+$/g, ""); //trim
+				if(self.solution[solution]) { // Check solution is valid.
+					var dupFound = false;
+					$.each(self.solutions, function(index2, value2) { // Check for duplicates
+						if(solution === value2) {
+							dupFound = true;
+							return false;
+						}
+					});
+					if(!dupFound) {
+						self.solutions.push(solution);
+					}
+				}
+			});
+				
+			// Create Aurora.js formats array
+			$.each(this.options.auroraFormats.toLowerCase().split(","), function(index1, value1) {
+				var format = value1.replace(/^\s+|\s+$/g, ""); //trim
+				if(self.format[format]) { // Check format is valid.
+					var dupFound = false;
+					$.each(self.aurora.formats, function(index2, value2) { // Check for duplicates
+						if(format === value2) {
+							dupFound = true;
+							return false;
+						}
+					});
+					if(!dupFound) {
+						self.aurora.formats.push(format);
+					}
+				}
+			});
+
+			this.internal.instance = "jp_" + this.count;
+			this.instances[this.internal.instance] = this.element;
+
+			// Check the jPlayer div has an id and create one if required. Important for Flash to know the unique id for comms.
+			if(!this.element.attr("id")) {
+				this.element.attr("id", this.options.idPrefix + "_jplayer_" + this.count);
+			}
+
+			this.internal.self = $.extend({}, {
+				id: this.element.attr("id"),
+				jq: this.element
+			});
+			this.internal.audio = $.extend({}, {
+				id: this.options.idPrefix + "_audio_" + this.count,
+				jq: undefined
+			});
+			this.internal.video = $.extend({}, {
+				id: this.options.idPrefix + "_video_" + this.count,
+				jq: undefined
+			});
+			this.internal.flash = $.extend({}, {
+				id: this.options.idPrefix + "_flash_" + this.count,
+				jq: undefined,
+				swf: this.options.swfPath + (this.options.swfPath.toLowerCase().slice(-4) !== ".swf" ? (this.options.swfPath && this.options.swfPath.slice(-1) !== "/" ? "/" : "") + "jquery.jplayer.swf" : "")
+			});
+			this.internal.poster = $.extend({}, {
+				id: this.options.idPrefix + "_poster_" + this.count,
+				jq: undefined
+			});
+
+			// Register listeners defined in the constructor
+			$.each($.jPlayer.event, function(eventName,eventType) {
+				if(self.options[eventName] !== undefined) {
+					self.element.bind(eventType + ".jPlayer", self.options[eventName]); // With .jPlayer namespace.
+					self.options[eventName] = undefined; // Destroy the handler pointer copy on the options. Reason, events can be added/removed in other ways so this could be obsolete and misleading.
+				}
+			});
+
+			// Determine if we require solutions for audio, video or both media types.
+			this.require.audio = false;
+			this.require.video = false;
+			$.each(this.formats, function(priority, format) {
+				self.require[self.format[format].media] = true;
+			});
+
+			// Now required types are known, finish the options default settings.
+			if(this.require.video) {
+				this.options = $.extend(true, {},
+					this.optionsVideo,
+					this.options
+				);
+			} else {
+				this.options = $.extend(true, {},
+					this.optionsAudio,
+					this.options
+				);
+			}
+			this._setSize(); // update status and jPlayer element size
+
+			// Determine the status for Blocklisted options.
+			this.status.nativeVideoControls = this._uaBlocklist(this.options.nativeVideoControls);
+			this.status.noFullWindow = this._uaBlocklist(this.options.noFullWindow);
+			this.status.noVolume = this._uaBlocklist(this.options.noVolume);
+
+			// Create event handlers if native fullscreen is supported
+			if($.jPlayer.nativeFeatures.fullscreen.api.fullscreenEnabled) {
+				this._fullscreenAddEventListeners();
+			}
+
+			// The native controls are only for video and are disabled when audio is also used.
+			this._restrictNativeVideoControls();
+
+			// Create the poster image.
+			this.htmlElement.poster = document.createElement('img');
+			this.htmlElement.poster.id = this.internal.poster.id;
+			this.htmlElement.poster.onload = function() { // Note that this did not work on Firefox 3.6: poster.addEventListener("onload", function() {}, false); Did not investigate x-browser.
+				if(!self.status.video || self.status.waitForPlay) {
+					self.internal.poster.jq.show();
+				}
+			};
+			this.element.append(this.htmlElement.poster);
+			this.internal.poster.jq = $("#" + this.internal.poster.id);
+			this.internal.poster.jq.css({'width': this.status.width, 'height': this.status.height});
+			this.internal.poster.jq.hide();
+			this.internal.poster.jq.bind("click.jPlayer", function() {
+				self._trigger($.jPlayer.event.click);
+			});
+			
+			// Generate the required media elements
+			this.html.audio.available = false;
+			if(this.require.audio) { // If a supplied format is audio
+				this.htmlElement.audio = document.createElement('audio');
+				this.htmlElement.audio.id = this.internal.audio.id;
+				this.html.audio.available = !!this.htmlElement.audio.canPlayType && this._testCanPlayType(this.htmlElement.audio); // Test is for IE9 on Win Server 2008.
+			}
+			this.html.video.available = false;
+			if(this.require.video) { // If a supplied format is video
+				this.htmlElement.video = document.createElement('video');
+				this.htmlElement.video.id = this.internal.video.id;
+				this.html.video.available = !!this.htmlElement.video.canPlayType && this._testCanPlayType(this.htmlElement.video); // Test is for IE9 on Win Server 2008.
+			}
+
+			this.flash.available = this._checkForFlash(10.1);
+
+			this.html.canPlay = {};
+			this.aurora.canPlay = {};
+			this.flash.canPlay = {};
+			$.each(this.formats, function(priority, format) {
+				self.html.canPlay[format] = self.html[self.format[format].media].available && "" !== self.htmlElement[self.format[format].media].canPlayType(self.format[format].codec);
+				self.aurora.canPlay[format] = ($.inArray(format, self.aurora.formats) > -1);
+				self.flash.canPlay[format] = self.format[format].flashCanPlay && self.flash.available;
+			});
+			this.html.desired = false;
+			this.aurora.desired = false;
+			this.flash.desired = false;
+			$.each(this.solutions, function(solutionPriority, solution) {
+				if(solutionPriority === 0) {
+					self[solution].desired = true;
+				} else {
+					var audioCanPlay = false;
+					var videoCanPlay = false;
+					$.each(self.formats, function(formatPriority, format) {
+						if(self[self.solutions[0]].canPlay[format]) { // The other solution can play
+							if(self.format[format].media === 'video') {
+								videoCanPlay = true;
+							} else {
+								audioCanPlay = true;
+							}
+						}
+					});
+					self[solution].desired = (self.require.audio && !audioCanPlay) || (self.require.video && !videoCanPlay);
+				}
+			});
+			// This is what jPlayer will support, based on solution and supplied.
+			this.html.support = {};
+			this.aurora.support = {};
+			this.flash.support = {};
+			$.each(this.formats, function(priority, format) {
+				self.html.support[format] = self.html.canPlay[format] && self.html.desired;
+				self.aurora.support[format] = self.aurora.canPlay[format] && self.aurora.desired;
+				self.flash.support[format] = self.flash.canPlay[format] && self.flash.desired;
+			});
+			// If jPlayer is supporting any format in a solution, then the solution is used.
+			this.html.used = false;
+			this.aurora.used = false;
+			this.flash.used = false;
+			$.each(this.solutions, function(solutionPriority, solution) {
+				$.each(self.formats, function(formatPriority, format) {
+					if(self[solution].support[format]) {
+						self[solution].used = true;
+						return false;
+					}
+				});
+			});
+
+			// Init solution active state and the event gates to false.
+			this._resetActive();
+			this._resetGate();
+
+			// Set up the css selectors for the control and feedback entities.
+			this._cssSelectorAncestor(this.options.cssSelectorAncestor);
+			
+			// If neither html nor aurora nor flash are being used by this browser, then media playback is not possible. Trigger an error event.
+			if(!(this.html.used || this.aurora.used || this.flash.used)) {
+				this._error( {
+					type: $.jPlayer.error.NO_SOLUTION, 
+					context: "{solution:'" + this.options.solution + "', supplied:'" + this.options.supplied + "'}",
+					message: $.jPlayer.errorMsg.NO_SOLUTION,
+					hint: $.jPlayer.errorHint.NO_SOLUTION
+				});
+				if(this.css.jq.noSolution.length) {
+					this.css.jq.noSolution.show();
+				}
+			} else {
+				if(this.css.jq.noSolution.length) {
+					this.css.jq.noSolution.hide();
+				}
+			}
+
+			// Add the flash solution if it is being used.
+			if(this.flash.used) {
+				var htmlObj,
+				flashVars = 'jQuery=' + encodeURI(this.options.noConflict) + '&id=' + encodeURI(this.internal.self.id) + '&vol=' + this.options.volume + '&muted=' + this.options.muted;
+
+				// Code influenced by SWFObject 2.2: http://code.google.com/p/swfobject/
+				// Non IE browsers have an initial Flash size of 1 by 1 otherwise the wmode affected the Flash ready event. 
+
+				if($.jPlayer.browser.msie && (Number($.jPlayer.browser.version) < 9 || $.jPlayer.browser.documentMode < 9)) {
+					var objStr = '<object id="' + this.internal.flash.id + '" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="0" height="0" tabindex="-1"></object>';
+
+					var paramStr = [
+						'<param name="movie" value="' + this.internal.flash.swf + '" />',
+						'<param name="FlashVars" value="' + flashVars + '" />',
+						'<param name="allowScriptAccess" value="always" />',
+						'<param name="bgcolor" value="' + this.options.backgroundColor + '" />',
+						'<param name="wmode" value="' + this.options.wmode + '" />'
+					];
+
+					htmlObj = document.createElement(objStr);
+					for(var i=0; i < paramStr.length; i++) {
+						htmlObj.appendChild(document.createElement(paramStr[i]));
+					}
+				} else {
+					var createParam = function(el, n, v) {
+						var p = document.createElement("param");
+						p.setAttribute("name", n);	
+						p.setAttribute("value", v);
+						el.appendChild(p);
+					};
+
+					htmlObj = document.createElement("object");
+					htmlObj.setAttribute("id", this.internal.flash.id);
+					htmlObj.setAttribute("name", this.internal.flash.id);
+					htmlObj.setAttribute("data", this.internal.flash.swf);
+					htmlObj.setAttribute("type", "application/x-shockwave-flash");
+					htmlObj.setAttribute("width", "1"); // Non-zero
+					htmlObj.setAttribute("height", "1"); // Non-zero
+					htmlObj.setAttribute("tabindex", "-1");
+					createParam(htmlObj, "flashvars", flashVars);
+					createParam(htmlObj, "allowscriptaccess", "always");
+					createParam(htmlObj, "bgcolor", this.options.backgroundColor);
+					createParam(htmlObj, "wmode", this.options.wmode);
+				}
+
+				this.element.append(htmlObj);
+				this.internal.flash.jq = $(htmlObj);
+			}
+
+			// Setup playbackRate ability before using _addHtmlEventListeners()
+			if(this.html.used && !this.flash.used) { // If only HTML
+				// Using the audio element capabilities for playbackRate. ie., Assuming video element is the same.
+				this.status.playbackRateEnabled = this._testPlaybackRate('audio');
+			} else {
+				this.status.playbackRateEnabled = false;
+			}
+
+			this._updatePlaybackRate();
+
+			// Add the HTML solution if being used.
+			if(this.html.used) {
+
+				// The HTML Audio handlers
+				if(this.html.audio.available) {
+					this._addHtmlEventListeners(this.htmlElement.audio, this.html.audio);
+					this.element.append(this.htmlElement.audio);
+					this.internal.audio.jq = $("#" + this.internal.audio.id);
+				}
+
+				// The HTML Video handlers
+				if(this.html.video.available) {
+					this._addHtmlEventListeners(this.htmlElement.video, this.html.video);
+					this.element.append(this.htmlElement.video);
+					this.internal.video.jq = $("#" + this.internal.video.id);
+					if(this.status.nativeVideoControls) {
+						this.internal.video.jq.css({'width': this.status.width, 'height': this.status.height});
+					} else {
+						this.internal.video.jq.css({'width':'0px', 'height':'0px'}); // Using size 0x0 since a .hide() causes issues in iOS
+					}
+					this.internal.video.jq.bind("click.jPlayer", function() {
+						self._trigger($.jPlayer.event.click);
+					});
+				}
+			}
+			
+			// Add the Aurora.js solution if being used.
+			if(this.aurora.used) {
+				// Aurora.js player need to be created for each media, see setMedia function.
+			}
+
+			// Create the bridge that emulates the HTML Media element on the jPlayer DIV
+			if( this.options.emulateHtml ) {
+				this._emulateHtmlBridge();
+			}
+
+			if((this.html.used || this.aurora.used) && !this.flash.used) { // If only HTML, then emulate flash ready() call after 100ms.
+				setTimeout( function() {
+					self.internal.ready = true;
+					self.version.flash = "n/a";
+					self._trigger($.jPlayer.event.repeat); // Trigger the repeat event so its handler can initialize itself with the loop option.
+					self._trigger($.jPlayer.event.ready);
+				}, 100);
+			}
+
+			// Initialize the interface components with the options.
+			this._updateNativeVideoControls();
+			// The other controls are now setup in _cssSelectorAncestor()
+			if(this.css.jq.videoPlay.length) {
+				this.css.jq.videoPlay.hide();
+			}
+
+			$.jPlayer.prototype.count++; // Change static variable via prototype.
+		},
+		destroy: function() {
+			// MJP: The background change remains. Would need to store the original to restore it correctly.
+			// MJP: The jPlayer element's size change remains.
+
+			// Clear the media to reset the GUI and stop any downloads. Streams on some browsers had persited. (Chrome)
+			this.clearMedia();
+			// Remove the size/sizeFull cssClass from the cssSelectorAncestor
+			this._removeUiClass();
+			// Remove the times from the GUI
+			if(this.css.jq.currentTime.length) {
+				this.css.jq.currentTime.text("");
+			}
+			if(this.css.jq.duration.length) {
+				this.css.jq.duration.text("");
+			}
+			// Remove any bindings from the interface controls.
+			$.each(this.css.jq, function(fn, jq) {
+				// Check selector is valid before trying to execute method.
+				if(jq.length) {
+					jq.unbind(".jPlayer");
+				}
+			});
+			// Remove the click handlers for $.jPlayer.event.click
+			this.internal.poster.jq.unbind(".jPlayer");
+			if(this.internal.video.jq) {
+				this.internal.video.jq.unbind(".jPlayer");
+			}
+			// Remove the fullscreen event handlers
+			this._fullscreenRemoveEventListeners();
+			// Remove key bindings
+			if(this === $.jPlayer.focus) {
+				$.jPlayer.focus = null;
+			}
+			// Destroy the HTML bridge.
+			if(this.options.emulateHtml) {
+				this._destroyHtmlBridge();
+			}
+			this.element.removeData("jPlayer"); // Remove jPlayer data
+			this.element.unbind(".jPlayer"); // Remove all event handlers created by the jPlayer constructor
+			this.element.empty(); // Remove the inserted child elements
+			
+			delete this.instances[this.internal.instance]; // Clear the instance on the static instance object
+		},
+		destroyRemoved: function() { // Destroy any instances that have gone away.
+			var self = this;
+			$.each(this.instances, function(i, element) {
+				if(self.element !== element) { // Do not destroy this instance.
+					if(!element.data("jPlayer")) { // Check that element is a real jPlayer.
+						element.jPlayer("destroy");
+						delete self.instances[i];
+					}
+				}
+			});
+		},
+		enable: function() { // Plan to implement
+			// options.disabled = false
+		},
+		disable: function () { // Plan to implement
+			// options.disabled = true
+		},
+		_testCanPlayType: function(elem) {
+			// IE9 on Win Server 2008 did not implement canPlayType(), but it has the property.
+			try {
+				elem.canPlayType(this.format.mp3.codec); // The type is irrelevant.
+				return true;
+			} catch(err) {
+				return false;
+			}
+		},
+		_testPlaybackRate: function(type) {
+			// type: String 'audio' or 'video'
+			var el, rate = 0.5;
+			type = typeof type === 'string' ? type : 'audio';
+			el = document.createElement(type);
+			// Wrapping in a try/catch, just in case older HTML5 browsers throw and error.
+			try {
+				if('playbackRate' in el) {
+					el.playbackRate = rate;
+					return el.playbackRate === rate;
+				} else {
+					return false;
+				}
+			} catch(err) {
+				return false;
+			}
+		},
+		_uaBlocklist: function(list) {
+			// list : object with properties that are all regular expressions. Property names are irrelevant.
+			// Returns true if the user agent is matched in list.
+			var	ua = navigator.userAgent.toLowerCase(),
+				block = false;
+
+			$.each(list, function(p, re) {
+				if(re && re.test(ua)) {
+					block = true;
+					return false; // exit $.each.
+				}
+			});
+			return block;
+		},
+		_restrictNativeVideoControls: function() {
+			// Fallback to noFullWindow when nativeVideoControls is true and audio media is being used. Affects when both media types are used.
+			if(this.require.audio) {
+				if(this.status.nativeVideoControls) {
+					this.status.nativeVideoControls = false;
+					this.status.noFullWindow = true;
+				}
+			}
+		},
+		_updateNativeVideoControls: function() {
+			if(this.html.video.available && this.html.used) {
+				// Turn the HTML Video controls on/off
+				this.htmlElement.video.controls = this.status.nativeVideoControls;
+				// Show/hide the jPlayer GUI.
+				this._updateAutohide();
+				// For when option changed. The poster image is not updated, as it is dealt with in setMedia(). Acceptable degradation since seriously doubt these options will change on the fly. Can again review later.
+				if(this.status.nativeVideoControls && this.require.video) {
+					this.internal.poster.jq.hide();
+					this.internal.video.jq.css({'width': this.status.width, 'height': this.status.height});
+				} else if(this.status.waitForPlay && this.status.video) {
+					this.internal.poster.jq.show();
+					this.internal.video.jq.css({'width': '0px', 'height': '0px'});
+				}
+			}
+		},
+		_addHtmlEventListeners: function(mediaElement, entity) {
+			var self = this;
+			mediaElement.preload = this.options.preload;
+			mediaElement.muted = this.options.muted;
+			mediaElement.volume = this.options.volume;
+
+			if(this.status.playbackRateEnabled) {
+				mediaElement.defaultPlaybackRate = this.options.defaultPlaybackRate;
+				mediaElement.playbackRate = this.options.playbackRate;
+			}
+
+			// Create the event listeners
+			// Only want the active entity to affect jPlayer and bubble events.
+			// Using entity.gate so that object is referenced and gate property always current
+			
+			mediaElement.addEventListener("progress", function() {
+				if(entity.gate) {
+					if(self.internal.cmdsIgnored && this.readyState > 0) { // Detect iOS executed the command
+						self.internal.cmdsIgnored = false;
+					}
+					self._getHtmlStatus(mediaElement);
+					self._updateInterface();
+					self._trigger($.jPlayer.event.progress);
+				}
+			}, false);
+			mediaElement.addEventListener("loadeddata", function() {
+				if(entity.gate) {
+					self.androidFix.setMedia = false; // Disable the fix after the first progress event.
+					if(self.androidFix.play) { // Play Android audio - performing the fix.
+						self.androidFix.play = false;
+						self.play(self.androidFix.time);
+					}
+					if(self.androidFix.pause) { // Pause Android audio at time - performing the fix.
+						self.androidFix.pause = false;
+						self.pause(self.androidFix.time);
+					}
+					self._trigger($.jPlayer.event.loadeddata);
+				}
+			}, false);
+			mediaElement.addEventListener("timeupdate", function() {
+				if(entity.gate) {
+					self._getHtmlStatus(mediaElement);
+					self._updateInterface();
+					self._trigger($.jPlayer.event.timeupdate);
+				}
+			}, false);
+			mediaElement.addEventListener("durationchange", function() {
+				if(entity.gate) {
+					self._getHtmlStatus(mediaElement);
+					self._updateInterface();
+					self._trigger($.jPlayer.event.durationchange);
+				}
+			}, false);
+			mediaElement.addEventListener("play", function() {
+				if(entity.gate) {
+					self._updateButtons(true);
+					self._html_checkWaitForPlay(); // So the native controls update this variable and puts the hidden interface in the correct state. Affects toggling native controls.
+					self._trigger($.jPlayer.event.play);
+				}
+			}, false);
+			mediaElement.addEventListener("playing", function() {
+				if(entity.gate) {
+					self._updateButtons(true);
+					self._seeked();
+					self._trigger($.jPlayer.event.playing);
+				}
+			}, false);
+			mediaElement.addEventListener("pause", function() {
+				if(entity.gate) {
+					self._updateButtons(false);
+					self._trigger($.jPlayer.event.pause);
+				}
+			}, false);
+			mediaElement.addEventListener("waiting", function() {
+				if(entity.gate) {
+					self._seeking();
+					self._trigger($.jPlayer.event.waiting);
+				}
+			}, false);
+			mediaElement.addEventListener("seeking", function() {
+				if(entity.gate) {
+					self._seeking();
+					self._trigger($.jPlayer.event.seeking);
+				}
+			}, false);
+			mediaElement.addEventListener("seeked", function() {
+				if(entity.gate) {
+					self._seeked();
+					self._trigger($.jPlayer.event.seeked);
+				}
+			}, false);
+			mediaElement.addEventListener("volumechange", function() {
+				if(entity.gate) {
+					// Read the values back from the element as the Blackberry PlayBook shares the volume with the physical buttons master volume control.
+					// However, when tested 6th July 2011, those buttons do not generate an event. The physical play/pause button does though.
+					self.options.volume = mediaElement.volume;
+					self.options.muted = mediaElement.muted;
+					self._updateMute();
+					self._updateVolume();
+					self._trigger($.jPlayer.event.volumechange);
+				}
+			}, false);
+			mediaElement.addEventListener("ratechange", function() {
+				if(entity.gate) {
+					self.options.defaultPlaybackRate = mediaElement.defaultPlaybackRate;
+					self.options.playbackRate = mediaElement.playbackRate;
+					self._updatePlaybackRate();
+					self._trigger($.jPlayer.event.ratechange);
+				}
+			}, false);
+			mediaElement.addEventListener("suspend", function() { // Seems to be the only way of capturing that the iOS4 browser did not actually play the media from the page code. ie., It needs a user gesture.
+				if(entity.gate) {
+					self._seeked();
+					self._trigger($.jPlayer.event.suspend);
+				}
+			}, false);
+			mediaElement.addEventListener("ended", function() {
+				if(entity.gate) {
+					// Order of the next few commands are important. Change the time and then pause.
+					// Solves a bug in Firefox, where issuing pause 1st causes the media to play from the start. ie., The pause is ignored.
+					if(!$.jPlayer.browser.webkit) { // Chrome crashes if you do this in conjunction with a setMedia command in an ended event handler. ie., The playlist demo.
+						self.htmlElement.media.currentTime = 0; // Safari does not care about this command. ie., It works with or without this line. (Both Safari and Chrome are Webkit.)
+					}
+					self.htmlElement.media.pause(); // Pause otherwise a click on the progress bar will play from that point, when it shouldn't, since it stopped playback.
+					self._updateButtons(false);
+					self._getHtmlStatus(mediaElement, true); // With override true. Otherwise Chrome leaves progress at full.
+					self._updateInterface();
+					self._trigger($.jPlayer.event.ended);
+				}
+			}, false);
+			mediaElement.addEventListener("error", function() {
+				if(entity.gate) {
+					self._updateButtons(false);
+					self._seeked();
+					if(self.status.srcSet) { // Deals with case of clearMedia() causing an error event.
+						clearTimeout(self.internal.htmlDlyCmdId); // Clears any delayed commands used in the HTML solution.
+						self.status.waitForLoad = true; // Allows the load operation to try again.
+						self.status.waitForPlay = true; // Reset since a play was captured.
+						if(self.status.video && !self.status.nativeVideoControls) {
+							self.internal.video.jq.css({'width':'0px', 'height':'0px'});
+						}
+						if(self._validString(self.status.media.poster) && !self.status.nativeVideoControls) {
+							self.internal.poster.jq.show();
+						}
+						if(self.css.jq.videoPlay.length) {
+							self.css.jq.videoPlay.show();
+						}
+						self._error( {
+							type: $.jPlayer.error.URL,
+							context: self.status.src, // this.src shows absolute urls. Want context to show the url given.
+							message: $.jPlayer.errorMsg.URL,
+							hint: $.jPlayer.errorHint.URL
+						});
+					}
+				}
+			}, false);
+			// Create all the other event listeners that bubble up to a jPlayer event from html, without being used by jPlayer.
+			$.each($.jPlayer.htmlEvent, function(i, eventType) {
+				mediaElement.addEventListener(this, function() {
+					if(entity.gate) {
+						self._trigger($.jPlayer.event[eventType]);
+					}
+				}, false);
+			});
+		},
+		_addAuroraEventListeners : function(player, entity) {
+			var self = this;
+			//player.preload = this.options.preload;
+			//player.muted = this.options.muted;
+			player.volume = this.options.volume * 100;
+
+			// Create the event listeners
+			// Only want the active entity to affect jPlayer and bubble events.
+			// Using entity.gate so that object is referenced and gate property always current
+			
+			player.on("progress", function() {
+				if(entity.gate) {
+					if(self.internal.cmdsIgnored && this.readyState > 0) { // Detect iOS executed the command
+						self.internal.cmdsIgnored = false;
+					}
+					self._getAuroraStatus(player);
+					self._updateInterface();
+					self._trigger($.jPlayer.event.progress);
+					// Progress with song duration, we estimate timeupdate need to be triggered too.
+					if (player.duration > 0) {
+						self._trigger($.jPlayer.event.timeupdate);
+					}
+				}
+			}, false);
+			player.on("ready", function() {
+				if(entity.gate) {
+					self._trigger($.jPlayer.event.loadeddata);
+				}
+			}, false);
+			player.on("duration", function() {
+				if(entity.gate) {
+					self._getAuroraStatus(player);
+					self._updateInterface();
+					self._trigger($.jPlayer.event.durationchange);
+				}
+			}, false);
+			player.on("end", function() {
+				if(entity.gate) {
+					// Order of the next few commands are important. Change the time and then pause.
+					self._updateButtons(false);
+					self._getAuroraStatus(player, true);
+					self._updateInterface();
+					self._trigger($.jPlayer.event.ended);
+				}
+			}, false);
+			player.on("error", function() {
+				if(entity.gate) {
+					self._updateButtons(false);
+					self._seeked();
+					if(self.status.srcSet) { // Deals with case of clearMedia() causing an error event.
+						self.status.waitForLoad = true; // Allows the load operation to try again.
+						self.status.waitForPlay = true; // Reset since a play was captured.
+						if(self.status.video && !self.status.nativeVideoControls) {
+							self.internal.video.jq.css({'width':'0px', 'height':'0px'});
+						}
+						if(self._validString(self.status.media.poster) && !self.status.nativeVideoControls) {
+							self.internal.poster.jq.show();
+						}
+						if(self.css.jq.videoPlay.length) {
+							self.css.jq.videoPlay.show();
+						}
+						self._error( {
+							type: $.jPlayer.error.URL,
+							context: self.status.src, // this.src shows absolute urls. Want context to show the url given.
+							message: $.jPlayer.errorMsg.URL,
+							hint: $.jPlayer.errorHint.URL
+						});
+					}
+				}
+			}, false);
+		},
+		_getHtmlStatus: function(media, override) {
+			var ct = 0, cpa = 0, sp = 0, cpr = 0;
+
+			// Fixes the duration bug in iOS, where the durationchange event occurs when media.duration is not always correct.
+			// Fixes the initial duration bug in BB OS7, where the media.duration is infinity and displays as NaN:NaN due to Date() using inifity.
+			if(isFinite(media.duration)) {
+				this.status.duration = media.duration;
+			}
+
+			ct = media.currentTime;
+			cpa = (this.status.duration > 0) ? 100 * ct / this.status.duration : 0;
+			if((typeof media.seekable === "object") && (media.seekable.length > 0)) {
+				sp = (this.status.duration > 0) ? 100 * media.seekable.end(media.seekable.length-1) / this.status.duration : 100;
+				cpr = (this.status.duration > 0) ? 100 * media.currentTime / media.seekable.end(media.seekable.length-1) : 0; // Duration conditional for iOS duration bug. ie., seekable.end is a NaN in that case.
+			} else {
+				sp = 100;
+				cpr = cpa;
+			}
+			
+			if(override) {
+				ct = 0;
+				cpr = 0;
+				cpa = 0;
+			}
+
+			this.status.seekPercent = sp;
+			this.status.currentPercentRelative = cpr;
+			this.status.currentPercentAbsolute = cpa;
+			this.status.currentTime = ct;
+
+			this.status.remaining = this.status.duration - this.status.currentTime;
+
+			this.status.videoWidth = media.videoWidth;
+			this.status.videoHeight = media.videoHeight;
+
+			this.status.readyState = media.readyState;
+			this.status.networkState = media.networkState;
+			this.status.playbackRate = media.playbackRate;
+			this.status.ended = media.ended;
+		},
+		_getAuroraStatus: function(player, override) {
+			var ct = 0, cpa = 0, sp = 0, cpr = 0;
+
+			this.status.duration = player.duration / 1000;
+
+			ct = player.currentTime / 1000;
+			cpa = (this.status.duration > 0) ? 100 * ct / this.status.duration : 0;
+			if(player.buffered > 0) {
+				sp = (this.status.duration > 0) ? (player.buffered * this.status.duration) / this.status.duration : 100;
+				cpr = (this.status.duration > 0) ? ct / (player.buffered * this.status.duration) : 0;
+			} else {
+				sp = 100;
+				cpr = cpa;
+			}
+			
+			if(override) {
+				ct = 0;
+				cpr = 0;
+				cpa = 0;
+			}
+
+			this.status.seekPercent = sp;
+			this.status.currentPercentRelative = cpr;
+			this.status.currentPercentAbsolute = cpa;
+			this.status.currentTime = ct;
+
+			this.status.remaining = this.status.duration - this.status.currentTime;
+
+			this.status.readyState = 4; // status.readyState;
+			this.status.networkState = 0; // status.networkState;
+			this.status.playbackRate = 1; // status.playbackRate;
+			this.status.ended = false; // status.ended;
+		},
+		_resetStatus: function() {
+			this.status = $.extend({}, this.status, $.jPlayer.prototype.status); // Maintains the status properties that persist through a reset.
+		},
+		_trigger: function(eventType, error, warning) { // eventType always valid as called using $.jPlayer.event.eventType
+			var event = $.Event(eventType);
+			event.jPlayer = {};
+			event.jPlayer.version = $.extend({}, this.version);
+			event.jPlayer.options = $.extend(true, {}, this.options); // Deep copy
+			event.jPlayer.status = $.extend(true, {}, this.status); // Deep copy
+			event.jPlayer.html = $.extend(true, {}, this.html); // Deep copy
+			event.jPlayer.aurora = $.extend(true, {}, this.aurora); // Deep copy
+			event.jPlayer.flash = $.extend(true, {}, this.flash); // Deep copy
+			if(error) {
+				event.jPlayer.error = $.extend({}, error);
+			}
+			if(warning) {
+				event.jPlayer.warning = $.extend({}, warning);
+			}
+			this.element.trigger(event);
+		},
+		jPlayerFlashEvent: function(eventType, status) { // Called from Flash
+			if(eventType === $.jPlayer.event.ready) {
+				if(!this.internal.ready) {
+					this.internal.ready = true;
+					this.internal.flash.jq.css({'width':'0px', 'height':'0px'}); // Once Flash generates the ready event, minimise to zero as it is not affected by wmode anymore.
+
+					this.version.flash = status.version;
+					if(this.version.needFlash !== this.version.flash) {
+						this._error( {
+							type: $.jPlayer.error.VERSION,
+							context: this.version.flash,
+							message: $.jPlayer.errorMsg.VERSION + this.version.flash,
+							hint: $.jPlayer.errorHint.VERSION
+						});
+					}
+					this._trigger($.jPlayer.event.repeat); // Trigger the repeat event so its handler can initialize itself with the loop option.
+					this._trigger(eventType);
+				} else {
+					// This condition occurs if the Flash is hidden and then shown again.
+					// Firefox also reloads the Flash if the CSS position changes. position:fixed is used for full screen.
+
+					// Only do this if the Flash is the solution being used at the moment. Affects Media players where both solution may be being used.
+					if(this.flash.gate) {
+
+						// Send the current status to the Flash now that it is ready (available) again.
+						if(this.status.srcSet) {
+
+							// Need to read original status before issuing the setMedia command.
+							var	currentTime = this.status.currentTime,
+								paused = this.status.paused; 
+
+							this.setMedia(this.status.media);
+							this.volumeWorker(this.options.volume);
+							if(currentTime > 0) {
+								if(paused) {
+									this.pause(currentTime);
+								} else {
+									this.play(currentTime);
+								}
+							}
+						}
+						this._trigger($.jPlayer.event.flashreset);
+					}
+				}
+			}
+			if(this.flash.gate) {
+				switch(eventType) {
+					case $.jPlayer.event.progress:
+						this._getFlashStatus(status);
+						this._updateInterface();
+						this._trigger(eventType);
+						break;
+					case $.jPlayer.event.timeupdate:
+						this._getFlashStatus(status);
+						this._updateInterface();
+						this._trigger(eventType);
+						break;
+					case $.jPlayer.event.play:
+						this._seeked();
+						this._updateButtons(true);
+						this._trigger(eventType);
+						break;
+					case $.jPlayer.event.pause:
+						this._updateButtons(false);
+						this._trigger(eventType);
+						break;
+					case $.jPlayer.event.ended:
+						this._updateButtons(false);
+						this._trigger(eventType);
+						break;
+					case $.jPlayer.event.click:
+						this._trigger(eventType); // This could be dealt with by the default
+						break;
+					case $.jPlayer.event.error:
+						this.status.waitForLoad = true; // Allows the load operation to try again.
+						this.status.waitForPlay = true; // Reset since a play was captured.
+						if(this.status.video) {
+							this.internal.flash.jq.css({'width':'0px', 'height':'0px'});
+						}
+						if(this._validString(this.status.media.poster)) {
+							this.internal.poster.jq.show();
+						}
+						if(this.css.jq.videoPlay.length && this.status.video) {
+							this.css.jq.videoPlay.show();
+						}
+						if(this.status.video) { // Set up for another try. Execute before error event.
+							this._flash_setVideo(this.status.media);
+						} else {
+							this._flash_setAudio(this.status.media);
+						}
+						this._updateButtons(false);
+						this._error( {
+							type: $.jPlayer.error.URL,
+							context:status.src,
+							message: $.jPlayer.errorMsg.URL,
+							hint: $.jPlayer.errorHint.URL
+						});
+						break;
+					case $.jPlayer.event.seeking:
+						this._seeking();
+						this._trigger(eventType);
+						break;
+					case $.jPlayer.event.seeked:
+						this._seeked();
+						this._trigger(eventType);
+						break;
+					case $.jPlayer.event.ready:
+						// The ready event is handled outside the switch statement.
+						// Captured here otherwise 2 ready events would be generated if the ready event handler used setMedia.
+						break;
+					default:
+						this._trigger(eventType);
+				}
+			}
+			return false;
+		},
+		_getFlashStatus: function(status) {
+			this.status.seekPercent = status.seekPercent;
+			this.status.currentPercentRelative = status.currentPercentRelative;
+			this.status.currentPercentAbsolute = status.currentPercentAbsolute;
+			this.status.currentTime = status.currentTime;
+			this.status.duration = status.duration;
+			this.status.remaining = status.duration - status.currentTime;
+
+			this.status.videoWidth = status.videoWidth;
+			this.status.videoHeight = status.videoHeight;
+
+			// The Flash does not generate this information in this release
+			this.status.readyState = 4; // status.readyState;
+			this.status.networkState = 0; // status.networkState;
+			this.status.playbackRate = 1; // status.playbackRate;
+			this.status.ended = false; // status.ended;
+		},
+		_updateButtons: function(playing) {
+			if(playing === undefined) {
+				playing = !this.status.paused;
+			} else {
+				this.status.paused = !playing;
+			}
+			// Apply the state classes. (For the useStateClassSkin:true option)
+			if(playing) {
+				this.addStateClass('playing');
+			} else {
+				this.removeStateClass('playing');
+			}
+			if(!this.status.noFullWindow && this.options.fullWindow) {
+				this.addStateClass('fullScreen');
+			} else {
+				this.removeStateClass('fullScreen');
+			}
+			if(this.options.loop) {
+				this.addStateClass('looped');
+			} else {
+				this.removeStateClass('looped');
+			}
+			// Toggle the GUI element pairs. (For the useStateClassSkin:false option)
+			if(this.css.jq.play.length && this.css.jq.pause.length) {
+				if(playing) {
+					this.css.jq.play.hide();
+					this.css.jq.pause.show();
+				} else {
+					this.css.jq.play.show();
+					this.css.jq.pause.hide();
+				}
+			}
+			if(this.css.jq.restoreScreen.length && this.css.jq.fullScreen.length) {
+				if(this.status.noFullWindow) {
+					this.css.jq.fullScreen.hide();
+					this.css.jq.restoreScreen.hide();
+				} else if(this.options.fullWindow) {
+					this.css.jq.fullScreen.hide();
+					this.css.jq.restoreScreen.show();
+				} else {
+					this.css.jq.fullScreen.show();
+					this.css.jq.restoreScreen.hide();
+				}
+			}
+			if(this.css.jq.repeat.length && this.css.jq.repeatOff.length) {
+				if(this.options.loop) {
+					this.css.jq.repeat.hide();
+					this.css.jq.repeatOff.show();
+				} else {
+					this.css.jq.repeat.show();
+					this.css.jq.repeatOff.hide();
+				}
+			}
+		},
+		_updateInterface: function() {
+			if(this.css.jq.seekBar.length) {
+				this.css.jq.seekBar.width(this.status.seekPercent+"%");
+			}
+			if(this.css.jq.playBar.length) {
+				if(this.options.smoothPlayBar) {
+					this.css.jq.playBar.stop().animate({
+						width: this.status.currentPercentAbsolute+"%"
+					}, 250, "linear");
+				} else {
+					this.css.jq.playBar.width(this.status.currentPercentRelative+"%");
+				}
+			}
+			var currentTimeText = '';
+			if(this.css.jq.currentTime.length) {
+				currentTimeText = this._convertTime(this.status.currentTime);
+				if(currentTimeText !== this.css.jq.currentTime.text()) {
+					this.css.jq.currentTime.text(this._convertTime(this.status.currentTime));
+				}
+			}
+			var durationText = '',
+				duration = this.status.duration,
+				remaining = this.status.remaining;
+			if(this.css.jq.duration.length) {
+				if(typeof this.status.media.duration === 'string') {
+					durationText = this.status.media.duration;
+				} else {
+					if(typeof this.status.media.duration === 'number') {
+						duration = this.status.media.duration;
+						remaining = duration - this.status.currentTime;
+					}
+					if(this.options.remainingDuration) {
+						durationText = (remaining > 0 ? '-' : '') + this._convertTime(remaining);
+					} else {
+						durationText = this._convertTime(duration);
+					}
+				}
+				if(durationText !== this.css.jq.duration.text()) {
+					this.css.jq.duration.text(durationText);
+				}
+			}
+		},
+		_convertTime: ConvertTime.prototype.time,
+		_seeking: function() {
+			if(this.css.jq.seekBar.length) {
+				this.css.jq.seekBar.addClass("jp-seeking-bg");
+			}
+			this.addStateClass('seeking');
+		},
+		_seeked: function() {
+			if(this.css.jq.seekBar.length) {
+				this.css.jq.seekBar.removeClass("jp-seeking-bg");
+			}
+			this.removeStateClass('seeking');
+		},
+		_resetGate: function() {
+			this.html.audio.gate = false;
+			this.html.video.gate = false;
+			this.aurora.gate = false;
+			this.flash.gate = false;
+		},
+		_resetActive: function() {
+			this.html.active = false;
+			this.aurora.active = false;
+			this.flash.active = false;
+		},
+		_escapeHtml: function(s) {
+			return s.split('&').join('&amp;').split('<').join('&lt;').split('>').join('&gt;').split('"').join('&quot;');
+		},
+		_qualifyURL: function(url) {
+			var el = document.createElement('div');
+			el.innerHTML= '<a href="' + this._escapeHtml(url) + '">x</a>';
+			return el.firstChild.href;
+		},
+		_absoluteMediaUrls: function(media) {
+			var self = this;
+			$.each(media, function(type, url) {
+				if(url && self.format[type] && url.substr(0, 5) !== "data:") {
+					media[type] = self._qualifyURL(url);
+				}
+			});
+			return media;
+		},
+		addStateClass: function(state) {
+			if(this.ancestorJq.length) {
+				this.ancestorJq.addClass(this.options.stateClass[state]);
+			}
+		},
+		removeStateClass: function(state) {
+			if(this.ancestorJq.length) {
+				this.ancestorJq.removeClass(this.options.stateClass[state]);
+			}
+		},
+		setMedia: function(media) {
+		
+			/*	media[format] = String: URL of format. Must contain all of the supplied option's video or audio formats.
+			 *	media.poster = String: Video poster URL.
+			 *	media.track = Array: Of objects defining the track element: kind, src, srclang, label, def.
+			 *	media.stream = Boolean: * NOT IMPLEMENTED * Designating actual media streams. ie., "false/undefined" for files. Plan to refresh the flash every so often.
+			 */
+
+			var	self = this,
+				supported = false,
+				posterChanged = this.status.media.poster !== media.poster; // Compare before reset. Important for OSX Safari as this.htmlElement.poster.src is absolute, even if original poster URL was relative.
+
+			this._resetMedia();
+			this._resetGate();
+			this._resetActive();
+
+			// Clear the Android Fix.
+			this.androidFix.setMedia = false;
+			this.androidFix.play = false;
+			this.androidFix.pause = false;
+
+			// Convert all media URLs to absolute URLs.
+			media = this._absoluteMediaUrls(media);
+
+			$.each(this.formats, function(formatPriority, format) {
+				var isVideo = self.format[format].media === 'video';
+				$.each(self.solutions, function(solutionPriority, solution) {
+					if(self[solution].support[format] && self._validString(media[format])) { // Format supported in solution and url given for format.
+						var isHtml = solution === 'html';
+						var isAurora = solution === 'aurora';
+
+						if(isVideo) {
+							if(isHtml) {
+								self.html.video.gate = true;
+								self._html_setVideo(media);
+								self.html.active = true;
+							} else {
+								self.flash.gate = true;
+								self._flash_setVideo(media);
+								self.flash.active = true;
+							}
+							if(self.css.jq.videoPlay.length) {
+								self.css.jq.videoPlay.show();
+							}
+							self.status.video = true;
+						} else {
+							if(isHtml) {
+								self.html.audio.gate = true;
+								self._html_setAudio(media);
+								self.html.active = true;
+
+								// Setup the Android Fix - Only for HTML audio.
+								if($.jPlayer.platform.android) {
+									self.androidFix.setMedia = true;
+								}
+							} else if(isAurora) {
+								self.aurora.gate = true;
+								self._aurora_setAudio(media);
+								self.aurora.active = true;
+							} else {
+								self.flash.gate = true;
+								self._flash_setAudio(media);
+								self.flash.active = true;
+							}
+							if(self.css.jq.videoPlay.length) {
+								self.css.jq.videoPlay.hide();
+							}
+							self.status.video = false;
+						}
+						
+						supported = true;
+						return false; // Exit $.each
+					}
+				});
+				if(supported) {
+					return false; // Exit $.each
+				}
+			});
+
+			if(supported) {
+				if(!(this.status.nativeVideoControls && this.html.video.gate)) {
+					// Set poster IMG if native video controls are not being used
+					// Note: With IE the IMG onload event occurs immediately when cached.
+					// Note: Poster hidden by default in _resetMedia()
+					if(this._validString(media.poster)) {
+						if(posterChanged) { // Since some browsers do not generate img onload event.
+							this.htmlElement.poster.src = media.poster;
+						} else {
+							this.internal.poster.jq.show();
+						}
+					}
+				}
+				if(typeof media.title === 'string') {
+					if(this.css.jq.title.length) {
+						this.css.jq.title.html(media.title);
+					}
+					if(this.htmlElement.audio) {
+						this.htmlElement.audio.setAttribute('title', media.title);
+					}
+					if(this.htmlElement.video) {
+						this.htmlElement.video.setAttribute('title', media.title);
+					}
+				}
+				this.status.srcSet = true;
+				this.status.media = $.extend({}, media);
+				this._updateButtons(false);
+				this._updateInterface();
+				this._trigger($.jPlayer.event.setmedia);
+			} else { // jPlayer cannot support any formats provided in this browser
+				// Send an error event
+				this._error( {
+					type: $.jPlayer.error.NO_SUPPORT,
+					context: "{supplied:'" + this.options.supplied + "'}",
+					message: $.jPlayer.errorMsg.NO_SUPPORT,
+					hint: $.jPlayer.errorHint.NO_SUPPORT
+				});
+			}
+		},
+		_resetMedia: function() {
+			this._resetStatus();
+			this._updateButtons(false);
+			this._updateInterface();
+			this._seeked();
+			this.internal.poster.jq.hide();
+
+			clearTimeout(this.internal.htmlDlyCmdId);
+
+			if(this.html.active) {
+				this._html_resetMedia();
+			} else if(this.aurora.active) {
+				this._aurora_resetMedia();
+			} else if(this.flash.active) {
+				this._flash_resetMedia();
+			}
+		},
+		clearMedia: function() {
+			this._resetMedia();
+
+			if(this.html.active) {
+				this._html_clearMedia();
+			} else if(this.aurora.active) {
+				this._aurora_clearMedia();
+			} else if(this.flash.active) {
+				this._flash_clearMedia();
+			}
+
+			this._resetGate();
+			this._resetActive();
+		},
+		load: function() {
+			if(this.status.srcSet) {
+				if(this.html.active) {
+					this._html_load();
+				} else if(this.aurora.active) {
+					this._aurora_load();
+				} else if(this.flash.active) {
+					this._flash_load();
+				}
+			} else {
+				this._urlNotSetError("load");
+			}
+		},
+		focus: function() {
+			if(this.options.keyEnabled) {
+				$.jPlayer.focus = this;
+			}
+		},
+		play: function(time) {
+			var guiAction = typeof time === "object"; // Flags GUI click events so we know this was not a direct command, but an action taken by the user on the GUI.
+			if(guiAction && this.options.useStateClassSkin && !this.status.paused) {
+				this.pause(time); // The time would be the click event, but passing it over so info is not lost.
+			} else {
+				time = (typeof time === "number") ? time : NaN; // Remove jQuery event from click handler
+				if(this.status.srcSet) {
+					this.focus();
+					if(this.html.active) {
+						this._html_play(time);
+					} else if(this.aurora.active) {
+						this._aurora_play(time);
+					} else if(this.flash.active) {
+						this._flash_play(time);
+					}
+				} else {
+					this._urlNotSetError("play");
+				}
+			}
+		},
+		videoPlay: function() { // Handles clicks on the play button over the video poster
+			this.play();
+		},
+		pause: function(time) {
+			time = (typeof time === "number") ? time : NaN; // Remove jQuery event from click handler
+			if(this.status.srcSet) {
+				if(this.html.active) {
+					this._html_pause(time);
+				} else if(this.aurora.active) {
+					this._aurora_pause(time);
+				} else if(this.flash.active) {
+					this._flash_pause(time);
+				}
+			} else {
+				this._urlNotSetError("pause");
+			}
+		},
+		tellOthers: function(command, conditions) {
+			var self = this,
+				hasConditions = typeof conditions === 'function',
+				args = Array.prototype.slice.call(arguments); // Convert arguments to an Array.
+
+			if(typeof command !== 'string') { // Ignore, since no command.
+				return; // Return undefined to maintain chaining.
+			}
+			if(hasConditions) {
+				args.splice(1, 1); // Remove the conditions from the arguments
+			}
+
+			$.jPlayer.prototype.destroyRemoved();
+			$.each(this.instances, function() {
+				// Remember that "this" is the instance's "element" in the $.each() loop.
+				if(self.element !== this) { // Do not tell my instance.
+					if(!hasConditions || conditions.call(this.data("jPlayer"), self)) {
+						this.jPlayer.apply(this, args);
+					}
+				}
+			});
+		},
+		pauseOthers: function(time) {
+			this.tellOthers("pause", function() {
+				// In the conditions function, the "this" context is the other instance's jPlayer object.
+				return this.status.srcSet;
+			}, time);
+		},
+		stop: function() {
+			if(this.status.srcSet) {
+				if(this.html.active) {
+					this._html_pause(0);
+				} else if(this.aurora.active) {
+					this._aurora_pause(0);
+				} else if(this.flash.active) {
+					this._flash_pause(0);
+				}
+			} else {
+				this._urlNotSetError("stop");
+			}
+		},
+		playHead: function(p) {
+			p = this._limitValue(p, 0, 100);
+			if(this.status.srcSet) {
+				if(this.html.active) {
+					this._html_playHead(p);
+				} else if(this.aurora.active) {
+					this._aurora_playHead(p);
+				} else if(this.flash.active) {
+					this._flash_playHead(p);
+				}
+			} else {
+				this._urlNotSetError("playHead");
+			}
+		},
+		_muted: function(muted) {
+			this.mutedWorker(muted);
+			if(this.options.globalVolume) {
+				this.tellOthers("mutedWorker", function() {
+					// Check the other instance has global volume enabled.
+					return this.options.globalVolume;
+				}, muted);
+			}
+		},
+		mutedWorker: function(muted) {
+			this.options.muted = muted;
+			if(this.html.used) {
+				this._html_setProperty('muted', muted);
+			}
+			if(this.aurora.used) {
+				this._aurora_mute(muted);
+			}
+			if(this.flash.used) {
+				this._flash_mute(muted);
+			}
+
+			// The HTML solution generates this event from the media element itself.
+			if(!this.html.video.gate && !this.html.audio.gate) {
+				this._updateMute(muted);
+				this._updateVolume(this.options.volume);
+				this._trigger($.jPlayer.event.volumechange);
+			}
+		},
+		mute: function(mute) { // mute is either: undefined (true), an event object (true) or a boolean (muted).
+			var guiAction = typeof mute === "object"; // Flags GUI click events so we know this was not a direct command, but an action taken by the user on the GUI.
+			if(guiAction && this.options.useStateClassSkin && this.options.muted) {
+				this._muted(false);
+			} else {
+				mute = mute === undefined ? true : !!mute;
+				this._muted(mute);
+			}
+		},
+		unmute: function(unmute) { // unmute is either: undefined (true), an event object (true) or a boolean (!muted).
+			unmute = unmute === undefined ? true : !!unmute;
+			this._muted(!unmute);
+		},
+		_updateMute: function(mute) {
+			if(mute === undefined) {
+				mute = this.options.muted;
+			}
+			if(mute) {
+				this.addStateClass('muted');
+			} else {
+				this.removeStateClass('muted');
+			}
+			if(this.css.jq.mute.length && this.css.jq.unmute.length) {
+				if(this.status.noVolume) {
+					this.css.jq.mute.hide();
+					this.css.jq.unmute.hide();
+				} else if(mute) {
+					this.css.jq.mute.hide();
+					this.css.jq.unmute.show();
+				} else {
+					this.css.jq.mute.show();
+					this.css.jq.unmute.hide();
+				}
+			}
+		},
+		volume: function(v) {
+			this.volumeWorker(v);
+			if(this.options.globalVolume) {
+				this.tellOthers("volumeWorker", function() {
+					// Check the other instance has global volume enabled.
+					return this.options.globalVolume;
+				}, v);
+			}
+		},
+		volumeWorker: function(v) {
+			v = this._limitValue(v, 0, 1);
+			this.options.volume = v;
+
+			if(this.html.used) {
+				this._html_setProperty('volume', v);
+			}
+			if(this.aurora.used) {
+				this._aurora_volume(v);
+			}
+			if(this.flash.used) {
+				this._flash_volume(v);
+			}
+
+			// The HTML solution generates this event from the media element itself.
+			if(!this.html.video.gate && !this.html.audio.gate) {
+				this._updateVolume(v);
+				this._trigger($.jPlayer.event.volumechange);
+			}
+		},
+		volumeBar: function(e) { // Handles clicks on the volumeBar
+			if(this.css.jq.volumeBar.length) {
+				// Using $(e.currentTarget) to enable multiple volume bars
+				var $bar = $(e.currentTarget),
+					offset = $bar.offset(),
+					x = e.pageX - offset.left,
+					w = $bar.width(),
+					y = $bar.height() - e.pageY + offset.top,
+					h = $bar.height();
+				if(this.options.verticalVolume) {
+					this.volume(y/h);
+				} else {
+					this.volume(x/w);
+				}
+			}
+			if(this.options.muted) {
+				this._muted(false);
+			}
+		},
+		_updateVolume: function(v) {
+			if(v === undefined) {
+				v = this.options.volume;
+			}
+			v = this.options.muted ? 0 : v;
+
+			if(this.status.noVolume) {
+				this.addStateClass('noVolume');
+				if(this.css.jq.volumeBar.length) {
+					this.css.jq.volumeBar.hide();
+				}
+				if(this.css.jq.volumeBarValue.length) {
+					this.css.jq.volumeBarValue.hide();
+				}
+				if(this.css.jq.volumeMax.length) {
+					this.css.jq.volumeMax.hide();
+				}
+			} else {
+				this.removeStateClass('noVolume');
+				if(this.css.jq.volumeBar.length) {
+					this.css.jq.volumeBar.show();
+				}
+				if(this.css.jq.volumeBarValue.length) {
+					this.css.jq.volumeBarValue.show();
+					this.css.jq.volumeBarValue[this.options.verticalVolume ? "height" : "width"]((v*100)+"%");
+				}
+				if(this.css.jq.volumeMax.length) {
+					this.css.jq.volumeMax.show();
+				}
+			}
+		},
+		volumeMax: function() { // Handles clicks on the volume max
+			this.volume(1);
+			if(this.options.muted) {
+				this._muted(false);
+			}
+		},
+		_cssSelectorAncestor: function(ancestor) {
+			var self = this;
+			this.options.cssSelectorAncestor = ancestor;
+			this._removeUiClass();
+			this.ancestorJq = ancestor ? $(ancestor) : []; // Would use $() instead of [], but it is only 1.4+
+			if(ancestor && this.ancestorJq.length !== 1) { // So empty strings do not generate the warning.
+				this._warning( {
+					type: $.jPlayer.warning.CSS_SELECTOR_COUNT,
+					context: ancestor,
+					message: $.jPlayer.warningMsg.CSS_SELECTOR_COUNT + this.ancestorJq.length + " found for cssSelectorAncestor.",
+					hint: $.jPlayer.warningHint.CSS_SELECTOR_COUNT
+				});
+			}
+			this._addUiClass();
+			$.each(this.options.cssSelector, function(fn, cssSel) {
+				self._cssSelector(fn, cssSel);
+			});
+
+			// Set the GUI to the current state.
+			this._updateInterface();
+			this._updateButtons();
+			this._updateAutohide();
+			this._updateVolume();
+			this._updateMute();
+		},
+		_cssSelector: function(fn, cssSel) {
+			var self = this;
+			if(typeof cssSel === 'string') {
+				if($.jPlayer.prototype.options.cssSelector[fn]) {
+					if(this.css.jq[fn] && this.css.jq[fn].length) {
+						this.css.jq[fn].unbind(".jPlayer");
+					}
+					this.options.cssSelector[fn] = cssSel;
+					this.css.cs[fn] = this.options.cssSelectorAncestor + " " + cssSel;
+
+					if(cssSel) { // Checks for empty string
+						this.css.jq[fn] = $(this.css.cs[fn]);
+					} else {
+						this.css.jq[fn] = []; // To comply with the css.jq[fn].length check before its use. As of jQuery 1.4 could have used $() for an empty set. 
+					}
+
+					if(this.css.jq[fn].length && this[fn]) {
+						var handler = function(e) {
+							e.preventDefault();
+							self[fn](e);
+							if(self.options.autoBlur) {
+								$(this).blur();
+							} else {
+								$(this).focus(); // Force focus for ARIA.
+							}
+						};
+						this.css.jq[fn].bind("click.jPlayer", handler); // Using jPlayer namespace
+					}
+
+					if(cssSel && this.css.jq[fn].length !== 1) { // So empty strings do not generate the warning. ie., they just remove the old one.
+						this._warning( {
+							type: $.jPlayer.warning.CSS_SELECTOR_COUNT,
+							context: this.css.cs[fn],
+							message: $.jPlayer.warningMsg.CSS_SELECTOR_COUNT + this.css.jq[fn].length + " found for " + fn + " method.",
+							hint: $.jPlayer.warningHint.CSS_SELECTOR_COUNT
+						});
+					}
+				} else {
+					this._warning( {
+						type: $.jPlayer.warning.CSS_SELECTOR_METHOD,
+						context: fn,
+						message: $.jPlayer.warningMsg.CSS_SELECTOR_METHOD,
+						hint: $.jPlayer.warningHint.CSS_SELECTOR_METHOD
+					});
+				}
+			} else {
+				this._warning( {
+					type: $.jPlayer.warning.CSS_SELECTOR_STRING,
+					context: cssSel,
+					message: $.jPlayer.warningMsg.CSS_SELECTOR_STRING,
+					hint: $.jPlayer.warningHint.CSS_SELECTOR_STRING
+				});
+			}
+		},
+		duration: function(e) {
+			if(this.options.toggleDuration) {
+				if(this.options.captureDuration) {
+					e.stopPropagation();
+				}
+				this._setOption("remainingDuration", !this.options.remainingDuration);
+			}
+		},
+		seekBar: function(e) { // Handles clicks on the seekBar
+			if(this.css.jq.seekBar.length) {
+				// Using $(e.currentTarget) to enable multiple seek bars
+				var $bar = $(e.currentTarget),
+					offset = $bar.offset(),
+					x = e.pageX - offset.left,
+					w = $bar.width(),
+					p = 100 * x / w;
+				this.playHead(p);
+			}
+		},
+		playbackRate: function(pbr) {
+			this._setOption("playbackRate", pbr);
+		},
+		playbackRateBar: function(e) { // Handles clicks on the playbackRateBar
+			if(this.css.jq.playbackRateBar.length) {
+				// Using $(e.currentTarget) to enable multiple playbackRate bars
+				var $bar = $(e.currentTarget),
+					offset = $bar.offset(),
+					x = e.pageX - offset.left,
+					w = $bar.width(),
+					y = $bar.height() - e.pageY + offset.top,
+					h = $bar.height(),
+					ratio, pbr;
+				if(this.options.verticalPlaybackRate) {
+					ratio = y/h;
+				} else {
+					ratio = x/w;
+				}
+				pbr = ratio * (this.options.maxPlaybackRate - this.options.minPlaybackRate) + this.options.minPlaybackRate;
+				this.playbackRate(pbr);
+			}
+		},
+		_updatePlaybackRate: function() {
+			var pbr = this.options.playbackRate,
+				ratio = (pbr - this.options.minPlaybackRate) / (this.options.maxPlaybackRate - this.options.minPlaybackRate);
+			if(this.status.playbackRateEnabled) {
+				if(this.css.jq.playbackRateBar.length) {
+					this.css.jq.playbackRateBar.show();
+				}
+				if(this.css.jq.playbackRateBarValue.length) {
+					this.css.jq.playbackRateBarValue.show();
+					this.css.jq.playbackRateBarValue[this.options.verticalPlaybackRate ? "height" : "width"]((ratio*100)+"%");
+				}
+			} else {
+				if(this.css.jq.playbackRateBar.length) {
+					this.css.jq.playbackRateBar.hide();
+				}
+				if(this.css.jq.playbackRateBarValue.length) {
+					this.css.jq.playbackRateBarValue.hide();
+				}
+			}
+		},
+		repeat: function(event) { // Handle clicks on the repeat button
+			var guiAction = typeof event === "object"; // Flags GUI click events so we know this was not a direct command, but an action taken by the user on the GUI.
+			if(guiAction && this.options.useStateClassSkin && this.options.loop) {
+				this._loop(false);
+			} else {
+				this._loop(true);
+			}
+		},
+		repeatOff: function() { // Handle clicks on the repeatOff button
+			this._loop(false);
+		},
+		_loop: function(loop) {
+			if(this.options.loop !== loop) {
+				this.options.loop = loop;
+				this._updateButtons();
+				this._trigger($.jPlayer.event.repeat);
+			}
+		},
+
+		// Options code adapted from ui.widget.js (1.8.7).  Made changes so the key can use dot notation. To match previous getData solution in jPlayer 1.
+		option: function(key, value) {
+			var options = key;
+
+			 // Enables use: options().  Returns a copy of options object
+			if ( arguments.length === 0 ) {
+				return $.extend( true, {}, this.options );
+			}
+
+			if(typeof key === "string") {
+				var keys = key.split(".");
+
+				 // Enables use: options("someOption")  Returns a copy of the option. Supports dot notation.
+				if(value === undefined) {
+
+					var opt = $.extend(true, {}, this.options);
+					for(var i = 0; i < keys.length; i++) {
+						if(opt[keys[i]] !== undefined) {
+							opt = opt[keys[i]];
+						} else {
+							this._warning( {
+								type: $.jPlayer.warning.OPTION_KEY,
+								context: key,
+								message: $.jPlayer.warningMsg.OPTION_KEY,
+								hint: $.jPlayer.warningHint.OPTION_KEY
+							});
+							return undefined;
+						}
+					}
+					return opt;
+				}
+
+				 // Enables use: options("someOptionObject", someObject}).  Creates: {someOptionObject:someObject}
+				 // Enables use: options("someOption", someValue).  Creates: {someOption:someValue}
+				 // Enables use: options("someOptionObject.someOption", someValue).  Creates: {someOptionObject:{someOption:someValue}}
+
+				options = {};
+				var opts = options;
+
+				for(var j = 0; j < keys.length; j++) {
+					if(j < keys.length - 1) {
+						opts[keys[j]] = {};
+						opts = opts[keys[j]];
+					} else {
+						opts[keys[j]] = value;
+					}
+				}
+			}
+
+			 // Otherwise enables use: options(optionObject).  Uses original object (the key)
+
+			this._setOptions(options);
+
+			return this;
+		},
+		_setOptions: function(options) {
+			var self = this;
+			$.each(options, function(key, value) { // This supports the 2 level depth that the options of jPlayer has. Would review if we ever need more depth.
+				self._setOption(key, value);
+			});
+
+			return this;
+		},
+		_setOption: function(key, value) {
+			var self = this;
+
+			// The ability to set options is limited at this time.
+
+			switch(key) {
+				case "volume" :
+					this.volume(value);
+					break;
+				case "muted" :
+					this._muted(value);
+					break;
+				case "globalVolume" :
+					this.options[key] = value;
+					break;
+				case "cssSelectorAncestor" :
+					this._cssSelectorAncestor(value); // Set and refresh all associations for the new ancestor.
+					break;
+				case "cssSelector" :
+					$.each(value, function(fn, cssSel) {
+						self._cssSelector(fn, cssSel); // NB: The option is set inside this function, after further validity checks.
+					});
+					break;
+				case "playbackRate" :
+					this.options[key] = value = this._limitValue(value, this.options.minPlaybackRate, this.options.maxPlaybackRate);
+					if(this.html.used) {
+						this._html_setProperty('playbackRate', value);
+					}
+					this._updatePlaybackRate();
+					break;
+				case "defaultPlaybackRate" :
+					this.options[key] = value = this._limitValue(value, this.options.minPlaybackRate, this.options.maxPlaybackRate);
+					if(this.html.used) {
+						this._html_setProperty('defaultPlaybackRate', value);
+					}
+					this._updatePlaybackRate();
+					break;
+				case "minPlaybackRate" :
+					this.options[key] = value = this._limitValue(value, 0.1, this.options.maxPlaybackRate - 0.1);
+					this._updatePlaybackRate();
+					break;
+				case "maxPlaybackRate" :
+					this.options[key] = value = this._limitValue(value, this.options.minPlaybackRate + 0.1, 16);
+					this._updatePlaybackRate();
+					break;
+				case "fullScreen" :
+					if(this.options[key] !== value) { // if changed
+						var wkv = $.jPlayer.nativeFeatures.fullscreen.used.webkitVideo;
+						if(!wkv || wkv && !this.status.waitForPlay) {
+							if(!wkv) { // No sensible way to unset option on these devices.
+								this.options[key] = value;
+							}
+							if(value) {
+								this._requestFullscreen();
+							} else {
+								this._exitFullscreen();
+							}
+							if(!wkv) {
+								this._setOption("fullWindow", value);
+							}
+						}
+					}
+					break;
+				case "fullWindow" :
+					if(this.options[key] !== value) { // if changed
+						this._removeUiClass();
+						this.options[key] = value;
+						this._refreshSize();
+					}
+					break;
+				case "size" :
+					if(!this.options.fullWindow && this.options[key].cssClass !== value.cssClass) {
+						this._removeUiClass();
+					}
+					this.options[key] = $.extend({}, this.options[key], value); // store a merged copy of it, incase not all properties changed.
+					this._refreshSize();
+					break;
+				case "sizeFull" :
+					if(this.options.fullWindow && this.options[key].cssClass !== value.cssClass) {
+						this._removeUiClass();
+					}
+					this.options[key] = $.extend({}, this.options[key], value); // store a merged copy of it, incase not all properties changed.
+					this._refreshSize();
+					break;
+				case "autohide" :
+					this.options[key] = $.extend({}, this.options[key], value); // store a merged copy of it, incase not all properties changed.
+					this._updateAutohide();
+					break;
+				case "loop" :
+					this._loop(value);
+					break;
+				case "remainingDuration" :
+					this.options[key] = value;
+					this._updateInterface();
+					break;
+				case "toggleDuration" :
+					this.options[key] = value;
+					break;
+				case "nativeVideoControls" :
+					this.options[key] = $.extend({}, this.options[key], value); // store a merged copy of it, incase not all properties changed.
+					this.status.nativeVideoControls = this._uaBlocklist(this.options.nativeVideoControls);
+					this._restrictNativeVideoControls();
+					this._updateNativeVideoControls();
+					break;
+				case "noFullWindow" :
+					this.options[key] = $.extend({}, this.options[key], value); // store a merged copy of it, incase not all properties changed.
+					this.status.nativeVideoControls = this._uaBlocklist(this.options.nativeVideoControls); // Need to check again as noFullWindow can depend on this flag and the restrict() can override it.
+					this.status.noFullWindow = this._uaBlocklist(this.options.noFullWindow);
+					this._restrictNativeVideoControls();
+					this._updateButtons();
+					break;
+				case "noVolume" :
+					this.options[key] = $.extend({}, this.options[key], value); // store a merged copy of it, incase not all properties changed.
+					this.status.noVolume = this._uaBlocklist(this.options.noVolume);
+					this._updateVolume();
+					this._updateMute();
+					break;
+				case "emulateHtml" :
+					if(this.options[key] !== value) { // To avoid multiple event handlers being created, if true already.
+						this.options[key] = value;
+						if(value) {
+							this._emulateHtmlBridge();
+						} else {
+							this._destroyHtmlBridge();
+						}
+					}
+					break;
+				case "timeFormat" :
+					this.options[key] = $.extend({}, this.options[key], value); // store a merged copy of it, incase not all properties changed.
+					break;
+				case "keyEnabled" :
+					this.options[key] = value;
+					if(!value && this === $.jPlayer.focus) {
+						$.jPlayer.focus = null;
+					}
+					break;
+				case "keyBindings" :
+					this.options[key] = $.extend(true, {}, this.options[key], value); // store a merged DEEP copy of it, incase not all properties changed.
+					break;
+				case "audioFullScreen" :
+					this.options[key] = value;
+					break;
+				case "autoBlur" :
+					this.options[key] = value;
+					break;
+			}
+
+			return this;
+		},
+		// End of: (Options code adapted from ui.widget.js)
+
+		_refreshSize: function() {
+			this._setSize(); // update status and jPlayer element size
+			this._addUiClass(); // update the ui class
+			this._updateSize(); // update internal sizes
+			this._updateButtons();
+			this._updateAutohide();
+			this._trigger($.jPlayer.event.resize);
+		},
+		_setSize: function() {
+			// Determine the current size from the options
+			if(this.options.fullWindow) {
+				this.status.width = this.options.sizeFull.width;
+				this.status.height = this.options.sizeFull.height;
+				this.status.cssClass = this.options.sizeFull.cssClass;
+			} else {
+				this.status.width = this.options.size.width;
+				this.status.height = this.options.size.height;
+				this.status.cssClass = this.options.size.cssClass;
+			}
+
+			// Set the size of the jPlayer area.
+			this.element.css({'width': this.status.width, 'height': this.status.height});
+		},
+		_addUiClass: function() {
+			if(this.ancestorJq.length) {
+				this.ancestorJq.addClass(this.status.cssClass);
+			}
+		},
+		_removeUiClass: function() {
+			if(this.ancestorJq.length) {
+				this.ancestorJq.removeClass(this.status.cssClass);
+			}
+		},
+		_updateSize: function() {
+			// The poster uses show/hide so can simply resize it.
+			this.internal.poster.jq.css({'width': this.status.width, 'height': this.status.height});
+
+			// Video html or flash resized if necessary at this time, or if native video controls being used.
+			if(!this.status.waitForPlay && this.html.active && this.status.video || this.html.video.available && this.html.used && this.status.nativeVideoControls) {
+				this.internal.video.jq.css({'width': this.status.width, 'height': this.status.height});
+			}
+			else if(!this.status.waitForPlay && this.flash.active && this.status.video) {
+				this.internal.flash.jq.css({'width': this.status.width, 'height': this.status.height});
+			}
+		},
+		_updateAutohide: function() {
+			var	self = this,
+				event = "mousemove.jPlayer",
+				namespace = ".jPlayerAutohide",
+				eventType = event + namespace,
+				handler = function(event) {
+					var moved = false,
+						deltaX, deltaY;
+					if(typeof self.internal.mouse !== "undefined") {
+						//get the change from last position to this position
+						deltaX = self.internal.mouse.x - event.pageX;
+						deltaY = self.internal.mouse.y - event.pageY;
+						moved = (Math.floor(deltaX) > 0) || (Math.floor(deltaY)>0); 
+					} else {
+						moved = true;
+					}
+					// store current position for next method execution
+					self.internal.mouse = {
+							x : event.pageX,
+							y : event.pageY
+					};
+					// if mouse has been actually moved, do the gui fadeIn/fadeOut
+					if (moved) {
+						self.css.jq.gui.fadeIn(self.options.autohide.fadeIn, function() {
+							clearTimeout(self.internal.autohideId);
+							self.internal.autohideId = setTimeout( function() {
+								self.css.jq.gui.fadeOut(self.options.autohide.fadeOut);
+							}, self.options.autohide.hold);
+						});
+					}
+				};
+
+			if(this.css.jq.gui.length) {
+
+				// End animations first so that its callback is executed now.
+				// Otherwise an in progress fadeIn animation still has the callback to fadeOut again.
+				this.css.jq.gui.stop(true, true);
+
+				// Removes the fadeOut operation from the fadeIn callback.
+				clearTimeout(this.internal.autohideId);
+				// undefine mouse
+				delete this.internal.mouse;
+
+				this.element.unbind(namespace);
+				this.css.jq.gui.unbind(namespace);
+
+				if(!this.status.nativeVideoControls) {
+					if(this.options.fullWindow && this.options.autohide.full || !this.options.fullWindow && this.options.autohide.restored) {
+						this.element.bind(eventType, handler);
+						this.css.jq.gui.bind(eventType, handler);
+						this.css.jq.gui.hide();
+					} else {
+						this.css.jq.gui.show();
+					}
+				} else {
+					this.css.jq.gui.hide();
+				}
+			}
+		},
+		fullScreen: function(event) {
+			var guiAction = typeof event === "object"; // Flags GUI click events so we know this was not a direct command, but an action taken by the user on the GUI.
+			if(guiAction && this.options.useStateClassSkin && this.options.fullScreen) {
+				this._setOption("fullScreen", false);
+			} else {
+				this._setOption("fullScreen", true);
+			}
+		},
+		restoreScreen: function() {
+			this._setOption("fullScreen", false);
+		},
+		_fullscreenAddEventListeners: function() {
+			var self = this,
+				fs = $.jPlayer.nativeFeatures.fullscreen;
+
+			if(fs.api.fullscreenEnabled) {
+				if(fs.event.fullscreenchange) {
+					// Create the event handler function and store it for removal.
+					if(typeof this.internal.fullscreenchangeHandler !== 'function') {
+						this.internal.fullscreenchangeHandler = function() {
+							self._fullscreenchange();
+						};
+					}
+					document.addEventListener(fs.event.fullscreenchange, this.internal.fullscreenchangeHandler, false);
+				}
+				// No point creating handler for fullscreenerror.
+				// Either logic avoids fullscreen occurring (w3c/moz), or their is no event on the browser (webkit).
+			}
+		},
+		_fullscreenRemoveEventListeners: function() {
+			var fs = $.jPlayer.nativeFeatures.fullscreen;
+			if(this.internal.fullscreenchangeHandler) {
+				document.removeEventListener(fs.event.fullscreenchange, this.internal.fullscreenchangeHandler, false);
+			}
+		},
+		_fullscreenchange: function() {
+			// If nothing is fullscreen, then we cannot be in fullscreen mode.
+			if(this.options.fullScreen && !$.jPlayer.nativeFeatures.fullscreen.api.fullscreenElement()) {
+				this._setOption("fullScreen", false);
+			}
+		},
+		_requestFullscreen: function() {
+			// Either the container or the jPlayer div
+			var e = this.ancestorJq.length ? this.ancestorJq[0] : this.element[0],
+				fs = $.jPlayer.nativeFeatures.fullscreen;
+
+			// This method needs the video element. For iOS and Android.
+			if(fs.used.webkitVideo) {
+				e = this.htmlElement.video;
+			}
+
+			if(fs.api.fullscreenEnabled) {
+				fs.api.requestFullscreen(e);
+			}
+		},
+		_exitFullscreen: function() {
+
+			var fs = $.jPlayer.nativeFeatures.fullscreen,
+				e;
+
+			// This method needs the video element. For iOS and Android.
+			if(fs.used.webkitVideo) {
+				e = this.htmlElement.video;
+			}
+
+			if(fs.api.fullscreenEnabled) {
+				fs.api.exitFullscreen(e);
+			}
+		},
+		_html_initMedia: function(media) {
+			// Remove any existing track elements
+			var $media = $(this.htmlElement.media).empty();
+
+			// Create any track elements given with the media, as an Array of track Objects.
+			$.each(media.track || [], function(i,v) {
+				var track = document.createElement('track');
+				track.setAttribute("kind", v.kind ? v.kind : "");
+				track.setAttribute("src", v.src ? v.src : "");
+				track.setAttribute("srclang", v.srclang ? v.srclang : "");
+				track.setAttribute("label", v.label ? v.label : "");
+				if(v.def) {
+					track.setAttribute("default", v.def);
+				}
+				$media.append(track);
+			});
+
+			this.htmlElement.media.src = this.status.src;
+
+			if(this.options.preload !== 'none') {
+				this._html_load(); // See function for comments
+			}
+			this._trigger($.jPlayer.event.timeupdate); // The flash generates this event for its solution.
+		},
+		_html_setFormat: function(media) {
+			var self = this;
+			// Always finds a format due to checks in setMedia()
+			$.each(this.formats, function(priority, format) {
+				if(self.html.support[format] && media[format]) {
+					self.status.src = media[format];
+					self.status.format[format] = true;
+					self.status.formatType = format;
+					return false;
+				}
+			});
+		},
+		_html_setAudio: function(media) {
+			this._html_setFormat(media);
+			this.htmlElement.media = this.htmlElement.audio;
+			this._html_initMedia(media);
+		},
+		_html_setVideo: function(media) {
+			this._html_setFormat(media);
+			if(this.status.nativeVideoControls) {
+				this.htmlElement.video.poster = this._validString(media.poster) ? media.poster : "";
+			}
+			this.htmlElement.media = this.htmlElement.video;
+			this._html_initMedia(media);
+		},
+		_html_resetMedia: function() {
+			if(this.htmlElement.media) {
+				if(this.htmlElement.media.id === this.internal.video.id && !this.status.nativeVideoControls) {
+					this.internal.video.jq.css({'width':'0px', 'height':'0px'});
+				}
+				this.htmlElement.media.pause();
+			}
+		},
+		_html_clearMedia: function() {
+			if(this.htmlElement.media) {
+				this.htmlElement.media.src = "about:blank";
+				// The following load() is only required for Firefox 3.6 (PowerMacs).
+				// Recent HTMl5 browsers only require the src change. Due to changes in W3C spec and load() effect.
+				this.htmlElement.media.load(); // Stops an old, "in progress" download from continuing the download. Triggers the loadstart, error and emptied events, due to the empty src. Also an abort event if a download was in progress.
+			}
+		},
+		_html_load: function() {
+			// This function remains to allow the early HTML5 browsers to work, such as Firefox 3.6
+			// A change in the W3C spec for the media.load() command means that this is no longer necessary.
+			// This command should be removed and actually causes minor undesirable effects on some browsers. Such as loading the whole file and not only the metadata.
+			if(this.status.waitForLoad) {
+				this.status.waitForLoad = false;
+				this.htmlElement.media.load();
+			}
+			clearTimeout(this.internal.htmlDlyCmdId);
+		},
+		_html_play: function(time) {
+			var self = this,
+				media = this.htmlElement.media;
+
+			this.androidFix.pause = false; // Cancel the pause fix.
+
+			this._html_load(); // Loads if required and clears any delayed commands.
+
+			// Setup the Android Fix.
+			if(this.androidFix.setMedia) {
+				this.androidFix.play = true;
+				this.androidFix.time = time;
+
+			} else if(!isNaN(time)) {
+
+				// Attempt to play it, since iOS has been ignoring commands
+				if(this.internal.cmdsIgnored) {
+					media.play();
+				}
+
+				try {
+					// !media.seekable is for old HTML5 browsers, like Firefox 3.6.
+					// Checking seekable.length is important for iOS6 to work with setMedia().play(time)
+					if(!media.seekable || typeof media.seekable === "object" && media.seekable.length > 0) {
+						media.currentTime = time;
+						media.play();
+					} else {
+						throw 1;
+					}
+				} catch(err) {
+					this.internal.htmlDlyCmdId = setTimeout(function() {
+						self.play(time);
+					}, 250);
+					return; // Cancel execution and wait for the delayed command.
+				}
+			} else {
+				media.play();
+			}
+			this._html_checkWaitForPlay();
+		},
+		_html_pause: function(time) {
+			var self = this,
+				media = this.htmlElement.media;
+
+			this.androidFix.play = false; // Cancel the play fix.
+
+			if(time > 0) { // We do not want the stop() command, which does pause(0), causing a load operation.
+				this._html_load(); // Loads if required and clears any delayed commands.
+			} else {
+				clearTimeout(this.internal.htmlDlyCmdId);
+			}
+
+			// Order of these commands is important for Safari (Win) and IE9. Pause then change currentTime.
+			media.pause();
+
+			// Setup the Android Fix.
+			if(this.androidFix.setMedia) {
+				this.androidFix.pause = true;
+				this.androidFix.time = time;
+
+			} else if(!isNaN(time)) {
+				try {
+					if(!media.seekable || typeof media.seekable === "object" && media.seekable.length > 0) {
+						media.currentTime = time;
+					} else {
+						throw 1;
+					}
+				} catch(err) {
+					this.internal.htmlDlyCmdId = setTimeout(function() {
+						self.pause(time);
+					}, 250);
+					return; // Cancel execution and wait for the delayed command.
+				}
+			}
+			if(time > 0) { // Avoids a setMedia() followed by stop() or pause(0) hiding the video play button.
+				this._html_checkWaitForPlay();
+			}
+		},
+		_html_playHead: function(percent) {
+			var self = this,
+				media = this.htmlElement.media;
+
+			this._html_load(); // Loads if required and clears any delayed commands.
+
+			// This playHead() method needs a refactor to apply the android fix.
+
+			try {
+				if(typeof media.seekable === "object" && media.seekable.length > 0) {
+					media.currentTime = percent * media.seekable.end(media.seekable.length-1) / 100;
+				} else if(media.duration > 0 && !isNaN(media.duration)) {
+					media.currentTime = percent * media.duration / 100;
+				} else {
+					throw "e";
+				}
+			} catch(err) {
+				this.internal.htmlDlyCmdId = setTimeout(function() {
+					self.playHead(percent);
+				}, 250);
+				return; // Cancel execution and wait for the delayed command.
+			}
+			if(!this.status.waitForLoad) {
+				this._html_checkWaitForPlay();
+			}
+		},
+		_html_checkWaitForPlay: function() {
+			if(this.status.waitForPlay) {
+				this.status.waitForPlay = false;
+				if(this.css.jq.videoPlay.length) {
+					this.css.jq.videoPlay.hide();
+				}
+				if(this.status.video) {
+					this.internal.poster.jq.hide();
+					this.internal.video.jq.css({'width': this.status.width, 'height': this.status.height});
+				}
+			}
+		},
+		_html_setProperty: function(property, value) {
+			if(this.html.audio.available) {
+				this.htmlElement.audio[property] = value;
+			}
+			if(this.html.video.available) {
+				this.htmlElement.video[property] = value;
+			}
+		},
+		_aurora_setAudio: function(media) {
+			var self = this;            
+			
+			// Always finds a format due to checks in setMedia()
+			$.each(this.formats, function(priority, format) {
+				if(self.aurora.support[format] && media[format]) {
+					self.status.src = media[format];
+					self.status.format[format] = true;
+					self.status.formatType = format;
+			
+					return false;
+				}
+			});
+			
+			this.aurora.player = new AV.Player.fromURL(this.status.src);
+			this._addAuroraEventListeners(this.aurora.player, this.aurora);
+
+			if(this.options.preload === 'auto') {
+				this._aurora_load();
+				this.status.waitForLoad = false;
+			}
+		},
+		_aurora_resetMedia: function() {
+			if (this.aurora.player) {
+				this.aurora.player.stop();
+			}
+		},
+		_aurora_clearMedia: function() {
+			// Nothing to clear.
+		},
+		_aurora_load: function() {
+			if(this.status.waitForLoad) {
+				this.status.waitForLoad = false;
+				this.aurora.player.preload();
+			}
+		},
+		_aurora_play: function(time) {
+			if (!this.status.waitForLoad) {
+				if (!isNaN(time)) {
+					this.aurora.player.seek(time);
+				}
+			}
+			if (!this.aurora.player.playing) {
+				this.aurora.player.play();
+			}
+			this.status.waitForLoad = false;
+			this._aurora_checkWaitForPlay();
+			
+			// No event from the player, update UI now.
+			this._updateButtons(true);
+			this._trigger($.jPlayer.event.play);
+		},
+		_aurora_pause: function(time) {
+			if (!isNaN(time)) {
+				this.aurora.player.seek(time * 1000);
+			}
+			this.aurora.player.pause();
+			
+			if(time > 0) { // Avoids a setMedia() followed by stop() or pause(0) hiding the video play button.
+				this._aurora_checkWaitForPlay();
+			}
+			
+			// No event from the player, update UI now.
+			this._updateButtons(false);
+			this._trigger($.jPlayer.event.pause);
+		},
+		_aurora_playHead: function(percent) {
+			if(this.aurora.player.duration > 0) {
+				// The seek() sould be in milliseconds, but the only codec that works with seek (aac.js) uses seconds.
+				this.aurora.player.seek(percent * this.aurora.player.duration / 100); // Using seconds
+			}
+				
+			if(!this.status.waitForLoad) {
+				this._aurora_checkWaitForPlay();
+			}
+		},
+		_aurora_checkWaitForPlay: function() {
+			if(this.status.waitForPlay) {
+				this.status.waitForPlay = false;
+			}
+		},
+		_aurora_volume: function(v) {
+			this.aurora.player.volume = v * 100;
+		},
+		_aurora_mute: function(m) {
+			if (m) {
+				this.aurora.properties.lastvolume = this.aurora.player.volume;
+				this.aurora.player.volume = 0;
+			} else {
+				this.aurora.player.volume = this.aurora.properties.lastvolume;
+			}
+			this.aurora.properties.muted = m;
+		},
+		_flash_setAudio: function(media) {
+			var self = this;
+			try {
+				// Always finds a format due to checks in setMedia()
+				$.each(this.formats, function(priority, format) {
+					if(self.flash.support[format] && media[format]) {
+						switch (format) {
+							case "m4a" :
+							case "fla" :
+								self._getMovie().fl_setAudio_m4a(media[format]);
+								break;
+							case "mp3" :
+								self._getMovie().fl_setAudio_mp3(media[format]);
+								break;
+							case "rtmpa":
+								self._getMovie().fl_setAudio_rtmp(media[format]);
+								break;
+						}
+						self.status.src = media[format];
+						self.status.format[format] = true;
+						self.status.formatType = format;
+						return false;
+					}
+				});
+
+				if(this.options.preload === 'auto') {
+					this._flash_load();
+					this.status.waitForLoad = false;
+				}
+			} catch(err) { this._flashError(err); }
+		},
+		_flash_setVideo: function(media) {
+			var self = this;
+			try {
+				// Always finds a format due to checks in setMedia()
+				$.each(this.formats, function(priority, format) {
+					if(self.flash.support[format] && media[format]) {
+						switch (format) {
+							case "m4v" :
+							case "flv" :
+								self._getMovie().fl_setVideo_m4v(media[format]);
+								break;
+							case "rtmpv":
+								self._getMovie().fl_setVideo_rtmp(media[format]);
+								break;		
+						}
+						self.status.src = media[format];
+						self.status.format[format] = true;
+						self.status.formatType = format;
+						return false;
+					}
+				});
+
+				if(this.options.preload === 'auto') {
+					this._flash_load();
+					this.status.waitForLoad = false;
+				}
+			} catch(err) { this._flashError(err); }
+		},
+		_flash_resetMedia: function() {
+			this.internal.flash.jq.css({'width':'0px', 'height':'0px'}); // Must do via CSS as setting attr() to zero causes a jQuery error in IE.
+			this._flash_pause(NaN);
+		},
+		_flash_clearMedia: function() {
+			try {
+				this._getMovie().fl_clearMedia();
+			} catch(err) { this._flashError(err); }
+		},
+		_flash_load: function() {
+			try {
+				this._getMovie().fl_load();
+			} catch(err) { this._flashError(err); }
+			this.status.waitForLoad = false;
+		},
+		_flash_play: function(time) {
+			try {
+				this._getMovie().fl_play(time);
+			} catch(err) { this._flashError(err); }
+			this.status.waitForLoad = false;
+			this._flash_checkWaitForPlay();
+		},
+		_flash_pause: function(time) {
+			try {
+				this._getMovie().fl_pause(time);
+			} catch(err) { this._flashError(err); }
+			if(time > 0) { // Avoids a setMedia() followed by stop() or pause(0) hiding the video play button.
+				this.status.waitForLoad = false;
+				this._flash_checkWaitForPlay();
+			}
+		},
+		_flash_playHead: function(p) {
+			try {
+				this._getMovie().fl_play_head(p);
+			} catch(err) { this._flashError(err); }
+			if(!this.status.waitForLoad) {
+				this._flash_checkWaitForPlay();
+			}
+		},
+		_flash_checkWaitForPlay: function() {
+			if(this.status.waitForPlay) {
+				this.status.waitForPlay = false;
+				if(this.css.jq.videoPlay.length) {
+					this.css.jq.videoPlay.hide();
+				}
+				if(this.status.video) {
+					this.internal.poster.jq.hide();
+					this.internal.flash.jq.css({'width': this.status.width, 'height': this.status.height});
+				}
+			}
+		},
+		_flash_volume: function(v) {
+			try {
+				this._getMovie().fl_volume(v);
+			} catch(err) { this._flashError(err); }
+		},
+		_flash_mute: function(m) {
+			try {
+				this._getMovie().fl_mute(m);
+			} catch(err) { this._flashError(err); }
+		},
+		_getMovie: function() {
+			return document[this.internal.flash.id];
+		},
+		_getFlashPluginVersion: function() {
+
+			// _getFlashPluginVersion() code influenced by:
+			// - FlashReplace 1.01: http://code.google.com/p/flashreplace/
+			// - SWFObject 2.2: http://code.google.com/p/swfobject/
+
+			var version = 0,
+				flash;
+			if(window.ActiveXObject) {
+				try {
+					flash = new ActiveXObject("ShockwaveFlash.ShockwaveFlash");
+					if (flash) { // flash will return null when ActiveX is disabled
+						var v = flash.GetVariable("$version");
+						if(v) {
+							v = v.split(" ")[1].split(",");
+							version = parseInt(v[0], 10) + "." + parseInt(v[1], 10);
+						}
+					}
+				} catch(e) {}
+			}
+			else if(navigator.plugins && navigator.mimeTypes.length > 0) {
+				flash = navigator.plugins["Shockwave Flash"];
+				if(flash) {
+					version = navigator.plugins["Shockwave Flash"].description.replace(/.*\s(\d+\.\d+).*/, "$1");
+				}
+			}
+			return version * 1; // Converts to a number
+		},
+		_checkForFlash: function (version) {
+			var flashOk = false;
+			if(this._getFlashPluginVersion() >= version) {
+				flashOk = true;
+			}
+			return flashOk;
+		},
+		_validString: function(url) {
+			return (url && typeof url === "string"); // Empty strings return false
+		},
+		_limitValue: function(value, min, max) {
+			return (value < min) ? min : ((value > max) ? max : value);
+		},
+		_urlNotSetError: function(context) {
+			this._error( {
+				type: $.jPlayer.error.URL_NOT_SET,
+				context: context,
+				message: $.jPlayer.errorMsg.URL_NOT_SET,
+				hint: $.jPlayer.errorHint.URL_NOT_SET
+			});
+		},
+		_flashError: function(error) {
+			var errorType;
+			if(!this.internal.ready) {
+				errorType = "FLASH";
+			} else {
+				errorType = "FLASH_DISABLED";
+			}
+			this._error( {
+				type: $.jPlayer.error[errorType],
+				context: this.internal.flash.swf,
+				message: $.jPlayer.errorMsg[errorType] + error.message,
+				hint: $.jPlayer.errorHint[errorType]
+			});
+			// Allow the audio player to recover if display:none and then shown again, or with position:fixed on Firefox.
+			// This really only affects audio in a media player, as an audio player could easily move the jPlayer element away from such issues.
+			this.internal.flash.jq.css({'width':'1px', 'height':'1px'});
+		},
+		_error: function(error) {
+			this._trigger($.jPlayer.event.error, error);
+			if(this.options.errorAlerts) {
+				this._alert("Error!" + (error.message ? "\n" + error.message : "") + (error.hint ? "\n" + error.hint : "") + "\nContext: " + error.context);
+			}
+		},
+		_warning: function(warning) {
+			this._trigger($.jPlayer.event.warning, undefined, warning);
+			if(this.options.warningAlerts) {
+				this._alert("Warning!" + (warning.message ? "\n" + warning.message : "") + (warning.hint ? "\n" + warning.hint : "") + "\nContext: " + warning.context);
+			}
+		},
+		_alert: function(message) {
+			var msg = "jPlayer " + this.version.script + " : id='" + this.internal.self.id +"' : " + message;
+			if(!this.options.consoleAlerts) {
+				alert(msg);
+			} else if(window.console && window.console.log) {
+				window.console.log(msg);
+			}
+		},
+		_emulateHtmlBridge: function() {
+			var self = this;
+
+			// Emulate methods on jPlayer's DOM element.
+			$.each( $.jPlayer.emulateMethods.split(/\s+/g), function(i, name) {
+				self.internal.domNode[name] = function(arg) {
+					self[name](arg);
+				};
+
+			});
+
+			// Bubble jPlayer events to its DOM element.
+			$.each($.jPlayer.event, function(eventName,eventType) {
+				var nativeEvent = true;
+				$.each( $.jPlayer.reservedEvent.split(/\s+/g), function(i, name) {
+					if(name === eventName) {
+						nativeEvent = false;
+						return false;
+					}
+				});
+				if(nativeEvent) {
+					self.element.bind(eventType + ".jPlayer.jPlayerHtml", function() { // With .jPlayer & .jPlayerHtml namespaces.
+						self._emulateHtmlUpdate();
+						var domEvent = document.createEvent("Event");
+						domEvent.initEvent(eventName, false, true);
+						self.internal.domNode.dispatchEvent(domEvent);
+					});
+				}
+				// The error event would require a special case
+			});
+
+			// IE9 has a readyState property on all elements. The document should have it, but all (except media) elements inherit it in IE9. This conflicts with Popcorn, which polls the readyState.
+		},
+		_emulateHtmlUpdate: function() {
+			var self = this;
+
+			$.each( $.jPlayer.emulateStatus.split(/\s+/g), function(i, name) {
+				self.internal.domNode[name] = self.status[name];
+			});
+			$.each( $.jPlayer.emulateOptions.split(/\s+/g), function(i, name) {
+				self.internal.domNode[name] = self.options[name];
+			});
+		},
+		_destroyHtmlBridge: function() {
+			var self = this;
+
+			// Bridge event handlers are also removed by destroy() through .jPlayer namespace.
+			this.element.unbind(".jPlayerHtml"); // Remove all event handlers created by the jPlayer bridge. So you can change the emulateHtml option.
+
+			// Remove the methods and properties
+			var emulated = $.jPlayer.emulateMethods + " " + $.jPlayer.emulateStatus + " " + $.jPlayer.emulateOptions;
+			$.each( emulated.split(/\s+/g), function(i, name) {
+				delete self.internal.domNode[name];
+			});
+		}
+	};
+
+	$.jPlayer.error = {
+		FLASH: "e_flash",
+		FLASH_DISABLED: "e_flash_disabled",
+		NO_SOLUTION: "e_no_solution",
+		NO_SUPPORT: "e_no_support",
+		URL: "e_url",
+		URL_NOT_SET: "e_url_not_set",
+		VERSION: "e_version"
+	};
+
+	$.jPlayer.errorMsg = {
+		FLASH: "jPlayer's Flash fallback is not configured correctly, or a command was issued before the jPlayer Ready event. Details: ", // Used in: _flashError()
+		FLASH_DISABLED: "jPlayer's Flash fallback has been disabled by the browser due to the CSS rules you have used. Details: ", // Used in: _flashError()
+		NO_SOLUTION: "No solution can be found by jPlayer in this browser. Neither HTML nor Flash can be used.", // Used in: _init()
+		NO_SUPPORT: "It is not possible to play any media format provided in setMedia() on this browser using your current options.", // Used in: setMedia()
+		URL: "Media URL could not be loaded.", // Used in: jPlayerFlashEvent() and _addHtmlEventListeners()
+		URL_NOT_SET: "Attempt to issue media playback commands, while no media url is set.", // Used in: load(), play(), pause(), stop() and playHead()
+		VERSION: "jPlayer " + $.jPlayer.prototype.version.script + " needs Jplayer.swf version " + $.jPlayer.prototype.version.needFlash + " but found " // Used in: jPlayerReady()
+	};
+
+	$.jPlayer.errorHint = {
+		FLASH: "Check your swfPath option and that Jplayer.swf is there.",
+		FLASH_DISABLED: "Check that you have not display:none; the jPlayer entity or any ancestor.",
+		NO_SOLUTION: "Review the jPlayer options: support and supplied.",
+		NO_SUPPORT: "Video or audio formats defined in the supplied option are missing.",
+		URL: "Check media URL is valid.",
+		URL_NOT_SET: "Use setMedia() to set the media URL.",
+		VERSION: "Update jPlayer files."
+	};
+
+	$.jPlayer.warning = {
+		CSS_SELECTOR_COUNT: "e_css_selector_count",
+		CSS_SELECTOR_METHOD: "e_css_selector_method",
+		CSS_SELECTOR_STRING: "e_css_selector_string",
+		OPTION_KEY: "e_option_key"
+	};
+
+	$.jPlayer.warningMsg = {
+		CSS_SELECTOR_COUNT: "The number of css selectors found did not equal one: ",
+		CSS_SELECTOR_METHOD: "The methodName given in jPlayer('cssSelector') is not a valid jPlayer method.",
+		CSS_SELECTOR_STRING: "The methodCssSelector given in jPlayer('cssSelector') is not a String or is empty.",
+		OPTION_KEY: "The option requested in jPlayer('option') is undefined."
+	};
+
+	$.jPlayer.warningHint = {
+		CSS_SELECTOR_COUNT: "Check your css selector and the ancestor.",
+		CSS_SELECTOR_METHOD: "Check your method name.",
+		CSS_SELECTOR_STRING: "Check your css selector is a string.",
+		OPTION_KEY: "Check your option name."
+	};
+}));
 
 !function(){function t(t){var n=t.split(/\n/);n.shift(),n.splice(-1,1);var o=n[0].length-n[0].trim().length,e=new RegExp(" {"+o+"}");return n=n.map(function(t){return t.match(e)&&(t=t.substring(o)),t}),n=n.join("\n")}var n=$("<div id='source-button' class='btn btn-primary btn-xs'>&lt; &gt;</div>").click(function(){var n=$(this).parent().html();n=t(n),$("#source-modal pre").text(n),$("#source-modal").modal()});$('.bs-component [data-toggle="popover"]').popover(),$('.bs-component [data-toggle="tooltip"]').tooltip(),$(".bs-component").hover(function(){$(this).append(n),n.show()},function(){n.hide()})}();
 //# sourceMappingURL=all.js.map

@@ -3,6 +3,7 @@
 @section('title')
     {{ $page->title }} | @parent
 @stop
+s
 @section('meta')
     <meta name="title" content="{{ $page->meta_title}}" />
     <meta name="description" content="{{ $page->meta_description }}" />
