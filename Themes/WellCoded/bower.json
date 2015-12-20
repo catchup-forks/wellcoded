@@ -16,6 +16,6 @@
     "bootstrap": "~3.3.2",
     "font-awesome": "~4.3.0",
     "prism": "*",
-    "jPlayer": "jplayer#~2.9.2"
+    "mediaelement": "~2.19.0"
   }
 }

@@ -41,7 +41,7 @@ elixir(function (mix) {
         '/vendor/jquery/dist/jquery.js',
         '/vendor/bootstrap/dist/js/bootstrap.min.js',
         '/vendor/prism/prism.js',
-        '/vendor/jPlayer/dist/jplayer/jquery.jplayer.js',
+        '/vendor/mediaelement/build/mediaelement-and-player.min.js',
         '/js/bootswatch.js'
     ], './assets/js', 'resources');
 
@@ -60,4 +60,24 @@ elixir(function (mix) {
         'resources/vendor/font-awesome/fonts',
         'assets/fonts'
     );
+
+    mix.copy(
+        [   'resources/vendor/mediaelement/build/bigplay.svg',
+            'resources/vendor/mediaelement/build/bigplay.png',
+            'resources/vendor/mediaelement/build/background.png',
+            'resources/vendor/mediaelement/build/loading.gif',
+            'resources/vendor/mediaelement/build/background.png',
+            'resources/vendor/mediaelement/build/controls.svg',
+            'resources/vendor/mediaelement/build/controls.png',
+            'resources/vendor/mediaelement/build/background.png',
+            'resources/vendor/mediaelement/build/background.png',
+            'resources/vendor/mediaelement/build/background.png',
+            'resources/vendor/mediaelement/build/background.png',
+            'resources/vendor/mediaelement/build/background.png',
+            'resources/vendor/mediaelement/build/background.png',
+            'resources/vendor/mediaelement/build/background.png',
+            'resources/vendor/mediaelement/build/jumpforward.png',
+            'resources/vendor/mediaelement/build/skipback.png'],
+        'assets/img/medialement'
+    )
 });
