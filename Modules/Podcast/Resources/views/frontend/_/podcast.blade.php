@@ -1,15 +1,11 @@
-<h3><a href="{{ route('podcasts.show', [$podcast->id, $podcast->present()->slug]) }}">{{ $podcast->title }}</a></h3>
+<a href="{{ route('podcasts.show', [$podcast->id, $podcast->present()->slug]) }}"><h3 class="ctitle">{{ $podcast->title }}</h3></a>
 
-<div class="meta">
-    Date: {{ $podcast->present()->published_at }}, Tags: {{ $podcast->tags }}
-</div>
+<p><csmall>Posted: {{ $podcast->present()->published_at }}.</csmall></p>
 
-<div class="description">
-    {!! $podcast->description !!}
-</div>
+{!! $podcast->description !!}
 
 <div class="player">
     <audio class="mejs-player" src="{{ $podcast->files->first()->path }}" data-mejsoptions='{"features": ["playpause","progress","current","duration","volume", "speed"]}'></audio>
 </div>
 
-<a href="{{ $podcast->files->first()->path }}">MP3</a>
+<p><a href="{{ route('podcasts.show', [$podcast->id, $podcast->present()->slug]) }}">[Read More]</a></p>

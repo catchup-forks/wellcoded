@@ -9,18 +9,27 @@
 @stop
 
 @section('content')
-    <div class="row">
 
+    <div id="blue">
+        <div class="container">
+            <div class="row">
+                <h3>Podcasts</h3>
+            </div><!-- /row -->
+        </div> <!-- /container -->
+    </div><!-- /blue -->
 
-        <ul>
-            @foreach($podcasts as $podcast)
-                <li>
+    <div class="container mtb">
+        <div class="row">
+
+            <! -- BLOG POSTS LIST -->
+            <div class="col-lg-8 col-lg-offset-2">
+                @foreach($podcasts as $podcast)
                     @include('podcast::frontend._.podcast')
-                </li>
-            @endforeach
-        </ul>
+                @endforeach
+            </div><! --/col-lg-8 -->
 
-    </div>
+        </div><! --/row -->
+    </div><! --/container -->
 @stop
 
 @section('scripts')
