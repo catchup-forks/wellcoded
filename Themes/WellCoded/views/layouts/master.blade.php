@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="{{ Theme::url('ico/favicon.ico') }}">
 
-    <title>@section('title', Setting::get('core::site-name'))</title>
+    <title>@section('title') {{ setting('core::site-name')}} @show</title>
 
     <!-- Bootstrap core CSS -->
     {!! Theme::style('css/bootstrap.css') !!}
