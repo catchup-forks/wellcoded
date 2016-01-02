@@ -21,4 +21,12 @@ class Podcast extends Presenter
     {
         return $this->entity->published_at->format('d/m/Y');
     }
+
+    public function excerpt()
+    {
+        $matches = [];
+        preg_match("/<p.*?>(.*?)<\/p>/is", $this->entity->description, $matches);
+
+        return array_get($matches, '1', '');
+    }
 }
