@@ -1,6 +1,7 @@
 <?php namespace Modules\Podcast\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\Podcast\Composers\PodcastsComposer;
 
 class PodcastServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,7 @@ class PodcastServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerBindings();
+        view()->composer('home', PodcastsComposer::class);
     }
 
     /**
