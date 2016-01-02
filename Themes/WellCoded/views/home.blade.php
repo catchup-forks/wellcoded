@@ -9,19 +9,9 @@
 @stop
 
 @section('content')
-    <div id="blue">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3>Podcasts</h3>
-                </div>
-            </div><!-- /row -->
-        </div> <!-- /container -->
-    </div><!-- /blue -->
-
     <div class="container mtb">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
+            <div class="col-lg-6 col-lg-offset-6" style="padding-top: 100px;">
                 @foreach($podcasts as $podcast)
                     <h3 class="ctitle">
                         <a href="{{ route('podcasts.show', [$podcast->id, $podcast->present()->slug]) }}">
