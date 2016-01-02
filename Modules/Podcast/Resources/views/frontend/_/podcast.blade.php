@@ -1,6 +1,6 @@
 <a href="{{ route('podcasts.show', [$podcast->id, $podcast->present()->slug]) }}"><h3 class="ctitle">{{ $podcast->title }}</h3></a>
 
-<p><csmall>Posted: {{ $podcast->present()->published_at }}.</csmall></p>
+<p><small>Posted: {{ $podcast->present()->published_at }}.</small></p>
 
 {!! $podcast->description !!}
 
