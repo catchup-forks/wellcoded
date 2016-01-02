@@ -80,7 +80,7 @@ body {
     background: #ffffff;
     margin: 0;
     height: 100%;
-    color: #384452;
+    color: #555;
     font-family: 'Lato', sans-serif;
     font-weight: 400;
     font-size: 16px;
@@ -97,8 +97,8 @@ p {
     font-family: 'Lato', sans-serif;
     font-weight: 400;
     font-size: 1em;
-    line-height: 24px;
-    color: #384452;
+    line-height: 1.8em;
+    color: #555;
     margin-top: 10px;
 }
 
@@ -116,6 +116,18 @@ a {
     -o-transition: background-color .4s linear, color .4s linear;
     -ms-transition: background-color .4s linear, color .4s linear;
     transition: background-color .4s linear, color .4s linear;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin: 5px 0 15px 0;
+}
+ul {
+    list-style: disc;
+    margin-left: 30px;
+}
+ul > li {
+    margin-bottom: 5px;
 }
 
 a:hover,
