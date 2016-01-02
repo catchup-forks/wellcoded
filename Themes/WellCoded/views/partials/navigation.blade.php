@@ -11,12 +11,12 @@
         </div>
         <div class="navbar-collapse collapse navbar-right">
             <ul class="nav navbar-nav">
-                <li class="{{ on_route('homepage') ? 'active' : '' }}">
-                    <a href="{{ route('homepage') }}">Accueil <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="{{ on_route('podcasts.*') ? 'active' : '' }}">
-                    <a href="{{ route('podcasts.index') }}">Podcasts</a>
-                </li>
+                {{--<li class="{{ on_route('homepage') ? 'active' : '' }}">--}}
+                    {{--<a href="{{ route('homepage') }}">Accueil <span class="sr-only">(current)</span></a>--}}
+                {{--</li>--}}
+                {{--<li class="{{ on_route('podcasts.*') ? 'active' : '' }}">--}}
+                    {{--<a href="{{ route('podcasts.index') }}">Podcasts</a>--}}
+                {{--</li>--}}
             </ul>
         </div><!--/.nav-collapse -->
     </div>
