@@ -48,6 +48,8 @@
 <script src="{{ Theme::url('js/custom.js') }}"></script>
 {!! Theme::script('vendor/media-element/mediaelement-and-player.min.js') !!}
 @yield('scripts')
-
+<?php if (Setting::has('core::google-analytics')): ?>
+{!! Setting::get('core::google-analytics') !!}
+<?php endif; ?>
 </body>
 </html>
