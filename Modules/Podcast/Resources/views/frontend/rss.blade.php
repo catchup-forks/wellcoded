@@ -3,7 +3,7 @@
     <channel>
         <atom:link rel="self" type="application/atom+xml" href="{{ URL::current() }}" title="MP3 Audio"/>
         <title>The Wellcoded Podcast</title>
-        <generator>https://wellcoded.com</generator>
+        <generator>https://wellcoded.io</generator>
         <description>
             Le Podcast Wellcoded traite des sujets tels que le freelancing et le développement web. Les deux hosts sont Julien Tant et Nicolas Widart, deux freelances Laravel basés en Europe.
         </description>
@@ -11,11 +11,11 @@
         <language>fr</language>
         <pubDate>{{ with(new DateTime)->format(DateTime::RSS) }}</pubDate>
         <lastBuildDate>{{ with(new DateTime)->format(DateTime::RSS) }}</lastBuildDate>
-        <link>http://wellcoded.com</link>
+        <link>http://wellcoded.io</link>
         <image>
             <url>{{ asset('assets/media/wellcoded.png') }}</url>
             <title>The WellCoded Podcast</title>
-            <link>http://wellcoded.com</link>
+            <link>http://wellcoded.io</link>
         </image>
         <itunes:author>Julien Tant, Nicolas Widart</itunes:author>
         <itunes:image href="{{ asset('assets/media/wellcoded.png') }}"/>
@@ -25,7 +25,7 @@
         <itunes:keywords>freelance, laravel, webdev, web, developpement</itunes:keywords>
         <itunes:owner>
             <itunes:name>Julien Tant, Nicolas Widart</itunes:name>
-            <itunes:email>podcast@wellcoded.com</itunes:email>
+            <itunes:email>podcast@wellcoded.io</itunes:email>
         </itunes:owner>
         <itunes:category text="Technology"/>
         @foreach($podcasts as $podcast)
