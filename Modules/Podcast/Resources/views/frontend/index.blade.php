@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Les podcasts | @parent
+    The Wellcoded Podcast
 @stop
 
 @section('meta')
