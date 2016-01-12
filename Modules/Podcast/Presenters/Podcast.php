@@ -29,4 +29,14 @@ class Podcast extends Presenter
 
         return array_get($matches, '1', '');
     }
+
+    public function url()
+    {
+        return route('podcasts.show', [$this->entity->id, $this->slug()]);
+    }
+
+    public function mp3url()
+    {
+        return asset($this->entity->files->first()->path);
+    }
 }

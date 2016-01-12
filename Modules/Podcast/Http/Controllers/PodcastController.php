@@ -28,4 +28,11 @@ class PodcastController extends Controller
         }
         return view('podcast::frontend.show', compact('podcast'));
     }
+
+    public function rss(PodcastRepository $podcastRepository)
+    {
+        return response()->view('podcast::frontend.rss', [
+            'podcasts' => $podcastRepository->all()
+        ], 200, ['content-type' => 'application/rss+xml']);
+    }
 }

@@ -42,6 +42,9 @@
                     </div>
 
 
+                    {!! Form::normalInput('duration', 'Durée (hh:mm:ss)', $errors, $podcast) !!}
+
+
                     @include('media::admin.fields.file-link', [
                         'entityClass' => 'Modules\\\\Podcast\\\\Entities\\\\Podcast',
                         'entityId' => $podcast->id,

@@ -41,6 +41,7 @@
                         </div>
                     </div>
 
+                    {!! Form::normalInput('duration', 'Durée (hh:mm:ss)', $errors) !!}
 
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary btn-flat">{{ trans('core::core.button.create') }}</button>

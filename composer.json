@@ -19,7 +19,7 @@
     "asgardcms/dashboard-module": "~1.0",
     "asgardcms/user-module": "~1.0",
     "asgardcms/setting-module": "~1.0",
-    "asgardcms/media-module": "~1.0",
+    "asgardcms/media-module": "dev-master",
     "asgardcms/page-module": "~1.0",
     "asgardcms/menu-module": "~1.0",
     "asgardcms/workshop-module": "~1.0",

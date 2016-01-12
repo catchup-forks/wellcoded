@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8e24226683dcd91ad4269aa2d5fe043c",
-    "content-hash": "29e9b857570ec662e292633566510fc6",
+    "hash": "51e957b9ed519c2c67d7c523da21eb99",
+    "content-hash": "02a13db63a4342812802b399a3279d0a",
     "packages": [
         {
             "name": "asgardcms/adminlte-theme",
-            "version": "1.15.0",
+            "version": "1.15.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AsgardCms/AdminLTE.git",
-                "reference": "10754afb6d8f0be24d5dfca6c95a311fad8f7930"
+                "reference": "92d62a7ef3ac4ab181ce001baa11ae5cc1974b6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AsgardCms/AdminLTE/zipball/10754afb6d8f0be24d5dfca6c95a311fad8f7930",
-                "reference": "10754afb6d8f0be24d5dfca6c95a311fad8f7930",
+                "url": "https://api.github.com/repos/AsgardCms/AdminLTE/zipball/92d62a7ef3ac4ab181ce001baa11ae5cc1974b6f",
+                "reference": "92d62a7ef3ac4ab181ce001baa11ae5cc1974b6f",
                 "shasum": ""
             },
             "require": {
@@ -41,20 +41,20 @@
             "keywords": [
                 "asgard-cms"
             ],
-            "time": "2015-12-25 19:53:34"
+            "time": "2016-01-12 12:47:36"
         },
         {
             "name": "asgardcms/core-module",
-            "version": "1.22.0",
+            "version": "1.23.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AsgardCms/Core.git",
-                "reference": "a31156941aadc78c6ec70c1db919ffcdf5d2dcc4"
+                "reference": "f3c215130312a0540a47fb9fdb0518208dc8f374"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AsgardCms/Core/zipball/a31156941aadc78c6ec70c1db919ffcdf5d2dcc4",
-                "reference": "a31156941aadc78c6ec70c1db919ffcdf5d2dcc4",
+                "url": "https://api.github.com/repos/AsgardCms/Core/zipball/f3c215130312a0540a47fb9fdb0518208dc8f374",
+                "reference": "f3c215130312a0540a47fb9fdb0518208dc8f374",
                 "shasum": ""
             },
             "require": {
@@ -100,7 +100,7 @@
                 "asgardcms",
                 "core"
             ],
-            "time": "2015-12-31 22:09:43"
+            "time": "2016-01-11 15:15:39"
         },
         {
             "name": "asgardcms/dashboard-module",
@@ -177,16 +177,16 @@
         },
         {
             "name": "asgardcms/media-module",
-            "version": "1.19.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AsgardCms/Media.git",
-                "reference": "b9ddbad71a972a7ccafcab7ca1465ba9136cc274"
+                "reference": "c48ccf2dbd291e11ae7293dabdd1097ebd3322cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AsgardCms/Media/zipball/b9ddbad71a972a7ccafcab7ca1465ba9136cc274",
-                "reference": "b9ddbad71a972a7ccafcab7ca1465ba9136cc274",
+                "url": "https://api.github.com/repos/AsgardCms/Media/zipball/c48ccf2dbd291e11ae7293dabdd1097ebd3322cf",
+                "reference": "c48ccf2dbd291e11ae7293dabdd1097ebd3322cf",
                 "shasum": ""
             },
             "require": {
@@ -221,7 +221,7 @@
                 "library",
                 "media"
             ],
-            "time": "2015-12-21 10:47:23"
+            "time": "2016-01-12 22:11:27"
         },
         {
             "name": "asgardcms/menu-module",
@@ -354,16 +354,16 @@
         },
         {
             "name": "asgardcms/translation-module",
-            "version": "1.7.0",
+            "version": "1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AsgardCms/Translation.git",
-                "reference": "1f13a7503360cf7047d58c1c91ae324cdd3416af"
+                "reference": "09e482915d93530bcb0aca503fccb66de47bec27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AsgardCms/Translation/zipball/1f13a7503360cf7047d58c1c91ae324cdd3416af",
-                "reference": "1f13a7503360cf7047d58c1c91ae324cdd3416af",
+                "url": "https://api.github.com/repos/AsgardCms/Translation/zipball/09e482915d93530bcb0aca503fccb66de47bec27",
+                "reference": "09e482915d93530bcb0aca503fccb66de47bec27",
                 "shasum": ""
             },
             "require": {
@@ -394,7 +394,7 @@
                 }
             ],
             "description": "Module containing all AsgardCms translations",
-            "time": "2015-12-18 16:26:47"
+            "time": "2016-01-07 16:25:27"
         },
         {
             "name": "asgardcms/user-module",
@@ -451,16 +451,16 @@
         },
         {
             "name": "asgardcms/workshop-module",
-            "version": "1.13.1",
+            "version": "1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AsgardCms/Workshop.git",
-                "reference": "557436c726552541a268cecf70b4ee4fdf91bb5b"
+                "reference": "da708057de03770493109ab0f431a4de451ba21e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AsgardCms/Workshop/zipball/557436c726552541a268cecf70b4ee4fdf91bb5b",
-                "reference": "557436c726552541a268cecf70b4ee4fdf91bb5b",
+                "url": "https://api.github.com/repos/AsgardCms/Workshop/zipball/da708057de03770493109ab0f431a4de451ba21e",
+                "reference": "da708057de03770493109ab0f431a4de451ba21e",
                 "shasum": ""
             },
             "require": {
@@ -491,7 +491,7 @@
                 "modules",
                 "workshop"
             ],
-            "time": "2015-12-24 11:53:01"
+            "time": "2016-01-11 15:46:32"
         },
         {
             "name": "cartalyst/sentinel",
@@ -1221,16 +1221,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.5.3",
+            "version": "v2.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "2fbcea96eae34a53183377cdbb0b9bec33974648"
+                "reference": "abbdfd1cff43a7b99d027af3be709bc8fc7d4769"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/2fbcea96eae34a53183377cdbb0b9bec33974648",
-                "reference": "2fbcea96eae34a53183377cdbb0b9bec33974648",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/abbdfd1cff43a7b99d027af3be709bc8fc7d4769",
+                "reference": "abbdfd1cff43a7b99d027af3be709bc8fc7d4769",
                 "shasum": ""
             },
             "require": {
@@ -1288,7 +1288,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2015-12-25 16:28:24"
+            "time": "2016-01-05 22:11:12"
         },
         {
             "name": "doctrine/inflector",
@@ -1758,16 +1758,16 @@
         },
         {
             "name": "intervention/image",
-            "version": "2.3.4",
+            "version": "2.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/image.git",
-                "reference": "a67ee32df0c6820cc6e861ad4144ee0ef9c74aa3"
+                "reference": "9f29360b8ab94585cb9e80cf9045abd5b85feb89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/image/zipball/a67ee32df0c6820cc6e861ad4144ee0ef9c74aa3",
-                "reference": "a67ee32df0c6820cc6e861ad4144ee0ef9c74aa3",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/9f29360b8ab94585cb9e80cf9045abd5b85feb89",
+                "reference": "9f29360b8ab94585cb9e80cf9045abd5b85feb89",
                 "shasum": ""
             },
             "require": {
@@ -1816,7 +1816,7 @@
                 "thumbnail",
                 "watermark"
             ],
-            "time": "2015-11-30 17:03:21"
+            "time": "2016-01-02 19:15:13"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -2479,7 +2479,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mcamara/laravel-localization/zipball/ebd734314f2f36ad9d9444728c19532a4cef5494",
+                "url": "https://api.github.com/repos/mcamara/laravel-localization/zipball/3300cd3d3f30ef1febf73a4739bc52cd9f5d53bc",
                 "reference": "ebd734314f2f36ad9d9444728c19532a4cef5494",
                 "shasum": ""
             },
@@ -2738,16 +2738,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "1.1.4",
+            "version": "1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "d762ee5b099a29044603cd4649851e81aa66cb47"
+                "reference": "dd8998b7c846f6909f4e7a5f67fabebfc412a4f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/d762ee5b099a29044603cd4649851e81aa66cb47",
-                "reference": "d762ee5b099a29044603cd4649851e81aa66cb47",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/dd8998b7c846f6909f4e7a5f67fabebfc412a4f7",
+                "reference": "dd8998b7c846f6909f4e7a5f67fabebfc412a4f7",
                 "shasum": ""
             },
             "require": {
@@ -2782,20 +2782,20 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2015-12-10 14:48:13"
+            "time": "2016-01-06 13:31:20"
         },
         {
             "name": "pingpong/generators",
-            "version": "v2.1.4",
+            "version": "v2.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pingpong-labs/generators.git",
-                "reference": "bbf756b633da361f99af52bcf5620f671c86e3a1"
+                "reference": "08391dff4ca7223fa07bffe9a4f14764e3a116e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pingpong-labs/generators/zipball/bbf756b633da361f99af52bcf5620f671c86e3a1",
-                "reference": "bbf756b633da361f99af52bcf5620f671c86e3a1",
+                "url": "https://api.github.com/repos/pingpong-labs/generators/zipball/08391dff4ca7223fa07bffe9a4f14764e3a116e1",
+                "reference": "08391dff4ca7223fa07bffe9a4f14764e3a116e1",
                 "shasum": ""
             },
             "require": {
@@ -2831,7 +2831,7 @@
                 "laravel",
                 "pingpong"
             ],
-            "time": "2015-07-02 04:19:47"
+            "time": "2016-01-05 04:57:42"
         },
         {
             "name": "pingpong/menus",
@@ -4106,16 +4106,16 @@
         },
         {
             "name": "venturecraft/revisionable",
-            "version": "1.24.0",
+            "version": "1.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/VentureCraft/revisionable.git",
-                "reference": "99c27d94f80ae9240cec89c4276f61e748e989a5"
+                "reference": "ab290031e5268cf654d3f3bb906f34c5bf7638fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VentureCraft/revisionable/zipball/99c27d94f80ae9240cec89c4276f61e748e989a5",
-                "reference": "99c27d94f80ae9240cec89c4276f61e748e989a5",
+                "url": "https://api.github.com/repos/VentureCraft/revisionable/zipball/ab290031e5268cf654d3f3bb906f34c5bf7638fd",
+                "reference": "ab290031e5268cf654d3f3bb906f34c5bf7638fd",
                 "shasum": ""
             },
             "require": {
@@ -4150,7 +4150,7 @@
                 "model",
                 "revision"
             ],
-            "time": "2015-12-09 21:48:10"
+            "time": "2016-01-11 22:27:19"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -5383,6 +5383,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "pingpong/modules": 20,
+        "asgardcms/media-module": 20,
         "laravel/homestead": 20
     },
     "prefer-stable": true,
