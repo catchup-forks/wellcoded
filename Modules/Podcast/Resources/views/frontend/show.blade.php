@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    {{ $podcast->title }} | The Wellcoded Podcast
+    {{ $podcast->title }} | @parent
 @stop
 
 @section('meta')
