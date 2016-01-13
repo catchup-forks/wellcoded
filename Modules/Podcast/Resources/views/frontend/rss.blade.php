@@ -51,7 +51,7 @@
                 </itunes:summary>
                 <itunes:subtitle>{{ $podcast->present()->excerpt }}
                 </itunes:subtitle>
-                <itunes:keywords>freelance, laravel, webdev, web, developpement</itunes:keywords>
+                <itunes:keywords>{{ $podcast->tags }}</itunes:keywords>
                 <itunes:explicit>no</itunes:explicit>
             </item>
         @endforeach

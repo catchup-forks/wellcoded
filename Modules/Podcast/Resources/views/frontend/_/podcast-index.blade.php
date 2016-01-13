@@ -8,7 +8,7 @@
                 </a>
             </h3>
 
-            <p><small>Publié le {{ $podcast->present()->published_at }}.</small></p>
+            <p style="margin-top: -15px"><small>Publié le {{ $podcast->present()->published_at }} | Durée : {{ $podcast->duration }} | Tags : {{ $podcast->tags }}</small></p>
             @include('podcast::frontend._.player')
             <p>
                 {!! $podcast->present()->excerpt !!}
