@@ -7,6 +7,7 @@
     <meta name="description" content="{{ Setting::get('core::site-description') }}">
     <meta name="author" content="">
     <link rel="shortcut icon" href="{{ Theme::url('ico/favicon.ico') }}">
+    <link href="{{ route('podcasts.rss') }}" rel="alternate" type="application/rss+xml" title="The Wellcoded Podcast" />
 
     <title>@section('title'){{ setting('core::site-name')}}@show</title>
 

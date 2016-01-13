@@ -448,7 +448,7 @@ a:focus {
     font-size: 1.2em;
 }
 
-#blue h3 {
+#blue h3, #blue h2, #blue h1 {
     color: white;
 }
 
