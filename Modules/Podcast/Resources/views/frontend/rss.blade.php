@@ -11,11 +11,11 @@
         <language>fr</language>
         <pubDate>{{ with(new DateTime)->format(DateTime::RSS) }}</pubDate>
         <lastBuildDate>{{ with(new DateTime)->format(DateTime::RSS) }}</lastBuildDate>
-        <link>http://wellcoded.io</link>
+        <link>https://wellcoded.io</link>
         <image>
             <url>{{ asset('assets/media/wellcoded.png') }}</url>
             <title>The WellCoded Podcast</title>
-            <link>http://wellcoded.io</link>
+            <link>https://wellcoded.io</link>
         </image>
         <itunes:author>Julien Tant, Nicolas Widart</itunes:author>
         <itunes:image href="{{ asset('assets/media/wellcoded.png') }}"/>
