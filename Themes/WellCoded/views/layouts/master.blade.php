@@ -10,12 +10,12 @@
     <link href="{{ route('podcasts.rss') }}" rel="alternate" type="application/rss+xml" title="The Wellcoded Podcast" />
     <meta property="og:title" content="{{ Setting::get('core::site-name') }}" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://wellcoded.io" />
+    <meta property="og:url" content="https://wellcoded.io/fr" />
     <meta property="og:description" content="{{ Setting::get('core::site-description') }}" />
     <meta property="og:image" content="{{ asset('assets/media/wellcoded.png') }}" />
 
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:url" content="https://wellcoded.io">
+    <meta name="twitter:url" content="https://wellcoded.io/fr">
     <meta name="twitter:title" content="{{ Setting::get('core::site-name') }}">
     <meta name="twitter:description" content="{{ Setting::get('core::site-description') }}">
     <meta name="twitter:image" content="{{ asset('assets/media/wellcoded.png') }}">
