@@ -21,7 +21,7 @@
                 <div class="col-md-6">
                     <h3 class="text-center podcast-title">
                         {{ $podcast->title }}
-                        <small>Publié le{{ $podcast->present()->published_at }}.</small>
+                        <small>Publié le {{ $podcast->present()->published_at }}.</small>
                     </h3>
                 </div>
             </div><!-- /row -->
