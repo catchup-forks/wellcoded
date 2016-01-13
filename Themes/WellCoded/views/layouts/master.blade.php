@@ -13,6 +13,13 @@
     <meta property="og:url" content="https://wellcoded.io" />
     <meta property="og:description" content="{{ Setting::get('core::site-description') }}" />
     <meta property="og:image" content="{{ asset('assets/media/wellcoded.png') }}" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://wellcoded.io">
+    <meta name="twitter:title" content="{{ Setting::get('core::site-name') }}">
+    <meta name="twitter:description" content="{{ Setting::get('core::site-description') }}">
+    <meta name="twitter:image" content="{{ asset('assets/media/wellcoded.png') }}">
+
     <title>@section('title'){{ setting('core::site-name')}}@show</title>
 
     <!-- Bootstrap core CSS -->
