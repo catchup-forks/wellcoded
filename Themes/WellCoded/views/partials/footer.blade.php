@@ -8,7 +8,7 @@
             </div>
             <div class="col-md-6">
                 <p class="text-right">
-                    Sité généré avec <a href="https://asgardcms.com/">AsgardCMS</a> <span style="color: #FF5E5E;">♥</span>
+                    Site généré avec <a href="https://asgardcms.com/">AsgardCMS</a> <span style="color: #FF5E5E;">♥</span>
                 </p>
             </div>
         </div><! --/row -->
