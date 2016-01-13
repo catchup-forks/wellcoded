@@ -5,10 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ Setting::get('core::site-description') }}">
-    <meta name="author" content="">
+    <meta name="author" content="Nicolas Widart, Julien Tant">
     <link rel="shortcut icon" href="{{ Theme::url('ico/favicon.ico') }}">
     <link href="{{ route('podcasts.rss') }}" rel="alternate" type="application/rss+xml" title="The Wellcoded Podcast" />
-
+    <meta property="og:title" content="{{ Setting::get('core::site-name') }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://wellcoded.io" />
+    <meta property="og:description" content="{{ Setting::get('core::site-description') }}" />
+    <meta property="og:image" content="{{ asset('assets/media/wellcoded.png') }}" />
     <title>@section('title'){{ setting('core::site-name')}}@show</title>
 
     <!-- Bootstrap core CSS -->
