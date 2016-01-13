@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-3">
                         <div class="back-link">
-                            <a href="{{ route('podcasts.index') }}"><i class="fa fa-chevron-left"></i></a>
+                            <a href="{{ route('homepage') }}"><i class="fa fa-chevron-left"></i></a>
                         </div>
                 </div>
                 <div class="col-md-6">

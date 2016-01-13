@@ -15,9 +15,7 @@ class PodcastController extends Controller
 {
     public function index(PodcastRepository $podcastRepository)
     {
-        return view('podcast::frontend.index', [
-            'podcasts' => $podcastRepository->latests()
-        ]);
+        return redirect()->route('homepage');
     }
 
     public function show(PodcastRepository $podcastRepository, $podcastId)
