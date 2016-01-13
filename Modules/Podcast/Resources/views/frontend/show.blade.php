@@ -35,5 +35,27 @@
                 {!! $podcast->description !!}
             </div>
         </div>
+
+        <div class="row" style="margin-top: 25px;">
+            <div class="col-lg-6 col-lg-offset-3">
+                <h3>Des commentaires, remarques ou questions ? A vous l'antenne !</h3>
+
+                <div id="disqus_thread"></div>
+                <script>
+                     var disqus_config = function () {
+                     this.page.url = '{{ URL::current() }}';
+                     this.page.identifier = 'podcast-id-{{ $podcast->id }}';
+                     };
+                    (function() { // DON'T EDIT BELOW THIS LINE
+                        var d = document, s = d.createElement('script');
+
+                        s.src = '//wellcoded.disqus.com/embed.js';
+
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                    })();
+                </script>
+            </div>
+        </div>
     </div><! --/container -->
 @stop
