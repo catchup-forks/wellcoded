@@ -8,7 +8,7 @@
                 </a>
             </h3>
 
-            <p><small>Posted: {{ $podcast->present()->published_at }}.</small></p>
+            <p><small>Publié le {{ $podcast->present()->published_at }}.</small></p>
             @include('podcast::frontend._.player')
             <p>
                 {!! $podcast->present()->excerpt !!}
