@@ -3,15 +3,31 @@
 @section('title')
     {{ $page->title }} | @parent
 @stop
-s
+
 @section('meta')
     <meta name="title" content="{{ $page->meta_title}}" />
     <meta name="description" content="{{ $page->meta_description }}" />
 @stop
 
+
 @section('content')
-    <div class="row">
-        <h1>{{ $page->title }}</h1>
-        {!! $page->body !!}
-    </div>
+    <div id="blue">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="podcast-title">
+                        {{ $page->title }}
+                    </h1>
+                </div>
+            </div><!-- /row -->
+        </div> <!-- /container -->
+    </div><!-- /blue -->
+
+    <div class="container mtb">
+        <div class="row">
+            <div class="col-lg-12">
+                {!! $page->body !!}
+            </div>
+        </div>
+    </div><! --/container -->
 @stop
