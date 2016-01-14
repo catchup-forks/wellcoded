@@ -30,19 +30,19 @@
         <itunes:category text="Technology"/>
         @foreach($podcasts as $podcast)
             <item>
-                <title><![CDATA[{!! $podcast->title  !!}]]></title>
+                <title><![CDATA[{!! trim($podcast->title) !!}]]></title>
                 <guid isPermaLink="false">{{ $podcast->id }}</guid>
                 <link>{{ $podcast->present()->url }}</link>
-                <description><![CDATA[{!! $podcast->present()->excerpt !!}]]></description>
-                <content:encoded><![CDATA[{!! $podcast->description !!}]]></content:encoded>
+                <description><![CDATA[{!! trim($podcast->present()->excerpt) !!}]]></description>
+                <content:encoded><![CDATA[{!! trim($podcast->description) !!}]]></content:encoded>
                 <pubDate>{{ $podcast->published_at->format(DateTime::RSS) }}</pubDate>
                 <author>Julien Tant, Nicolas Widart</author>
                 <enclosure url="{{ $podcast->present()->mp3url }}" length="{{ $podcast->files()->first()->filesize }}" type="audio/mpeg"/>
                 <itunes:author>Julien Tant, Nicolas Widart</itunes:author>
                 <itunes:image href="{{ asset('assets/media/wellcoded.png') }}"/>
                 <itunes:duration>{{ $podcast->duration }}</itunes:duration>
-                <itunes:summary><![CDATA[{!! $podcast->present()->excerpt !!}]]></itunes:summary>
-                <itunes:subtitle><![CDATA[{!! $podcast->present()->excerpt !!}]]></itunes:subtitle>
+                <itunes:summary><![CDATA[{!! trim($podcast->present()->excerpt) !!}]]></itunes:summary>
+                <itunes:subtitle><![CDATA[{!! trim($podcast->present()->excerpt) !!}]]></itunes:subtitle>
                 <itunes:keywords>{{ $podcast->tags }}</itunes:keywords>
                 <itunes:explicit>no</itunes:explicit>
             </item>
