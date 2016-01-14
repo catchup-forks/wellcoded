@@ -30,11 +30,11 @@
         <itunes:category text="Technology"/>
         @foreach($podcasts as $podcast)
             <item>
-                <title>{{ $podcast->title }}</title>
+                <title>{!! $podcast->title  !!}</title>
                 <guid isPermaLink="false">{{ $podcast->id }}</guid>
                 <link>{{ $podcast->present()->url }}</link>
                 <description>
-                    {{ $podcast->present()->excerpt }}
+                    {!! $podcast->present()->excerpt !!}
                 </description>
                 <content:encoded>
                     <![CDATA[
@@ -47,9 +47,9 @@
                 <itunes:author>Julien Tant, Nicolas Widart</itunes:author>
                 <itunes:image href="{{ asset('assets/media/wellcoded.png') }}"/>
                 <itunes:duration>{{ $podcast->duration }}</itunes:duration>
-                <itunes:summary>{{ $podcast->present()->excerpt }}
+                <itunes:summary>{!! $podcast->present()->excerpt !!}
                 </itunes:summary>
-                <itunes:subtitle>{{ $podcast->present()->excerpt }}
+                <itunes:subtitle>{!! $podcast->present()->excerpt !!}
                 </itunes:subtitle>
                 <itunes:keywords>{{ $podcast->tags }}</itunes:keywords>
                 <itunes:explicit>no</itunes:explicit>
