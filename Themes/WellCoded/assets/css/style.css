@@ -40,6 +40,10 @@ footer, header, hgroup, menu, nav, section {
     display: block;
 }
 
+html {
+    height: 100%;
+}
+
 body {
     line-height: 1;
 }
@@ -48,6 +52,9 @@ ol, ul {
     list-style: none;
 }
 
+
+display: flex;
+    flex-direction: column;
 blockquote, q {
     quotes: none;
 }
@@ -84,6 +91,9 @@ body {
     font-family: 'Lato', sans-serif;
     font-weight: 400;
     font-size: 16px;
+
+    display: flex;
+    flex-direction: column;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -252,7 +262,8 @@ a:focus {
 }
 
 .mtb {
-    margin-bottom: 80px;
+    padding-bottom: 80px; /* au lieu de margin */
+    flex-grow: 1;
 }
 
 .mb {
