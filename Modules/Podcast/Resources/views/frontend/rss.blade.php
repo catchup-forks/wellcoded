@@ -34,7 +34,7 @@
                 <guid isPermaLink="false">{{ $podcast->id }}</guid>
                 <link>{{ $podcast->present()->url }}</link>
                 <description>
-                    {!! htmlspecialchars_decode($podcast->present()->excerpt, ENT_QUOTES) !!}
+                    {!! html_entity_decode(htmlspecialchars_decode($podcast->present()->excerpt, ENT_QUOTES)) !!}
                 </description>
                 <content:encoded>
                     <![CDATA[
@@ -47,9 +47,9 @@
                 <itunes:author>Julien Tant, Nicolas Widart</itunes:author>
                 <itunes:image href="{{ asset('assets/media/wellcoded.png') }}"/>
                 <itunes:duration>{{ $podcast->duration }}</itunes:duration>
-                <itunes:summary>{!! htmlspecialchars_decode($podcast->present()->excerpt, ENT_QUOTES) !!}
+                <itunes:summary>{!! html_entity_decode(htmlspecialchars_decode($podcast->present()->excerpt, ENT_QUOTES)) !!}
                 </itunes:summary>
-                <itunes:subtitle>{!! htmlspecialchars_decode($podcast->present()->excerpt, ENT_QUOTES) !!}
+                <itunes:subtitle>{!! html_entity_decode(htmlspecialchars_decode($podcast->present()->excerpt, ENT_QUOTES)) !!}
                 </itunes:subtitle>
                 <itunes:keywords>{{ $podcast->tags }}</itunes:keywords>
                 <itunes:explicit>no</itunes:explicit>
