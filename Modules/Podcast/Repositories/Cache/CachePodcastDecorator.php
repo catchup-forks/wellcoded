@@ -12,6 +12,11 @@ class CachePodcastDecorator extends BaseCacheDecorator implements PodcastReposit
         $this->repository = $podcast;
     }
 
+    public function allPublished()
+    {
+        return  $this->repository->allPublished();
+    }
+
     public function latests($perPage = 15)
     {
         return  $this->repository->latests($perPage);

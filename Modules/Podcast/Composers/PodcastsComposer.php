@@ -17,6 +17,6 @@ class PodcastsComposer
 
     public function compose(View $view)
     {
-        $view->with('podcasts', $this->podcastRepository->all());
+        $view->with('podcasts', $this->podcastRepository->allPublished());
     }
 }

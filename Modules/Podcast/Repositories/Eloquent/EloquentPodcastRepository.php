@@ -15,12 +15,18 @@ class EloquentPodcastRepository extends EloquentBaseRepository implements Podcas
             ->paginate($perPage);
     }
 
+    public function allPublished()
+    {
+        return $this->model
+            ->with('files')
+            ->where('published_at', '<', date('Y-m-d H:i:s'))
+            ->orderBy('published_at', 'desc')
+            ->get();
+    }
+
     public function all()
     {
-        return $this->model->with('files')
-            ->where('published_at', '<', date('Y-m-d H:i:s'))
-            ->orderBy('published_at', 'desc')->get();
-
+        return $this->model->orderBy('published_at', 'desc')->get();
     }
 
     public function create($data)
