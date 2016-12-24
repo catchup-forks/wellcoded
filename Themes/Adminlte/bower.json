@@ -1,0 +1,22 @@
+{
+  "name": "admin-lte-theme",
+  "version": "1.0.0",
+  "description": "Admin LTE theme",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "/resources/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": ">= 4.2",
+    "admin-lte": "~2.0.5",
+    "iCheck": "~1.0.2",
+    "bootstrap": "~3.3.4",
+    "gridstack": ">=0.2.2",
+    "sisyphus": "~1.1"
+  }
+}

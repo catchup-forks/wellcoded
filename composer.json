@@ -1,33 +1,32 @@
 {
-  "name": "asgardcms/platform",
-  "description": "The AsgardCms application",
+  "name": "laravel/laravel",
+  "description": "The Laravel Framework.",
   "keywords": [
-    "cms",
-    "asgardcms",
-    "multilingual",
-    "laravel",
-    "laravel5"
+    "framework",
+    "laravel"
   ],
   "license": "MIT",
-  "version": "1.10.0",
   "type": "project",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "require": {
-    "laravel/framework": "~5.1",
-    "pingpong/modules": "dev-feature/5.1",
+    "laravel/framework": "^5.1",
+    "pingpong/modules": "dev-hotfix/migrations",
+    "cartalyst/sentry": "dev-feature/laravel-5",
     "cartalyst/sentinel": "~2.0",
-    "asgardcms/core-module": "~1.0",
-    "asgardcms/dashboard-module": "~1.0",
-    "asgardcms/user-module": "~1.0",
-    "asgardcms/setting-module": "~1.0",
-    "asgardcms/media-module": "dev-master",
-    "asgardcms/page-module": "~1.0",
-    "asgardcms/menu-module": "~1.0",
-    "asgardcms/workshop-module": "~1.0",
-    "asgardcms/translation-module": "~1.0",
-    "asgardcms/flatly-theme": "~1.0",
-    "asgardcms/adminlte-theme": "~1.0",
-    "laravel/homestead": "dev-php-7",
-    "predis/predis": "^1.0"
+    "asgardcms/core-module": "dev-develop",
+    "asgardcms/dashboard-module": "dev-develop",
+    "asgardcms/user-module": "dev-develop",
+    "asgardcms/setting-module": "dev-develop",
+    "asgardcms/media-module": "dev-develop",
+    "asgardcms/page-module": "dev-develop",
+    "asgardcms/menu-module": "dev-develop",
+    "asgardcms/workshop-module": "dev-develop",
+    "asgardcms/flatly-theme": "dev-master",
+    "asgardcms/adminlte-theme": "dev-master",
+    "predis/predis": "^1.0",
+    "asgardcms/blog-module": "dev-develop",
+    "asgardcms/block": "dev-develop"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.0",
@@ -35,6 +34,10 @@
     "barryvdh/laravel-debugbar": "~2.0"
   },
   "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.cartalyst.com"
+    },
     {
       "type": "vcs",
       "url": "https://github.com/nWidart/modules"
@@ -48,11 +51,6 @@
       "App\\": "app/",
       "Modules\\": "Modules/"
     }
-  },
-  "autoload-dev": {
-    "classmap": [
-      "tests/TestCase.php"
-    ]
   },
   "scripts": {
     "post-install-cmd": [
@@ -69,13 +67,11 @@
       "php artisan optimize"
     ],
     "post-create-project-cmd": [
-      "php artisan key:generate",
-      "php artisan cache:clear"
+      "php -r \"copy('.env.example', '.env');\"",
+      "php artisan key:generate"
     ]
   },
   "config": {
     "preferred-install": "dist"
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+  }
 }
